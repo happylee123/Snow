@@ -1,12 +1,15 @@
 <template>
-  <div class="home">
-    dsa
-  </div>
+    <div>
+        何时能感
+    </div>
 </template>
 
 <script>
-
 export default {
- 
+
 }
 </script>
+
+<style>
+
+</style>

@@ -12,9 +12,9 @@
           </div>
           <div id="nav" :span="24">
             <router-link tag="a" to="/">主页</router-link> 
-            <router-link tag="a" to="/about">旗舰单反</router-link>
-            <router-link tag="a" to="/about">旗舰微单</router-link>
-            <router-link tag="a" to="/about">旗舰镜头</router-link>
+            <router-link tag="a" to="/commodity">旗舰单反</router-link>
+            <router-link tag="a" to="/commodity">旗舰微单</router-link>
+            <router-link tag="a" to="/commodity">旗舰镜头</router-link>
             <router-link tag="a" to="/about">学习教程</router-link>
             <router-link tag="a" to="/about">关于我们</router-link>
             <input class="search__input" type="text" name="" value="">
@@ -23,7 +23,7 @@
       </el-col>
     </el-row>
     <!-- 这是需要切换展示的内容 -->
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -58,7 +58,7 @@ export default {
     line-height: 18px;
     color: #575756;
     background-color: transparent;
-    background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
+    // background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
     background-repeat: no-repeat;
     background-size: 18px 18px;
     background-position: 98% center;
@@ -70,7 +70,6 @@ export default {
 
     margin-top: -16px;
   }
-
   .search__input::placeholder {
       color: rgba(87, 87, 86, 0.8);
       text-transform: uppercase;
@@ -93,5 +92,4 @@ export default {
     border-bottom: 2px solid red;
   }
 }
-
 </style>

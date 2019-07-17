@@ -6,11 +6,13 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import './../public/base.css';
 
+import store from "./vuex/store"
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 Vue.use(ElementUI)
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

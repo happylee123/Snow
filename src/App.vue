@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-row>
+    <el-row id="top">
       <el-col :span="24">
         <div id="header">
           <div id="login">
@@ -12,11 +12,11 @@
           </div>
           <div id="nav" :span="24">
             <router-link tag="a" to="/">主页</router-link> 
-            <router-link tag="a" to="/about">旗舰单反</router-link>
-            <router-link tag="a" to="/about">旗舰微单</router-link>
-            <router-link tag="a" to="/about">旗舰镜头</router-link>
-            <router-link tag="a" to="/about">学习教程</router-link>
-            <router-link tag="a" to="/about">关于我们</router-link>
+            <router-link tag="a" to="/reaction">旗舰单反</router-link>
+            <router-link tag="a" to="/microsheet">旗舰微单</router-link>
+            <router-link tag="a" to="/lens">旗舰镜头</router-link>
+            <router-link tag="a" to="/study">学习教程</router-link>
+            <router-link tag="a" to="/C_Backstage">关于我们</router-link>
             <input class="search__input" type="text" name="" value="">
           </div>
         </div>
@@ -24,17 +24,27 @@
     </el-row>
     <!-- 这是需要切换展示的内容 -->
     <router-view/>
+    <!-- 尾部-->
+    <pubfooter></pubfooter>
   </div>
 </template>
 <script>
+import footer from "./components/Footer";
+
 export default {
-  
+  components:{
+    pubfooter:footer
+  }
 }
 </script>
 
 <style lang="less">
-#header{
-  border: 1px solid red;
+#top{
+  background-color: #272727;
+   color: #fff;
+   a{
+     color: #fff;
+   }
 }
 #login{
   text-align: center;
@@ -49,6 +59,7 @@ export default {
 #nav{
   text-align: center;
   margin: 3px 0;
+  padding: 10px 0 15 0;
   .search__input {
     // width: 100%;
     padding: 4px 20px;
@@ -89,8 +100,7 @@ export default {
     padding: 2px;
   }
   a:hover {
-    color: #979797;
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid #5389af;
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <el-row :gutter="20">
+    <el-row :gutter="20" id="buttom">
       <el-col :span="12">
         <div class="grid-content bg-purple">
           <div>
@@ -67,6 +67,16 @@
 <script>
 export default {};
 </script>
-<style>
+<style lang="less" scope>
+.footer{
+  padding: 50px 0 20px 0;
+  height: 100px;
+  background-color: #272727;
+  color: #fff;
+ a{
+      color:#fff;
+  }
+}
 
+  
 </style>

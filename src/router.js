@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import { Footer } from 'element-ui';
 
 Vue.use(Router)
 
@@ -13,16 +12,30 @@ export default new Router({
       component: Home
     },
     {
-      path:'/footer',
-      component:Footer
+      path:'/reaction',
+      name: 'reaction',
+      //component: () => import( './views/Commodity.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path:'/microsheet',
+      name: 'reaction',
+      //component: () => import( './views/reaction.vue')
+    },
+    {
+      path:'/lens',
+      name: 'lens',
+      //component: () => import( './views/lens.vue')
+    },
+    {
+      path:'/study',
+      name: 'study',
+      //component: () => import( './views/study.vue')
+    },
+    
+    {
+      path: '/C_Backstage',
+      name: 'C_Backstage',
+      component: () => import( './views/C_Backstage.vue')
     }
   ]
 })

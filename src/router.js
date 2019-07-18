@@ -29,7 +29,7 @@ export default new Router({
     {
       path:'/study',
       name: 'study',
-      //component: () => import( './views/study.vue')
+      component: () => import( './views/A_study.vue')
     },
     
     {

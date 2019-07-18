@@ -89,9 +89,9 @@ export default {
   }
 };
 </script>
-<style lang ="less">
-.el-row {
-  margin-bottom: 10px;
+<style lang ="less" scoped>
+/deep/.el-row {
+  margin-bottom: 20px;
   &:last-child {
     margin-bottom: 0;
   }

@@ -67,7 +67,6 @@
 <script>
 export default {};
 </script>
-<<<<<<< HEAD:src/components/Footer.vue
 <style lang="less" scope>
 .footer{
   padding: 50px 0 20px 0;
@@ -78,20 +77,6 @@ export default {};
       color:#fff;
   }
 }
-=======
-    <div>
-        何时能感
-    </div>
-</template>
-
-<script>
-export default {
-
-}
-</script>
-
-<style>
->>>>>>> 847415fd7dcf242e70b3eee3efbfe4f3bfad3cb0:src/views/Footer.vue
 
   
 </style>

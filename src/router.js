@@ -14,7 +14,7 @@ export default new Router({
     {
       path: '/bcommodity',
       name: 'bcommodity',
-      component: () => import('./views/BCommodity.vue'),
+      //component: () => import('./views/BCommodity.vue'),
     },
     {
       path:'/microsheet',

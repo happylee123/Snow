@@ -12,9 +12,9 @@ export default new Router({
       component: Home
     },
     {
-      path:'/reaction',
-      name: 'reaction',
-      //component: () => import( './views/Commodity.vue')
+      path: '/bcommodity',
+      name: 'bcommodity',
+      //component: () => import('./views/BCommodity.vue'),
     },
     {
       path:'/microsheet',

@@ -21,11 +21,6 @@
 <script>
 //import Cheader from "../components/C_header"
 export default {
-  data(){
-    return{
-      //img:require('./../assets/u4.png')
-    }
-  }
 }
 </script>
 <style lang = "less" scoped>

@@ -1,0 +1,15 @@
+.clear::after{
+    content: "";
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
+}
+
+.lf{
+    float: left;
+}
+
+.rf{
+    float: right;
+}

@@ -46,7 +46,7 @@
 
 <script>
 export default {
-  name: "boptional1",
+  name: "boptional",
   data() {
     return {};
   },

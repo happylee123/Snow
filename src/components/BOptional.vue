@@ -80,6 +80,10 @@ p {
     border: none;
   }
 }
+.active {
+  transform: rotate(180deg);
+  transform-origin: center center;
+}
 </style>
 
 

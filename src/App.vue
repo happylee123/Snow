@@ -12,7 +12,7 @@
           </div>
           <div id="nav" :span="24">
             <router-link tag="a" to="/">主页</router-link> 
-            <router-link tag="a" to="/reaction">旗舰单反</router-link>
+            <router-link tag="a" to="/BCommodity">旗舰单反</router-link>
             <router-link tag="a" to="/microsheet">旗舰微单</router-link>
             <router-link tag="a" to="/lens">旗舰镜头</router-link>
             <router-link tag="a" to="/study">学习教程</router-link>
@@ -69,7 +69,7 @@ export default {
     line-height: 18px;
     color: #575756;
     background-color: transparent;
-    background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
+    // background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
     background-repeat: no-repeat;
     background-size: 18px 18px;
     background-position: 98% center;

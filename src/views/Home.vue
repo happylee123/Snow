@@ -38,15 +38,14 @@
     </el-row>
     <!--图片-->
     <div class="demo-image__placeholder">
-      <div class="block">
-        <el-image :src="Studysrc"></el-image>
+      <div class="block" id="pic">
+        <el-image :src="Studysrc" id="A-img"></el-image>
       </div>
-      <div class="block">
-        <el-image :src="Studysrc"></el-image>
+      <div class="block1">
+        <el-image :src="Studysrc" id="A-img1"></el-image>
+        <el-image :src="Studysrc" id="A-img2"></el-image>
       </div>
-      <div class="block">
-        <el-image :src="Studysrc"></el-image>
-      </div>
+
     </div>
     <!-- 列表 -->
     <el-row class="button">
@@ -134,6 +133,19 @@ export default {
   width: 30%;
   display: inline-block;
   margin: 0 20px;
+}
+.block1{
+  width: 30%;
+  display: inline-block;
+  margin:  0 auto;
+}
+#A-img1{
+  height: 60%;
+  
+}
+#pic{
+  width: 60%;
+  margin: 0 40px;
 }
 .button{
   height: 200px;

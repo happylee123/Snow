@@ -1,7 +1,7 @@
 <template>
   <div class="Backstage">
      <div class="container">
-       <h2>关于我们</h2>
+       <h2>About us</h2>
      </div>
       <div class="imgs" >
         <img src="./../assets/u4.png" alt="" >

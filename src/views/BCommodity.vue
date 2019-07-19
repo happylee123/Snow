@@ -51,8 +51,24 @@
         </ul>
       </div>
       <div class="co-right clearfix">
-        <h4>黑卡®系列</h4>
-        <Boptional1></Boptional1>
+        <div class="bdiv1 clearfix">
+          <h4>黑卡®系列</h4>
+          <ul>
+            <Boptional1 v-for="(v1,i) in arrImg" :key="i" :v1="v1"></Boptional1>
+          </ul>
+        </div>
+        <div class="bdiv2 clearfix">
+          <h4>长焦系列</h4>
+          <ul>
+            <Boptional1 v-for="(v1,i) in arrImg" :key="i" :v1="v1"></Boptional1>
+          </ul>
+        </div>
+        <div class="bdiv3 clearfix">
+          <h4>缤纷系列</h4>
+          <ul>
+            <Boptional1 v-for="(v1,i) in arrImg" :key="i" :v1="v1"></Boptional1>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -60,7 +76,7 @@
 
 <script>
 import BOptional from "./../components/BOptional.vue";
-import Boptional1 from './../components/Boptional1.vue';
+import Boptional1 from "./../components/Boptional1.vue";
 export default {
   data() {
     return {
@@ -90,6 +106,93 @@ export default {
           child3: "触摸对焦"
         },
         { nav: "镜头类型", child1: "蔡司镜头", child2: "G镜头", child3: "" }
+      ],
+      //黑卡系列
+      arrImg: [
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        },
+        {
+          img:
+            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          bp:
+            "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
+          bspan: "RMB 8,499"
+        }
       ]
     };
   },
@@ -135,7 +238,7 @@ export default {
             font-size: 16px;
             color: #555;
             margin-bottom: 10px;
-            border: none; 
+            border: none;
             line-height: 20px;
           }
           span {
@@ -169,7 +272,7 @@ export default {
       }
     }
     .co-right {
-      border: 1px solid red;
+      // border: 1px solid red;
       float: right;
       width: 79.94%;
       padding: 10px;
@@ -184,8 +287,12 @@ export default {
         font-weight: normal;
       }
       ul {
-        // border: 1px solid yellow;
+        // border: 1px solid red;
         // margin-top: 6px;
+      }
+      .bdiv1,
+      .div2 {
+        margin-bottom: 20px;
       }
     }
   }

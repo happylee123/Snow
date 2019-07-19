@@ -13,7 +13,7 @@
           <div id="nav" :span="24">
             <router-link tag="a" to="/">主页</router-link> 
             <router-link tag="a" to="/BCommodity">旗舰单反</router-link>
-            <router-link tag="a" to="/microsheet">旗舰微单</router-link>
+            <router-link tag="a" to="/bdetails">旗舰微单</router-link>
             <router-link tag="a" to="/lens">旗舰镜头</router-link>
             <router-link tag="a" to="/study">学习教程</router-link>
             <router-link tag="a" to="/C_Backstage">关于我们</router-link>

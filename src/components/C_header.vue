@@ -5,21 +5,29 @@
       <div id="c_nvebox">
         <div class="c_nve clear">
           <div class="log lf">logo</div>
-          <div class="icon rf">
-            <span>1+</span>
-            <span>2+</span>
-            <span>3+</span>
+          <div class="icon rt">
+            <a href="">
+              <span class="iconfont">&#xe668;</span>
+            </a>
+            <a href="">
+              <span class="iconfont">&#xf0179;</span>
+            </a>
+            <a href="">
+              <span class="iconfont">&#xe60d;</span>
+            </a>
           </div>
         </div>
       </div>
       <!-- 列表 -->
       <div id="c_listbox">
-         <a href="javascript:void(0);">首页</a>
-          <a href="javascript:void(0);">单反</a>
-          <a href="javascript:void(0);">微单</a>
-          <a href="javascript:void(0);">镜头</a>
-          <a href="javascript:void(0);">荣誉与奖项</a>
-          <a href="javascript:void(0);">关于我们</a>
+          <div class="tag_a">
+            <a href="/">首页</a>
+          <a href="/#/BCommodity">单反</a>
+          <a href="/#/microsheet;">微单</a>
+          <a href="/#/lens">镜头</a>
+          <a href="/#/study">荣誉与奖项</a>
+          <a href="/#/aboutUs">关于我们</a>
+          </div>
       </div>
     </div>
   </div>
@@ -30,9 +38,9 @@ export default {};
 </script>
 
 <style scope lang="less">
+@import '../styles/C_pub.less';
 #c_header {
   color: #fff;
-  margin-bottom: 100px;
   // title
   #c_nvebox {
     background-color: #272727;
@@ -45,6 +53,7 @@ export default {};
         span{
           display: inline-block;
           margin-left: 20px;
+          cursor: default;
         }
       }
     }
@@ -55,13 +64,18 @@ export default {};
      height: 60px;
      line-height: 60px;
      box-shadow: 1px 4px 10px 1px #eeeeee;
-     a{
+     .tag_a{
+       width: 500px;
+       margin:  0 auto;
+       a{
        margin-right: 30px;
        &:hover{
          color: #202020;
          font-weight: bold;
        }
      }
+     }
+     
   }
 }
 </style>

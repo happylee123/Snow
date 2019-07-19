@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Page1 from './Page01.vue'
-
+import Page01 from './page01.vue'
+import headeree from '../../components/C_header'
 
 Vue.use(VueRouter);
 
@@ -10,8 +10,13 @@ const routes = [
         path: '/page1',
         name: 'page1',
         components:{
-          Page1
+          Page01
         }
+    },
+    {
+        path: '/aa',
+        name: 'aa',
+        component:headeree
     }
 ];
 

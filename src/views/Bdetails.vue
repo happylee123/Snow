@@ -51,14 +51,40 @@
           </p>
           <div class="ex-sp">
             <span class="ex-span1">规格</span>
-            <button>DSC-RX10M4</button><button>DSC-RX10M4</button>
-            <br>
-            <br>
+            <button>DSC-RX10M4</button>
+            <button>DSC-RX10M4</button>
+            <br />
+            <br />
             <span class="ex-span1">颜色</span>
             <button>黑色</button>
+            <br />
+            <br />
+            <span class="ex-span1">数量</span>
+            <button class="but">-</button>
+            <input type="text" placeholder="1" />
+            <button class="but">+</button>
+          </div>
+          <hr class="bhr1" />
+          <div class="ex-car">
+            <div>
+              <img src="./../assets/bdetails/button_cartaddition_big.png" alt />
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <!-- 商品参数的展示 parameter-->
+    <div class="parameter" :span="24">
+      <hr />
+      <div class="bNav">
+        <router-link tag="a" to="/bsummary">概述</router-link>|
+        <router-link tag="a" to="/bparameter">详细参数</router-link>|
+        <router-link tag="a" to="/bcomment">评论</router-link>
+        <img class="bNav-img" src="./../assets/bdetails/button_cartaddition_small.png" alt />
+      </div>
+      <hr />
+      <!-- 展示内容 -->
+      <router-view />
     </div>
   </div>
 </template>
@@ -76,17 +102,17 @@ export default {
   .exhibition {
     display: inline-block;
     width: 90%;
-    border: 1px solid red;
+    // border: 1px solid red;
     .ex-left {
       width: 47%;
-      border: 1px solid rebeccapurple;
+      // border: 1px solid rebeccapurple;
       float: left;
       text-align: center;
       .ex-big-img {
         display: inline-block;
         width: 537px;
         height: 537px;
-        border: 1px solid rgb(131, 131, 131);
+        border: 1px #dddddd solid;
         img {
           // display: inline-block;
           width: 100%;
@@ -103,7 +129,7 @@ export default {
         ul {
           li {
             float: left;
-            border: 1px solid rgb(128, 127, 126);
+            border: 1px #dddddd solid;
             margin: 0 13px;
           }
         }
@@ -112,7 +138,7 @@ export default {
     .ex-right {
       float: right;
       width: 52.4%;
-      border: 1px solid rebeccapurple;
+      // border: 1px solid rebeccapurple;
       .ex-name {
         padding-top: 8px;
         padding-bottom: 8px;
@@ -123,7 +149,7 @@ export default {
       .ex-describe {
         text-align: left;
         font-size: 14px;
-        line-height: 23px;
+        line-height: 26px;
       }
       .ex-rmb {
         padding-top: 24px;
@@ -169,7 +195,7 @@ export default {
           }
         }
         .ex-sp {
-            padding-top: 16px;
+          padding-top: 16px;
           .ex-span1 {
             color: #b1b1b1;
             font-size: 14px;
@@ -178,17 +204,58 @@ export default {
             padding-left: 13px;
             line-height: 34px;
           }
-          button{
-              text-align: 34px;
-              border: 1px solid #272727;
-              background: white;
-              margin-right: 10px;
-              padding: 6px 10px;
+          button {
+            text-align: 34px;
+            border: 1px solid #dbe0e7;
+            background: white;
+            margin-right: 10px;
+            padding: 6px 10px;
           }
-          button:hover{
-              border: #0a83d7 1px solid;
+          button:hover {
+            border: #0a83d7 1px solid;
+          }
+          input {
+            width: 34px;
+            height: 29px;
+            text-align: center;
+            border: 1px solid #dbe0e7;
+          }
+          .but {
+            margin: 0;
+            background: #f1f4f9;
           }
         }
+        .bhr1 {
+          border: 0.5px dotted #b1b1b1;
+        }
+        .ex-car {
+          img {
+            padding-left: 57px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .parameter {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    .bNav {
+      text-align: right;
+      width: 90%;
+      display: inline-block;
+      font-size: 18px;
+      // border: 1px solid red;
+      padding: 10px 0;
+      a {
+        // margin-left: 20px;
+        font-size: 14px;
+        color: #6c6c6c;
+      }
+      .bNav-img {
+        vertical-align: middle;
+        margin-left: 32px;
       }
     }
   }

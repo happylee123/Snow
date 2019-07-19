@@ -1,7 +1,7 @@
 <template>
   <div id="Commodity">
     <div class="banner">
-      <el-carousel :interval="5000" arrow="always" height="400px">
+      <el-carousel :interval="5000" arrow="always" height="379px">
         <el-carousel-item v-for="i in 6" :key="i">
           <a href="javascript:;">
             <img src="./../assets/suoni_files/banner1.jpg" alt />
@@ -209,6 +209,7 @@ export default {
   .banner {
     img {
       width: 100%;
+      
     }
   }
   .middle {

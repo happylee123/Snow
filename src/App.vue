@@ -6,8 +6,8 @@
           <div id="login">
             <span class="login-logo">logo</span>
             <span class="login-lo">
-              登录\注册
-              购物车
+              <span id="load">登录</span> /注册
+              <a href="/page1" target="_blank" class="iconfont" id="carticon"> &#xf0179;</a>
             </span>
           </div>
           <div id="nav" :span="24">
@@ -30,7 +30,7 @@
 </template>
 <script>
 import footer from "./components/Footer";
-
+import './styles/C_pub.less';
 export default {
   components:{
     pubfooter:footer
@@ -49,17 +49,31 @@ export default {
 #login{
   text-align: center;
   margin: 10px 0;
+  cursor: default;
   .login-logo{
     margin-right: 680px;
   }
   .login-lo{
     margin-left: 200px;
   }
+  #carticon{
+    margin-left: 10px;
+    &:hover{
+      color: #ececec;
+    }
+  }
+  #load{
+    color:#45affc;
+    
+    &:hover{
+      color:#82cbff;
+    }
+  }
 }
 #nav{
   text-align: center;
   margin: 3px 0;
-  padding: 10px 0 15 0;
+  padding: 14px 0 14px 0;
   .search__input {
     // width: 100%;
     padding: 4px 20px;

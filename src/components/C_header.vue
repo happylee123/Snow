@@ -24,9 +24,9 @@
       <div id="list_1200">
         <div id="c_listbox">
             <div class="tag_a">
-              <a href="/">首页</a>
+              <a href="/#/index">首页</a>
             <a href="/#/BCommodity">单反</a>
-            <a href="/#/microsheet;">微单</a>
+            <a href="/#/microsheet">微单</a>
             <a href="/#/lens">镜头</a>
             <a href="/#/study">荣誉与奖项</a>
             <a href="/#/aboutUs">关于我们</a>

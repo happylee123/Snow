@@ -7,46 +7,47 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
+    {//登录
       path: '/',
       name: 'login',
       component: () => import('./views/C_login.vue'),
     },
-    {
+    {//注册
       path: '/register',
       name: 'register',
       component: () => import('./views/C-register.vue'),
     },
-    {
+    {//首页
       path: '/index',
       name: 'index',
       component: () => import('./views/index.vue'),
-      children:[{
+      children:[
+        {//首页
         path: '/',
         name: 'Home',
         component: () => import('./views/Home.vue'),
       },
-      {
+      {//单反
         path: '/bcommodity',
         name: 'bcommodity',
         component: () => import('./views/BCommodity.vue'),
       },
-      {
+      {//微单
         path:'/microsheet',
         name: 'reaction',
         //component: () => import( './views/reaction.vue')
       },
-      {
+      {//镜头
         path:'/lens',
         name: 'lens',
         //component: () => import( './views/lens.vue')
       },
-      {
+      {//学习教程
         path:'/study',
         name: 'study',
         //component: () => import( './views/study.vue')
       },
-      { //商品详情页
+      { //商品详情页---------------------------------------------------//老赵路由
         path: '/bdetails',
         name: 'bdetails',
         component: () => import('./views/Bdetails.vue'),

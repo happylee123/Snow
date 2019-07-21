@@ -52,7 +52,7 @@ export default {
   margin: 10px 0;
   cursor: default;
   .login-logo{
-    margin-right: 680px;
+    margin-right: 694px;
   }
   .login-lo{
     margin-left: 200px;

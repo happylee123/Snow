@@ -11,7 +11,7 @@
             </span>
           </div>
           <div id="nav" :span="24">
-            <router-link tag="a" to="/">主页</router-link> 
+            <router-link tag="a" to="/index">主页</router-link> 
             <router-link tag="a" to="/BCommodity">旗舰单反</router-link>
             <router-link tag="a" to="/bdetails">旗舰微单</router-link>
             <router-link tag="a" to="/lens">旗舰镜头</router-link>

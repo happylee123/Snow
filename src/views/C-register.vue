@@ -1,47 +1,55 @@
 <template>
-  <div class="login">
-     <div>
+   <div class="register">
+       <div>
     <div class="d1">
-        <img src="../assets/logo2.png" class="img3" height="130" width="130"/>
-        <div class="d11">登录</div>
+        <div class="d2">注册账号</div>
         <div>
-            <span class="glyphicon glyphicon-earphone">@</span>
-            <input type="text" id="ipt1" placeholder="请输入账号名">
+
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <input type="text" class="ipt1" placeholder="用户名">
             <div class="div1"></div>
         </div>
+        <div class="div5"></div>
         <div>
-            <span class="glyphicon glyphicon-lock">$</span>
-            <input type="password" id="ipt2" placeholder="请输入密码">
+            <span class="glyphicon glyphicon-earphone"></span>
+            <input type="text"  class="ipt2 in1" placeholder="手机号">
             <div class="div2"></div>
         </div>
-        <div class="log-d1"></div>
-        <div class="d5">
-        <input type="checkbox" class="ipt3" ><span>自动登录</span>
-          <div class="d9">
-            <router-link to='/register' id="register">注册账号</router-link>
-            <a href="C-forget.html">忘记密码</a>
-          </div>
+        <div class="d3">
+        <div class="d4" >
+            <span class="glyphicon glyphicon-comment"></span>
+            <input type="text"  class="reg-ipt " placeholder="短信验证码">
+             <div class="reg-div1"></div>
         </div>
-        <router-link to="/index">
-        <button type="button" class="btn btn-primary" id="uploadbtn">登录</button>
-         </router-link>
-        <!-- <div class="d10">
-       <span>其他账号登录：<a href="C-wechat.html" style="text-decoration: none "><span class="qq">&#xe630;</span></a>
-           <a href="C-wechat.html" style="text-decoration: none"><span class="wechat">&#xe614;</span></a></span>
-        </div> -->
-        <div class="d8"></div>
+            <button class="btn1">获取验证码</button>
+        </div>
+        <div>
+            <span class="glyphicon glyphicon-lock"></span>
+            <input type="password"   class="ipt3 in1" placeholder="密码">
+            <div class="div3"></div>
+        </div>
+        <div class="div6"></div>
+        <div>
+            <span class="glyphicon glyphicon-lock"></span>
+            <input type="password"   class="ipt4 in1" placeholder="重复密码">
+            <div class="div4"></div>
+        </div>
+       <div class="d5">
+        <input type="checkbox" class="reg-ipt1">
+        <span>我已阅读并同意遵守<a class="lay">法律声明</a >和<a class="self">隐私条款</a></span>
+        </div>
+        <button type="button" class="btn btn-primary">注册</button>
+        <p>如果您已拥有账号，则可在此 <router-link to="/" id="loginbtn">登陆</router-link></p>
     </div>
 
 </div>
-   
-    
-  </div>
+   </div>
 </template>
 
 <script>
 export default {
- name:'login'
-};
+    name:"register",
+}
 </script>
 <style scope lang='less'>
 @import '../styles/C_pub.less';
@@ -55,6 +63,48 @@ export default {
   color: @colormain;
   margin-right:6px;
 }
+//已有账号，登录
+#loginbtn{
+    color: @colormain;
+    margin-left: 2px;
+}
+//登录框的placeholder颜色设置
+input::-webkit-input-placeholder{
+    color: #bababa;
+}
+//登录按钮
+.btn-primary{
+    background-color: #0a83d7;
+    outline: none;
+    border: none;
+    color: #fff;
+    &:hover{
+         background-color: #3aa0e9;
+    }
+}
+//条款
+.d5 a{
+    color: @colormain;
+    cursor: default;
+    &:hover{
+        color: #3aa0e9;
+    }
+}
+
+.d5 a.lay{
+    margin-right: 2px;
+}
+.d5 a.self{
+    margin-left: 2px;
+}
+//条框前的input
+.reg-ipt1{
+    width: 15px;
+    height: 15px;
+    position: relative;
+    top:-2px;
+}
+
 #uploadbtn{
   background-color:@colormain; 
   outline: none;
@@ -79,17 +129,18 @@ export default {
   text-align: center;
   font-size: 24px;
   height: 62px;
-  border: 1px solid #d6d6d6;
+  border:none;
   line-height: 62px;
   width: 451px;
   margin-top: 0;
+  color: #3f3f3f;
 }
 .d1 div {
   width: 369px;
   height: 49px;
   margin: 0 auto;
   border: 1px solid #cacaca;
-  margin-top: 20px;
+  margin-top: 12px;
   border-radius: 6px;
   position: relative;
   z-index: -1;
@@ -151,15 +202,21 @@ export default {
   text-align: center;
   line-height: 30px;
 }
+//发送验证码按钮
 .d1 .btn1 {
+outline: none;
+border:none;
   width: 130px;
   height: 49px;
   float: left;
   position: absolute;
   right: 0;
-  background: #fbfbfb;
+  background-color: #0a83d7;
   border: 1px solid #f2f2f2;
-  color: #c1c1c1;
+  color: #ffffff;
+  &:hover{
+      background-color: #3296dd;
+  }
 }
 .d1 .d3 {
   position: relative;
@@ -173,6 +230,9 @@ export default {
 .d1 .d5 {
   position: relative;
   border: 0;
+}
+.d1 .d5 span{
+    color: #7a7a7a;
 }
 .d1 .d5 .d9 {
   width: 150px;
@@ -327,6 +387,8 @@ export default {
 }
 .d1 p {
   text-align: center;
+  padding: 10px 0;
+  font-size: 12px;
 }
 .d1 .b1 {
   margin-top: 20px;
@@ -406,6 +468,5 @@ export default {
 }
 /*# sourceMappingURL=C-lulu.css.map */
 
+
 </style>
-
-

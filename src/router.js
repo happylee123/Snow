@@ -12,6 +12,11 @@ export default new Router({
       component: () => import('./views/C_login.vue'),
     },
     {
+      path: '/register',
+      name: 'register',
+      component: () => import('./views/C-register.vue'),
+    },
+    {
       path:"/index",
       name:'index',
       component: () => import('./views/index.vue'),

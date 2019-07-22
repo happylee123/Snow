@@ -25,7 +25,7 @@
             </div>
             <ul class="f-car_top">
               <li class="f-car_top01">
-                <input type="checkbox" id="f-car_cheak_all" :checked="ischecked" @click="checkall" />
+                <input type="checkbox" id="f-car_cheak_all" :checked="ischeckedall" @click="checkall" />
               </li>
               <li class="f-car_top02">全选</li>
               <li class="f-car_top03">商品信息</li>
@@ -41,7 +41,7 @@
               <div class="f-car_product" v-for="(v,i) in data">
                 <!-- 左 -->
                 <div class="f-car_left f-car_p">
-                  <input type="checkbox" class="f-car_singlecheck" :checked="ischecked" />
+                  <input type="checkbox" class="f-car_singlecheck" :checked="ischeckedarr[i]" @click="paynumber(i)" />
                 </div>
                 <!-- 右 -->
                 <div class="f-car_right f-car_p">
@@ -54,19 +54,19 @@
                   </div>
                   <div class="f-car_pro02">
                     RMB:
-                    <span class="f-car_sumsmall">{{v.price}}</span>
+                    <span class="f-car_sumsmall">{{v.price | price}}</span>
                   </div>
                   <div class="f-car_pro03">
                     <div class="clear">
                       <button class="f-car_relbtn" @click="reducenum(i)">-</button>
-                      <input type="text" class="f-car_num" :value="v.cart_num" />
+                      <input type="text" class="f-car_num" v-model="msg[i]"  @input="input(i)" @change="numchange(i)"/>
                       <button class="f-car_addbtn" @click="addnum(i)">+</button>
                     </div>
                     <p class="f-car_warntext"></p>
                   </div>
                   <div class="f-car_pro04">
                     RMB:
-                    <span class="f-car_sumbig">{{smallprice(i)}}</span>
+                    <span class="f-car_sumbig">{{smallprice(i) | price}}</span>
                   </div>
                   <div class="f-car_pro05 f-car_remove">删除</div>
                 </div>
@@ -81,24 +81,23 @@
           <div id="f-car_pay">
             <div class="f-car_btnbox clear">
               <div class="f-car_tools lf">
-                <input type="checkbox" id="f-car_cheak_all2" :checked="ischecked" @click="checkall" />
+                <input type="checkbox" id="f-car_cheak_all2" :checked="ischeckedall" @click="checkall" />
                 <span>全选</span>
                 <span id="f-car_remove_ss">
                   <a href="javascript:void(0)">删除</a>
                 </span>
                 <!-- <a href="javascript:void(0)">移入收藏夹</a> -->
               </div>
-              <div class="f-car_paybtn rt">
+              <div class="f-car_paybtn rt" @click="paynumber">
                 <span>
                   总价: RMB &nbsp;
-                  <span id="f-car_sumprice">{{sum}}</span>
+                  <span id="f-car_sumprice">{{sum | price}}</span>
                 </span>
-                <a id="f-car_topaybtn" href="./pages/C_order.html">
+                <router-link id="f-car_topaybtn" to="/order">
                    <button>
-                    去结算(
-                    <span id="f-car_pay_ss">0</span>)
+                    去结算(<span id="f-car_pay_ss" >{{paynum}}</span>)               
                   </button>
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
@@ -107,17 +106,24 @@
     </div>
     <!-- ---------尾部----------->
     <Footer></Footer>
+
+    <div>
+      
+    </div>
   </div>
 </template>
 <script>
-import Cheader from "../../components/C_header";
-import Footer from "../../components/Footer";
+import Cheader from "../components/C_header";
+import Footer from "../components/Footer";
 export default {
-  name: "page1",
+  name: "cart",
   data() {
     return {
-      msg:"jlkj",
-      ischecked: false,
+      msg:[],
+      smallqian:0,
+      paynum:0,
+      ischeckedall:false,
+      ischeckedarr: [false,false,false],
       writenum:"",
       data: [
           {
@@ -183,19 +189,71 @@ export default {
   },
   methods: {
     checkall() {
-      this.ischecked = !this.ischecked;
+      this.ischeckedall = !this.ischeckedall;
+      for (let i = 0; i < this.ischeckedarr.length; i++) {    
+          this.ischeckedarr[i]=this.ischeckedall;
+          
+      };
+      if(this.ischeckedall){
+          this.paynum=this.ischeckedarr.length;
+      }else{
+          this.paynum=0;
+      }
+       //this.$options.methods.paynumber()
     },
     smallprice(i){
         var obj=this.data[i];
-        return obj.price * obj.cart_num
+        this.smallqian=obj.price * obj.cart_num;
+        return this.smallqian
     },
     addnum(i){
-     return this.data[i].cart_num=this.data[i].cart_num+1;
+        this.msg[i]=this.data[i].cart_num=this.data[i].cart_num+1;
 
     },
     reducenum(i){
-        return this.data[i].cart_num=this.data[i].cart_num-1;
-    }
+          this.msg[i]=this.data[i].cart_num=this.data[i].cart_num-1;
+    },
+    //单个点击计算购买数量
+    paynumber(i){
+      let num=0;
+      this.ischeckedarr[i]=!this.ischeckedarr[i];
+      for (let i = 0; i < this.ischeckedarr.length; i++) {    
+         if(this.ischeckedarr[i]){
+             num=num+1;            
+         }
+      };
+      if(num!=this.data.length){
+          this.ischeckedall=false;
+      }
+      this.paynum=num;
+
+    },
+    //inpu框输入的时候
+    input(i){
+      //当数值为真的时候，即不为空
+          if(this.msg[i].trim()){
+            //值不为数字的时
+            if(!Number(this.msg[i])){
+              //只有一个字符串时
+              if(this.msg[i].length==1){
+                  this.msg[i]=1;
+              }else{
+                 //多个字符串后值等于parseInt(this.msg[i])
+                  this.msg[i]=parseInt(this.msg[i])
+              }
+      
+            }
+          }
+    
+      
+  
+               
+    },
+    //当inutp的值改变的时候
+   numchange(i){
+       this.data[i].cart_num=this.msg[i];
+   }
+    
     
   },
   computed:{
@@ -203,14 +261,25 @@ export default {
          var obj=this.data
          var sum=0;
          for(let i=0;i<obj.length;i++){
-             sum+=obj[i].price*obj[i].cart_num
+             sum+=obj[i].price*obj[i].cart_num;
          }
-         return sum
+         return sum;
      }
+  },
+  filters:{
+     price(v){   
+         return v.toFixed(2);
+     }    
   },
   components: {
     Cheader,
     Footer
+  },
+  created(){
+    //-----------------axios请求数据，获取data
+    for (let k = 0; k < this.data.length; k++) {
+      this.msg.push(this.data[k].cart_num)
+    }
   }
 };
 </script>
@@ -218,7 +287,7 @@ export default {
 
 <style scoped lang="less">
 
-@import "../../styles/C_pub.less";
+@import "../styles/C_pub.less";
 
 //-----------------------------
 #mainbigbox {
@@ -254,7 +323,7 @@ export default {
             float: left;
             width: 304px;
             line-height: 36px;
-            background: url("../@{imgurl}car01.png") no-repeat 0 0;
+            background: url("@{imgurl}car01.png") no-repeat 0 0;
             background-size: 304px;
           }
 
@@ -263,12 +332,12 @@ export default {
           }
 
           li.f-tu2 {
-            background: url("../@{imgurl}car02.png") no-repeat 0 0;
+            background: url("@{imgurl}car02.png") no-repeat 0 0;
             background-size: 304px;
           }
 
           li.f-tu3 {
-            background: url("../@{imgurl}car03.png") no-repeat 0 0;
+            background: url("@{imgurl}car03.png") no-repeat 0 0;
             background-size: 304px;
           }
 
@@ -297,7 +366,7 @@ export default {
         display: inline-block;
         width: 18px;
         height: 18px;
-        background: url("../@{imgurl}tip1.png") no-repeat;
+        background: url("@{imgurl}tip1.png") no-repeat;
         position: relative;
         top: 4px;
       }

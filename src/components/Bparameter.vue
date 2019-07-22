@@ -82,7 +82,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less" >
 #bparameter-box {
   width: 90%;
   display: inline-block;

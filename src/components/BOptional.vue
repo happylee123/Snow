@@ -49,7 +49,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 p {
   padding-left: 0;
   line-height: 74px;

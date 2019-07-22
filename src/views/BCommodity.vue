@@ -1,5 +1,6 @@
 <template>
   <div id="Commodity">
+    <!-- 轮播图 -->
     <div class="banner">
       <el-carousel :interval="5000" arrow="always" height="379px">
         <el-carousel-item v-for="i in 6" :key="i">
@@ -71,6 +72,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -110,95 +112,111 @@ export default {
       //黑卡系列
       arrImg: [
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         },
         {
-          img:
-            "./../../src/assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png",
+          img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
           bspan: "RMB 8,499"
         }
-      ]
+      ],
+      //bannner 的数据请求
+      banner: 1,
+      //下方展示区域的img 请求
+      exhibitionImg: 2
     };
   },
-  methods: {},
+  beforeMount: function(){
+    //bannner图的请求函数调用
+    this.getBannerImg()
+    //下方展示区域的img的函数调用
+    this.getExhibitionImg()
+  },
+  methods: {
+    //banner get函数
+    getBannerImg() {
+      this.$axios.get("/api/getBannerImg", {
+        params: {
+          banner: this.banner
+        }
+      });
+    },
+    //下方展示区域img的获取函数 
+    getExhibitionImg() {
+      this.$axios.get("/api/getExhibitionImg",{
+        params: {
+          exhibitionImg: this.exhibitionImg
+        }
+      })
+    }
+  },
+
   components: {
-    BOptional: BOptional,
+    BOptional,
     Boptional1
   }
 };
@@ -209,7 +227,6 @@ export default {
   .banner {
     img {
       width: 100%;
-      
     }
   }
   .middle {

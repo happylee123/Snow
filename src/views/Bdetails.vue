@@ -9,7 +9,7 @@
         </div>
         <!-- 小图 -->
         <div class="ex-small-img clearfix">
-          <span><</span>
+          <span> < </span>
           <ul>
             <li>
               <img src="./../assets/bdetails/img_dsc_m1.png" alt />
@@ -27,7 +27,7 @@
               <img src="./../assets/bdetails/img_dsc_m5.png" alt />
             </li>
           </ul>
-          <span>></span>
+          <span> > </span>
         </div>
       </div>
       <div class="ex-right">
@@ -60,9 +60,9 @@
             <br />
             <br />
             <span class="ex-span1">数量</span>
-            <button class="but">-</button>
-            <input type="text" placeholder="1" />
-            <button class="but">+</button>
+            <button class="but" >-</button>
+            <input type="text" placeholder="" v-model="Number" />
+            <button class="but" >+</button>
           </div>
           <hr class="bhr1" />
           <div class="ex-car">
@@ -77,21 +77,26 @@
     <div class="parameter" :span="24">
       <hr />
       <div class="bNav">
-        <router-link tag="a" to="/bsummary">概述</router-link>|
+        <router-link tag="a" to="/Bsummary">概述</router-link>|
         <router-link tag="a" to="/bparameter">详细参数</router-link>|
         <router-link tag="a" to="/bcomment">评论</router-link>
         <img class="bNav-img" src="./../assets/bdetails/button_cartaddition_small.png" alt />
       </div>
       <hr />
       <!-- 展示内容 -->
-      <router-view />
+      <router-view/>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "bdetails"
+  name: "bdetails",
+  data(){
+    return {
+        Number: 1
+    }
+  }
 };
 </script>
 

@@ -2,10 +2,10 @@
   <!-- <ul id="bUl"> -->
   <li class="bLI">
     <a href="javascript:;">
-      <img src=" v1.img " alt />
+      <img :src=" v1.img " alt />
       <div>
         <!-- <h4>黑卡®RX100 Ⅵ</h4> -->
-        <p class="bp">{{ v1.bp }}</p>
+        <p class="bp">{{v1.bp}}</p>
         <span class="bspan">{{ v1.bspan }}</span>
       </div>
     </a>

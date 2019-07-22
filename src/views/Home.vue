@@ -90,21 +90,21 @@ export default {
   data() {
     return {
       imagesbox:[
-        {id:0,idView:require('./../assets/banner1.jpg')},
         {id:1,idView:require('./../assets/banner2.jpg')},
         {id:2,idView:require('./../assets/banner3.jpg')},
         {id:3,idView:require('./../assets/banner4.jpg')},
+        {id:4,idView:require('./../assets/ban1.jpg')},
       ],
       Studysrc1:require('./../assets/jt1.jpg'),
       Studysrc2:require('./../assets/study3.jpg'),
       Studysrc3:require('./../assets/jt1.jpg'),
       imagesbox2:[
         {id:1,jt1:require('./../assets/study1.jpg')},
-        {id:2,jt1:require('./../assets/study2.jpg')},
+        {id:2,jt1:require('./../assets/study1.jpg')},
       ],
-      imagebox3:[
-        {id:1,jt2:require('./../assets/study1.jpg')}
-        ]
+      // imagebox3:[
+      //   {id:1,jt2:require('./../assets/study1.jpg')}
+      //   ]
     };
   }
 };
@@ -121,7 +121,7 @@ export default {
   text-align: center;
 }
 .el-carousel {
-  width: 87%;
+  width: 80%;
   margin: 0 auto;
 }
 /* .el-carousel__item h3 {
@@ -152,9 +152,8 @@ export default {
   width: 93%;
 }
 .block {
-  width: 30%;
   display: inline-block;
-  margin: 0 20px;
+  margin: 0 80px;
   padding-bottom: 20px;
   cursor: pointer;
 }
@@ -166,7 +165,7 @@ export default {
     width: 80%;
     img{
       float: left;
-      margin-left: 150px;
+      margin-left: 200px;
       cursor: pointer;
       /* display: inline-block; */
     }

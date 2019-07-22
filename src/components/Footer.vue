@@ -11,7 +11,7 @@
           </div>
         </div>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="12" class="A-right">
         <div class="grid-content bg-purple">
           <el-row :gutter="20">
             <el-col :span="6">
@@ -48,7 +48,7 @@
                 </div>
               </div>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="6" >
               <div class="grid-content bg-purple">
                 <div>
                   <h4>保持联络</h4>
@@ -69,14 +69,31 @@ export default {};
 </script>
 <style lang="less" scope>
 .footer{
-  padding: 50px 0 20px 0;
+  width: 100%;
+  padding: 40px 0 20px 0;
   height: 100px;
   background-color: #272727;
   color: #fff;
  a{
-      color:#fff;
+    color:#fff;
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    line-height: 25px;
+    display: block;
+    padding-left: 15%;
+  }
+  a:hover{
+    color: #50BCFD;
+  }
+}
+.el-row{
+  width: 100%;
+  h4{
+    color: #787878;
+    font-size: 18px;
+    padding-left: 15%;
   }
 }
 
-  
 </style>

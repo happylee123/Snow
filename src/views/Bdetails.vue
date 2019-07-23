@@ -75,7 +75,7 @@
     </div>
     <!-- 商品参数的展示 parameter-->
     <div class="parameter" :span="24">
-      <hr />
+      <hr>
       <div class="bNav">
         <router-link tag="a" to="/Bsummary">概述</router-link>|
         <router-link tag="a" to="/bparameter">详细参数</router-link>|

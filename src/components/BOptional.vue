@@ -8,18 +8,18 @@
       <br />
       <span class="co-hide" v-show="isHide">
         <label for="co-input1">
-          <input type="checkbox" name id="co-input1" />
-          {{ v.child1 }}
+          <input  @click.stop="child1Send(v.child1)" type="checkbox" name id="co-input1" />
+          <span>{{ v.child1 }}</span>
         </label>
         <br />
         <label for="co-input2">
-          <input type="checkbox" name id="co-input2" />
-          {{ v.child2 }}
+          <input @click.stop="child2Send(v.child2)" type="checkbox" name id="co-input2" />
+          <span>{{ v.child2 }}</span>
         </label>
         <br />
         <label for="co-input3">
-          <input type="checkbox" name id="co-input3" />
-          {{ v.child3 }}
+          <input @click.stop="child3Send(v.child3)" type="checkbox" name id="co-input3" />
+          <span>{{ v.child3 }}</span>
         </label>
       </span>
     </p>
@@ -45,6 +45,33 @@ export default {
       } else {
         this.active = "";
       }
+    },
+    // 子选项赛选功能
+    child1Send(v){
+      console.log(v),
+      this.$axios.get("/api/getChild1Send",{
+        params: {
+          child1: v
+        }
+      }).then(function(res){
+        console.log(res)
+      })
+    },
+    child2Send(v){
+      console.log(v),
+      this.$axios.get("/api/getChild2Send",{
+        params: {
+          child2: v
+        }
+      })
+    },
+    child3Send(v){
+      console.log(v),
+      this.$axios.get("/api/getChild3Send",{
+        params: {
+          child3: v
+        }
+      })
     }
   }
 };

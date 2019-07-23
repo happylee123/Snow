@@ -84,13 +84,7 @@ export default {
     return {
       arrNav: [
         {
-          nav: "影像传感器",
-          child1: "全幅画",
-          child2: "1英寸",
-          child3: "1/2.3英寸"
-        },
-        {
-          nav: "机身类型",
+          nav: "有效分辨率",
           child1: " 黑卡®系列",
           child2: "长焦系列",
           child3: "缤纷系列"
@@ -106,8 +100,7 @@ export default {
           child1: "4K视频录制",
           child2: "超慢动作视频录制",
           child3: "触摸对焦"
-        },
-        { nav: "镜头类型", child1: "蔡司镜头", child2: "G镜头", child3: "" }
+        }
       ],
       //黑卡系列
       arrImg: [

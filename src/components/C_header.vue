@@ -69,13 +69,20 @@ export default {};
     }
   }
   }
- 
+ #list_1200{
+   width: 100%;
+   background: #fff;
+   box-shadow: 1px 4px 10px 1px #eeeeee;
+ }
   //list
   #c_listbox{
+     width: 1200px;
      text-align: center;
      height: 60px;
      line-height: 60px;
-     box-shadow: 1px 4px 10px 1px #eeeeee;
+     
+     background-color: #fff;
+     margin-bottom: 20px;
      .tag_a{
        width: 500px;
        margin:  0 auto;

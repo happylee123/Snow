@@ -6,39 +6,39 @@
         <div>
 
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <input type="text" class="ipt1" placeholder="用户名">
-            <div class="div1"></div>
+            <input type="text" class="ipt1" placeholder="用户名"  v-model="text.username" @blur="Musername" @input="Musername" >
+            <div class="div1" v-show="is.username">{{wron.username}}</div>
         </div>
         <div class="div5"></div>
         <div>
             <span class="glyphicon glyphicon-earphone"></span>
-            <input type="text"  class="ipt2 in1" placeholder="手机号">
-            <div class="div2"></div>
+            <input type="text"  class="ipt2 in1" placeholder="手机号" v-model="text.phone" @blur="phone"  @input="phone">
+            <div class="div2" v-show="is.phone">{{wron.phone}}</div>
         </div>
         <div class="d3">
         <div class="d4" >
             <span class="glyphicon glyphicon-comment"></span>
-            <input type="text"  class="reg-ipt " placeholder="短信验证码">
-             <div class="reg-div1"></div>
+            <input type="text"  class="reg-ipt " placeholder="短信验证码" v-model="text.messge">
+             <div class="reg-div1" v-show="is.messge">{{wron.messge}}</div>
         </div>
             <button class="btn1">获取验证码</button>
         </div>
         <div>
             <span class="glyphicon glyphicon-lock"></span>
-            <input type="password"   class="ipt3 in1" placeholder="密码">
-            <div class="div3"></div>
+            <input type="password"   class="ipt3 in1" placeholder="密码" v-model="text.pass" @blur="password" @input="password">
+            <div class="div3" v-show="is.pass">{{wron.pass}}</div>
         </div>
         <div class="div6"></div>
         <div>
             <span class="glyphicon glyphicon-lock"></span>
-            <input type="password"   class="ipt4 in1" placeholder="重复密码">
-            <div class="div4"></div>
+            <input type="password"   class="ipt4 in1" placeholder="重复密码" v-model="text.confpass"  @blur="isconfpass"  @input="isconfpass">
+            <div class="div4" v-show="is.confpass">{{wron.confpass}}</div>
         </div>
        <div class="d5">
         <input type="checkbox" class="reg-ipt1">
         <span>我已阅读并同意遵守<a class="lay">法律声明</a >和<a class="self">隐私条款</a></span>
         </div>
-        <button type="button" class="btn btn-primary">注册</button>
+        <button type="button" class="btn btn-primary" @click="register">注册</button>
         <p>如果您已拥有账号，则可在此 <router-link to="/" id="loginbtn">登陆</router-link></p>
     </div>
 
@@ -49,6 +49,155 @@
 <script>
 export default {
     name:"register",
+     data(){
+   return {
+     text:{
+        username:"",
+        phone:'',
+        messge:'',
+        pass:'',
+        confpass:''
+     },
+     wron:[{
+        username:"",
+        phone:'',
+        messge:'',
+        pass:'',
+        confpass:''
+     }],
+     checkword:{
+       username:['不能为空','请输入字母开头至少8-12位，包括（字母、数字）'],
+       phone:['不能为空','请输入正确的电话号码'],
+       messge:['不能为空','验证码错误'],
+       pass:['不能为空','请输入字母开头至少8-12位，包括（字母、数字）'],
+       confpass:['不能为空','请输入字母开头至少8-12位，包括（字母、数字）']
+     },
+     is:{
+        username:false,
+        phone:false,
+        messge:false,
+        pass:false,
+        confpass:false
+     },
+     isor:{
+        username:false,
+        phone:false,
+        messge:false,
+        pass:false,
+        confpass:false
+     },
+     reg:{
+        username:/[a-zA-z0-9]{3,12}/,
+        phone:/[0-9]{11}/,
+        pass:/[a-zA-z0-9]{3,12}/,
+        confpass:/[a-zA-z0-9]{3,12}/,
+
+     }
+   }
+ },
+ methods:{
+   //验证封装
+   fn(name,fn){
+     if(!this.text[name].trim()){
+       this.is[name]=true;      //是否显示错误提示
+       this.wron[name]=this.checkword[name][0];  //错误提示的内容
+       //this.isor[name]=false;               //返回一个false
+       return false;
+     }
+     if(!this.reg[name].test(this.text[name])){
+       this.is[name]=true;    
+       this.wron[name]=this.checkword[name][1];
+       //this.isor[name]=false;
+       return false;
+     }else{
+        return fn()
+     }  
+   },
+   //验证用户名
+   Musername(){
+     /** 
+     if(!this.text.usernametext.trim()){
+       this.is.isuser=true;
+       this.wron.Uwron="不能为空";
+       return false;
+     }
+     if(!this.reg[0].username.test(this.text.usernametext)){
+       this.is.isuser=true;
+       this.wron.Uwron="请输入字母开头至少8-12位，包括字母、数字";
+       return false;
+     }else{
+       //----------------------发起axios请求
+        this.is.isuser=false;
+         return true;
+     }  
+    */
+    let that=this;
+     this.fn('username',function(){
+        that.is.username=false;
+        return true;
+     })
+  
+   },
+   //验证电话号码
+   phone(){
+     let that=this;
+      this.fn('phone',function(){
+        that.is.phone=false;
+        return true;
+     })
+   },
+   //验证密码
+   password(){
+      let that=this;
+      this.fn('pass',function(){
+        that.is.pass=false;
+        return true;
+     })
+      //alert('hjk')
+     
+   },
+   //确认密码验证
+   isconfpass(){
+      let that=this;
+      this.fn('confpass',function(){
+        that.is.confpass=false;
+        return true;
+     })
+     
+   },
+   //点击注册验证
+   register(){
+      let that=this;
+      let istrue=false;
+      let arr=[];
+      for (const k in this.is) {
+        if(k!='messge'){
+           arr.push(k)                        
+        }
+        
+      }
+      for (let i = 0; i < arr.length; i++) {
+        let is=this.fn(arr[i],function(){
+                    that.is[arr[i]]=false;
+                    return true;
+                })
+        
+        istrue=is
+      }
+       
+       if(istrue){
+         //-----------------验证短信验证码
+         //-----------------验证有没有勾选条款
+         //-----------------注册成功弹框
+         alert("注册成功")
+         this.$router.push('/')
+       }
+      
+   }
+
+   
+   
+ }
 }
 </script>
 <style scope lang='less'>
@@ -140,7 +289,7 @@ input::-webkit-input-placeholder{
   height: 49px;
   margin: 0 auto;
   border: 1px solid #cacaca;
-  margin-top: 12px;
+  margin-top: 18px;
   border-radius: 6px;
   position: relative;
   z-index: -1;
@@ -243,58 +392,26 @@ border:none;
   right: -31px;
   top: 14px;
 }
-.d1 .div1 {
-  width: 120px;
-  right: 10px;
+.d1 .div1,.d1 .div2,.d1 .div3,.d1 .div4 {
+  width: 371px;
   position: absolute;
-  height: 30px;
+  height: 24px;
   color: white;
-  background: #d16d62;
-  top: -13px;
+  background: #eeeeee;
   border: 0;
-  display: none;
   text-align: center;
   line-height: 30px;
+  bottom: -18px;
+  left: -1px;
+  z-index: 10000;
+  border-radius:0 0 6px 6px;
+  // border:1px solid gainsboro;
+  color: #3296dd;
+  line-height: 24px;
+  font-size: 12px;
 }
-.d1 .div2 {
-  width: 120px;
-  right: 10px;
-  position: absolute;
-  height: 30px;
-  color: white;
-  background: #d16d62;
-  top: -13px;
-  border: 0;
-  display: none;
-  text-align: center;
-  line-height: 30px;
-}
-.d1 .div3 {
-  width: 120px;
-  right: 10px;
-  position: absolute;
-  height: 30px;
-  color: white;
-  background: #d16d62;
-  top: -13px;
-  border: 0;
-  display: none;
-  text-align: center;
-  line-height: 30px;
-}
-.d1 .div4 {
-  width: 130px;
-  right: 10px;
-  position: absolute;
-  height: 30px;
-  color: white;
-  background: #d16d62;
-  top: -13px;
-  border: 0;
-  display: none;
-  text-align: center;
-  line-height: 30px;
-}
+
+
 .d1 .dd {
   width: 350px;
   position: absolute;
@@ -337,15 +454,14 @@ border:none;
   width: 80px;
 }
 .d1 .reg-div1 {
-  width: 94px;
+  width: 82px;
   right: 10px;
   position: absolute;
   height: 30px;
   color: white;
   background: #d16d62;
-  top: -13px;
+  top: -9px;
   border: 0;
-  display: none;
   text-align: center;
   line-height: 30px;
 }

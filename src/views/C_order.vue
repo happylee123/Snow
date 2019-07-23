@@ -32,12 +32,12 @@
           <div class="f-addressdescrption clear">
             <!-- -------111--------- -->
            
-            <div class="f-addressone clear lf " v-for="(v,i) in address"  :class="{borderactive:timeIndex === i} "   @click="ischoose(i)">
+            <div class="f-addressone clear lf " v-for="(v,i) in address"  :class="{borderactive:timeIndex === i} "   @click="ischoose(i)" :key="i">
               <p class="f-addressname">
                {{ v.add_name}}
                 <span class="rt">{{ v.add_tel}}</span>
               </p>
-              <p class="f-addresstext">{{ v.sheng}} &nbsp {{ v.shi}} &nbsp {{ v.xian}} &nbsp {{ v.add_all}}</p>
+              <p class="f-addresstext">{{ v.sheng}}  {{ v.shi}}  {{ v.xian}}  {{ v.add_all}}</p>
             </div>
             
           </div>
@@ -62,7 +62,7 @@
           <!-- ---订单产品列表---------- -->
           <div id="f-pay_product_orderlist">
             <!-- -----单个商品信息1 ------->
-            <div class="f-product clear" v-for="(v,i) in data">                
+            <div class="f-product clear" v-for="(v,i) in data" :key="i">                
               <div class="f-pro01 ">
                   <div class="f-img lf">
                       <img src="../assets/images/C_img/img_ilce_9_b.jpg" alt="网络加载失败">
@@ -112,7 +112,7 @@
                 <div class="f-sanjiao" :class="{sanjiao_top:issanjia}"></div>
               </div>
               <ul class="f-select" v-show="isoption"  >
-                <li class="f-downperson f-downli" v-for="(v,i) in tiketarr" :class="{li_active:i===istiket}" @mouseover="tiketactive(i)" @click="litext(i)">{{v}}</li>
+                <li class="f-downperson f-downli" v-for="(v,i) in tiketarr" :class="{li_active:i===istiket}" :key="i" @mouseover="tiketactive(i)" @click="litext(i)" >{{v}}</li>
                
               </ul>
             </div>

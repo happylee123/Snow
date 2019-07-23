@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cart">
     <!-- ---------头部 -------------->
     <Cheader></Cheader>
 
@@ -38,7 +38,7 @@
             <!-- ---------商品大盒子开始------ -->
             <div id="F-carproduct_list">
               <!-- -- 1 ------>
-              <div class="f-car_product" v-for="(v,i) in data">
+              <div class="f-car_product" v-for="(v,i) in data" :key="i">
                 <!-- 左 -->
                 <div class="f-car_left f-car_p">
                   <input type="checkbox" class="f-car_singlecheck" :checked="ischeckedarr[i]" @click="paynumber(i)" />
@@ -290,7 +290,8 @@ export default {
 @import "../styles/C_pub.less";
 
 //-----------------------------
-#mainbigbox {
+.cart{
+   #mainbigbox {
   background-color: rgb(237, 237, 237);
 
   //-----------------------------
@@ -590,4 +591,6 @@ export default {
     }
   }
 }
+}
+
 </style>

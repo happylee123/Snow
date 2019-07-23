@@ -4,15 +4,15 @@
     <div class="d1">
         <img src="../assets/logo2.png" class="img3" height="130" width="130"/>
         <div class="d11">登录</div>
-        <div>
+        <div >
             <span class="glyphicon glyphicon-earphone">@</span>
-            <input type="text" id="ipt1" placeholder="请输入账号名">
-            <div class="div1"></div>
+            <input type="text" id="ipt1" placeholder="请输入账号名" v-model="usernametext" @blur="Musername">
+            <div class="div1" v-show="isuser">{{Uwron}}</div>
         </div>
-        <div>
+        <div >
             <span class="glyphicon glyphicon-lock">$</span>
-            <input type="password" id="ipt2" placeholder="请输入密码">
-            <div class="div2"></div>
+            <input type="password" id="ipt2" placeholder="请输入密码" v-model="passtext" @blur="Mpass">
+            <div class="div2" v-show="ispass">{{Pwron}}</div>
         </div>
         <div class="log-d1"></div>
         <div class="d5">
@@ -22,13 +22,9 @@
             <a href="C-forget.html">忘记密码</a>
           </div>
         </div>
-        <router-link to="/index">
-        <button type="button" class="btn btn-primary" id="uploadbtn">登录</button>
-         </router-link>
-        <!-- <div class="d10">
-       <span>其他账号登录：<a href="C-wechat.html" style="text-decoration: none "><span class="qq">&#xe630;</span></a>
-           <a href="C-wechat.html" style="text-decoration: none"><span class="wechat">&#xe614;</span></a></span>
-        </div> -->
+        <button type="button" class="btn btn-primary" id="uploadbtn" @click="loginbtn">登录</button>
+ 
+       
         <div class="d8"></div>
     </div>
 
@@ -40,17 +36,88 @@
 
 <script>
 export default {
- name:'login'
+ name:'login',
+ data(){
+   return {
+     usernametext:"",
+     passtext:'',
+     Uwron:"",
+     Pwron:"",
+     isuser:false,
+     ispass:false,
+     reg:[
+       {username:/[a-zA-z0-9]{3,12}/},
+       {pass:/[a-zA-z0-9]{3,12}/}
+     ]
+     
+   }
+ },
+ methods:{
+   //验证封装
+   fn1(usernametext,isuser,Uwron,regindex,regname,fn){
+     if(!this[usernametext].trim()){
+       this[isuser]=true;
+       this[Uwron]="不能为空";
+       return false;
+     }
+     if(!this.reg[regindex][regname].test(this[usernametext])){
+       this[isuser]=true;
+       this[Uwron]="请输入字母开头至少8-12位，包括字母、数字";
+       return false;
+     }else{
+       //----------------------发起axios请求
+        fn()
+        this[isuser]=false;
+         return true;
+     }  
+   },
+   //验证用户名
+   Musername(){
+     /*
+     if(!this.usernametext.trim()){
+       this.isuser=true;
+       this.Uwron="不能为空";
+       return false;
+     }
+     if(!this.reg[0].username.test(this.usernametext)){
+       this.isuser=true;
+       this.Uwron="请输入字母开头至少8-12位，包括字母、数字";
+       return false;
+     }else{
+       //----------------------发起axios请求
+         this.isuser=false;
+         return true;
+     }  
+    */
+    this.fn1('usernametext','isuser','Uwron',0,'username',function(){})
+   
+   },
+   //验证密码
+   Mpass(){
+    this.fn1('passtext','ispass','Pwron',1,'pass',function(){})
+   },
+   loginbtn(){
+     if(this.fn1('usernametext','isuser','Uwron',0,'username',function(){}) && this.fn1('passtext','ispass','Pwron',1,'pass',function(){})){
+       //------------------------发送axios请求
+         this.$router.push('/index')
+     }
+  
+     
+   }
+   
+   
+ }
 };
 </script>
+
 <style scope lang='less'>
 @import '../styles/C_pub.less';
-
 * {
   margin: 0;
   padding: 0;
 }
-//注册
+.login{
+  //注册
 #register{
   color: @colormain;
   margin-right:6px;
@@ -184,30 +251,40 @@ export default {
   top: 14px;
 }
 .d1 .div1 {
-  width: 120px;
-  right: 10px;
+  width: 371px;
   position: absolute;
-  height: 30px;
+  height: 24px;
   color: white;
-  background: #d16d62;
-  top: -13px;
+  background: #eeeeee;
   border: 0;
-  display: none;
   text-align: center;
   line-height: 30px;
+  bottom: -18px;
+  left: -1px;
+  z-index: 10000;
+  border-radius:0 0 6px 6px;
+  // border:1px solid gainsboro;
+  color: #3296dd;
+  line-height: 24px;
+  font-size: 12px;
 }
 .d1 .div2 {
-  width: 120px;
-  right: 10px;
+  width: 371px;
   position: absolute;
-  height: 30px;
+  height: 24px;
   color: white;
-  background: #d16d62;
-  top: -13px;
+  background: #eeeeee;
   border: 0;
-  display: none;
   text-align: center;
   line-height: 30px;
+  bottom: -18px;
+  left: -1px;
+  z-index: 10000;
+  border-radius:0 0 6px 6px;
+  // border:1px solid gainsboro;
+  color: #3296dd;
+  line-height: 24px;
+  font-size: 12px;
 }
 .d1 .div3 {
   width: 120px;
@@ -405,6 +482,8 @@ export default {
   font-size: 15px;
 }
 /*# sourceMappingURL=C-lulu.css.map */
+}
+
 
 </style>
 

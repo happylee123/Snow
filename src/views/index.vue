@@ -4,10 +4,13 @@
       <el-col :span="24">
         <div id="header">
           <div id="login">
-            <span class="login-logo">logo</span>
+            <span class="login-logo">
+              <img src="../assets/logoB.png" alt="" id="logo">
+            </span>
             <span class="login-lo">
               <span id="load">登录</span> /注册
-              <router-link to='/cart' target="_blank" class="iconfont" id="carticon">&#xf0179;</router-link>
+              <router-link to='/personIndex' id="personcenter">个人中心</router-link>
+              <router-link to='/cart' target="_blank" class="iconfont" id="carticon">&#xf0179;</router-link>            
             </span>
           </div>
           <div id="nav" :span="24">
@@ -39,7 +42,21 @@ export default {
 }
 </script>
 
+
 <style lang="less" scoped>
+//logo
+#logo{
+  width: 50px;
+  position: relative;
+  top: 6px;
+}
+//个人中心
+#personcenter{
+  margin-left: 12px;
+  &:hover{
+    color: #e7e7e7;
+  }
+}
 #top{
   background-color: #272727;
    color: #fff;
@@ -51,8 +68,11 @@ export default {
   text-align: center;
   margin: 10px 0;
   cursor: default;
+  
   .login-logo{
-    margin-right: 694px;
+    margin-right: 614px;
+    
+   
   }
   .login-lo{
     margin-left: 200px;
@@ -60,7 +80,7 @@ export default {
   #carticon{
     margin-left: 10px;
     &:hover{
-      color: #ececec;
+      color: #e7e7e7;
     }
   }
   #load{

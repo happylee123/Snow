@@ -32,13 +32,15 @@ app.use(bodyParse.urlencoded({extended:false}));
 // })
 //路由的拦截与使用
 const A_Router= require('./router/A-Router.js');
-app.use(B_Router);
+app.use(A_Router);
 
 const B_Router= require('./router/B-Router.js');
 app.use(B_Router);
 
 const C_Router= require('./router/C-Router.js');
-app.use(B_Router);
+app.use(C_Router);
+
+
 
 //配置端口号
 app.listen(1314,function () {

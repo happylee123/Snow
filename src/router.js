@@ -43,9 +43,9 @@ export default new Router({
         //component: () => import( './views/lens.vue')
       },
       {//学习教程
-        path:'/study',
+        path:'/A_study',
         name: 'study',
-        //component: () => import( './views/study.vue')
+        component: () => import( './views/A_study.vue')
       },
       { //商品详情页---------------------------------------------------//老赵路由
         path: '/bdetails',

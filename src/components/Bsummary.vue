@@ -9,9 +9,16 @@
             <img src="./../img/dsc_rx10m4_04.jpg" alt="">
             <img src="./../img/dsc_rx10m4_05.jpg" alt="">
             <img src="./../img/dsc_rx10m4_06.jpg" alt=""> -->            
+            <!-- <img :src="v.src" alt="" v-for="v in arrImg" :key="v.id"> -->
+            <img src="./../assets/bdetails/heika_minisite.jpg" alt="">
+            <img src="./../assets/bdetails/dsc_rx10m4_01.jpg" alt="">
+            <img src="./../assets/bdetails/dsc_rx10m4_02.jpg" alt="">
+            <img src="./../assets/bdetails/dsc_rx10m4_03.jpg" alt="">
+            <img src="./../assets/bdetails/dsc_rx10m4_04.jpg" alt="">
+            <img src="./../assets/bdetails/dsc_rx10m4_05.jpg" alt="">
+            <img src="./../assets/bdetails/dsc_rx10m4_06.jpg" alt="">
         </div>
     </div>
-    
 </template>
 
 <script>

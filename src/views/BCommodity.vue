@@ -48,7 +48,7 @@
       <div class="co-left clearfix">
         <h4>筛选条件</h4>
         <ul>
-          <BOptional v-for="v in arrNav" :key="v.nav" :v="v"></BOptional>
+          <BOptional @sendChild1="fromChild" v-for="v in arrNav" :key="v.nav" :v="v"></BOptional>
         </ul>
       </div>
       <div class="co-right clearfix">
@@ -72,7 +72,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -205,6 +204,10 @@ export default {
           exhibitionImg: this.exhibitionImg
         }
       })
+    },
+    //接收子组件（BOptional。vue）的数据
+    fromChild(data){
+      console.log(data)
     }
   },
 
@@ -268,7 +271,7 @@ export default {
     .co-left {
       float: left;
       width: 18%;
-      border: #26a8df 1px solid;
+      border: 1px solid #e5e5e5;;
       h4 {
         padding-left: 24px;
         line-height: 60px;

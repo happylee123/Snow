@@ -6,12 +6,12 @@
         <div class="d11">登录</div>
         <div >
             <span class="glyphicon glyphicon-earphone">@</span>
-            <input type="text" id="ipt1" placeholder="请输入账号名" v-model="usernametext" @blur="Musername">
+            <input type="text" id="ipt1" placeholder="请输入账号名" v-model="usernametext" @blur="Musername" @input="Musername">
             <div class="div1" v-show="isuser">{{Uwron}}</div>
         </div>
         <div >
             <span class="glyphicon glyphicon-lock">$</span>
-            <input type="password" id="ipt2" placeholder="请输入密码" v-model="passtext" @blur="Mpass">
+            <input type="password" id="ipt2" placeholder="请输入密码" v-model="passtext" @blur="Mpass" @input="Mpass">
             <div class="div2" v-show="ispass">{{Pwron}}</div>
         </div>
         <div class="log-d1"></div>
@@ -66,9 +66,7 @@ export default {
        return false;
      }else{
        //----------------------发起axios请求
-        fn()
-        this[isuser]=false;
-         return true;
+        return fn()
      }  
    },
    //验证用户名
@@ -89,16 +87,35 @@ export default {
          return true;
      }  
     */
-    this.fn1('usernametext','isuser','Uwron',0,'username',function(){})
+   let that=this;
+    this.fn1('usernametext','isuser','Uwron',0,'username',function(){
+      that.isuser=false;
+      return true
+    })
    
    },
    //验证密码
    Mpass(){
-    this.fn1('passtext','ispass','Pwron',1,'pass',function(){})
+     let that=this;
+    this.fn1('passtext','ispass','Pwron',1,'pass',function(){
+        that.ispass=false;
+        return true
+    })
    },
    loginbtn(){
-     if(this.fn1('usernametext','isuser','Uwron',0,'username',function(){}) && this.fn1('passtext','ispass','Pwron',1,'pass',function(){})){
-       //------------------------发送axios请求
+     let that=this;
+     let usertrue= this.fn1('usernametext','isuser','Uwron',0,'username',function(){
+                    that.isuser=false;
+                    return true
+                  })
+    let  passtrue=this.fn1('passtext','ispass','Pwron',1,'pass',function(){
+                      that.ispass=false;
+                      return true
+                  })
+
+     if(usertrue && passtrue){
+       //------------------------发送axios请求,验证用户名和密码是否正确
+        this.axios.get('/login',)
          this.$router.push('/index')
      }
   

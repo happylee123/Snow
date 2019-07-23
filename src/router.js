@@ -101,6 +101,39 @@ export default new Router({
       path: '/pay',
       name: 'pay',
       component: () => import('./views/C_pay.vue'),
+    },
+    {//个人中心
+      path: '/personIndex',
+      name: 'personIndex',
+      component: () => import('./views/C-personIndex.vue'),
+      children:[
+        {//个人中心详情
+          path: '/',
+          name: 'peopel',
+          component: () => import('./views/C_people.vue'),
+        },
+        {//我的订单
+          path: '/orderlist',
+          name: 'orderlist',
+          component: () => import('./views/C_orderList.vue'),
+        }
+        ,
+        {//我的评价
+          path: '/evaluate',
+          name: 'evaluate',
+          component: () => import('./views/B_evaluate.vue'),
+        },
+         {//售后服务
+          path: '/aftersale',
+          name: 'aftersale',
+          component: () => import('./views/A_aftersale.vue'),
+        },
+         {//地址
+          path: '/address',
+          name: 'address',
+          component: () => import('./views/A_address.vue'),
+        }
+      ]
     }
   ]
 })

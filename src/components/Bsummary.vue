@@ -8,8 +8,7 @@
             <img src="./../img/dsc_rx10m4_03.jpg" alt="">
             <img src="./../img/dsc_rx10m4_04.jpg" alt="">
             <img src="./../img/dsc_rx10m4_05.jpg" alt="">
-            <img src="./../img/dsc_rx10m4_06.jpg" alt=""> -->
-            
+            <img src="./../img/dsc_rx10m4_06.jpg" alt=""> -->            
         </div>
     </div>
     

@@ -6,7 +6,6 @@ const favicon=require('serve-favicon');
 const morgan=require('morgan');
 //post映入
 const bodyParse=require('body-parser');
-const mysql=require('mysql');
 //搭建服务
 const app=express();
 //配置静态文件访问目录
@@ -30,6 +29,8 @@ app.use(bodyParse.urlencoded({extended:false}));
 
 //     next();
 // })
+
+
 //路由的拦截与使用
 const A_Router= require('./router/A-Router.js');
 app.use(A_Router);
@@ -37,12 +38,10 @@ app.use(A_Router);
 const B_Router= require('./router/B-Router.js');
 app.use(B_Router);
 
-const C_Router= require('./router/C-Router.js');
+const C_Router= require('./router/C_loginrouter.js');
 app.use(C_Router);
 
-
-
 //配置端口号
-app.listen(1314,function () {
+app.listen(1818,function () {
     console.log('项目启动了')
 });

@@ -57,8 +57,10 @@
     <el-row class="button">
       <el-col :span="4">
         <div>
+          <a href="javascript:;">
           <img src="./../assets/u103.png" alt="">
           <p>雷霆影像天地</p>
+          </a>
         </div>
       </el-col>
       <el-col :span="4">
@@ -153,9 +155,10 @@ export default {
 }
 .block {
   display: inline-block;
-  margin: 0 80px;
+  /* margin: 0 80px; */
   padding-bottom: 20px;
   cursor: pointer;
+  margin-left: 120px;
 }
 /*镜片图片*/
 .MainBlock{

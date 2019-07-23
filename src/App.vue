@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <keep-alive>
+     <keep-alive exclude="cart">
           <router-view></router-view> 
      </keep-alive>
   </div>

@@ -3,9 +3,9 @@
     <!-- 轮播图 -->
     <div class="banner">
       <el-carousel :interval="5000" arrow="always" height="379px">
-        <el-carousel-item v-for="i in 6" :key="i">
+        <el-carousel-item v-for="(bsrc,i) in imgSrc_arr" :key="i">
           <a href="javascript:;">
-            <img src="./../assets/suoni_files/banner1.jpg" alt />
+            <img :src="bsrc.img_name" alt />
           </a>
         </el-carousel-item>
       </el-carousel>
@@ -178,6 +178,7 @@ export default {
       ],
       //bannner 的数据请求
       banner: 1,
+      imgSrc_arr: [],
       //下方展示区域的img 请求
       exhibitionImg: 2
     };
@@ -195,6 +196,10 @@ export default {
         params: {
           banner: this.banner
         }
+      }).then((res)=>{ //接收后台返回来的banner的img地址
+        // console.log(res.data.msg)
+        var imgSrc_arr = res.data.msg;
+        this.imgSrc_arr = imgSrc_arr
       });
     },
     //下方展示区域img的获取函数 

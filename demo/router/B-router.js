@@ -1,13 +1,10 @@
 const express = require('express');
 const myRouter = express.Router();
-// const B_Controller=require('../controller/B-Controller.js');
+const B_Controller=require('../controller/B-Controller.js');
 
 
 //banner 图的请求
-myRouter.get('/getBannerImg',function (req,res) {
-    var json = req.query;
-    console.log('banner',json)
-});
+myRouter.get('/getBannerImg',B_Controller.getBannerImg);
 //下方展示区域的img 请求
 myRouter.get('/getExhibitionImg',function(req,res){
     var json = req.query;

@@ -12,6 +12,7 @@ var obj={
             }else{
                 //添加session
                 req.session.userid=data[0].user_id;
+                console.log(data[0].user_id)
                 res.send({error:0});
             }
            }else{

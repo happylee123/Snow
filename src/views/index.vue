@@ -8,7 +8,12 @@
               <img src="../assets/logoB.png" alt="" id="logo">
             </span>
             <span class="login-lo">
-              <span id="load">登录</span> /注册
+              <router-link to='/login'> 
+                 <span id="load">登录</span> 
+              </router-link >/
+              <router-link to='/register'> 
+              注册
+              </router-link>
               <router-link to='/personIndex' id="personcenter">个人中心</router-link>
               <router-link to='/cart' target="_blank" class="iconfont" id="carticon">&#xf0179;</router-link>            
             </span>

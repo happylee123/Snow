@@ -280,6 +280,13 @@ export default {
     for (let k = 0; k < this.data.length; k++) {
       this.msg.push(this.data[k].cart_num)
     }
+
+  },
+  mounted(){
+   this.$axios.post("/api/F_car_productlis").then(function(res){
+       
+         console.log(res.data)
+   })
   }
 };
 </script>

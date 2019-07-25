@@ -133,8 +133,10 @@ export default {
                      return false;
                 }
                 //保存数据在vuex中 0表示没有登录
-                that.$store.commit('save',1)
-                that.$router.push('/index')
+                    that.$store.commit('save',1)
+                    that.$router.push('/index')
+
+               
         })
      }
   

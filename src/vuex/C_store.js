@@ -1,14 +1,15 @@
 export default {
     state: {
-       
+       user:0
     },
     getters:{
-    
+      
         
     },
-    mutations: {
-       
-
+    mutations: {     
+        save(state,num){
+            state.user=num
+          }
     },
     actions: {
        

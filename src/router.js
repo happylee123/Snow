@@ -17,6 +17,18 @@ export default new Router({
       name: 'register',
       component: () => import('./views/C-register.vue'),
     },
+    {
+      //忘记密码
+      path: '/forget',
+      name: 'forget',
+      component: () => import('./views/C_forget.vue'),
+    },
+    {
+      //修改密码
+      path: '/changepass',
+      name: 'changepass',
+      component: () => import('./views/C_changepass.vue'),
+    },
     {//首页
       path: '/index',
       name: 'index',
@@ -136,4 +148,6 @@ export default new Router({
       ]
     }
   ]
-})
+});
+
+

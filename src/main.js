@@ -7,6 +7,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/base.css';
 import  './assets/css/pub.css';
 
+// router.beforeEach((to, from, next) => {
+//  if(to.meta.requireAuth){
+
+//  }
+  
+// })
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;

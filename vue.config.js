@@ -25,7 +25,7 @@ module.exports = {
         proxy: {
             '/api': {
                 /* 目标代理服务器地址 */
-                target: 'http://localhost:1314',
+                target: 'http://localhost:1818',
                 /* 允许跨域 */
                 changeOrigin: true,
                 /*路径的前缀*/

@@ -4,10 +4,7 @@ const B_Controller=require('../controller/B-Controller.js');
 
 
 //banner 图的请求
-myRouter.get('/getBannerImg',function (req,res) {
-    var json = req.query;
-    console.log('banner',json)
-});
+myRouter.get('/getBannerImg',B_Controller.getBannerImg);
 //下方展示区域的img 请求
 myRouter.get('/getExhibitionImg',function(req,res){
     var json = req.query;
@@ -29,4 +26,8 @@ myRouter.get('/getChild3Send',function (req,res) {
     console.log('子选项3',json)
     res.send('成功3')
 })
+
+
+
+module.exports = myRouter;
 

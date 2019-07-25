@@ -25,7 +25,6 @@
     </p>
   </li>
 </template>
-
 <script>
 export default {
   name: "boptional",
@@ -34,7 +33,7 @@ export default {
     return {
       isHide: false,
       elI: "el-icon-arrow-down",
-      active: ""
+      active: "",
     };
   },
   methods: {
@@ -48,30 +47,35 @@ export default {
     },
     // 子选项赛选功能
     child1Send(v){
-      console.log(v),
+      // console.log(v),
       this.$axios.get("/api/getChild1Send",{
         params: {
           child1: v
         }
-      }).then(function(res){
-        console.log(res)
-      })
+      }).then((res)=>{
+        //发送给父主组件数据
+        this.$emit('sendChild1',res)
+      });
     },
     child2Send(v){
-      console.log(v),
       this.$axios.get("/api/getChild2Send",{
         params: {
           child2: v
         }
-      })
+      }).then((res)=>{
+        //发送给父主组件数据
+        this.$emit('sendChild1',res)
+      });
     },
     child3Send(v){
-      console.log(v),
       this.$axios.get("/api/getChild3Send",{
         params: {
           child3: v
         }
-      })
+      }).then((res)=>{
+        //发送给父主组件数据
+        this.$emit('sendChild1',res)
+      });
     }
   }
 };
@@ -81,7 +85,7 @@ p {
   padding-left: 0;
   line-height: 74px;
   color: #555;
-  font-size: 22px;
+  font-size: 20px;
   border-bottom: 1px solid #e5e5e5;
   cursor: pointer;
   i {

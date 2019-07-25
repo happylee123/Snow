@@ -15,7 +15,7 @@ if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是�
               next();
           } else {
               next({
-                  path: '/',
+                  path: '/login',
                   query: {
                       redirect: to.fullPath
                   } // 将跳转的路由path作为参数，登录成功后跳转到该路由

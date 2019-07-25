@@ -19,7 +19,12 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  beforeMount: {
+
+  },
+  methods: {
+    
+  }
 };
 </script>
 
@@ -37,14 +42,14 @@ export default {
     width: 94%;
     text-align: left;
     .bp {
-      padding: 0 6px;
-      font-size: 14px;
-      line-height: 18px;
-      border: none;
-      width: 100%;
+      // padding: 0 6px;
+      padding-left: 6px;
+      height: 42px;
       overflow: hidden;
-      white-space: nowrap;
       text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
     .bspan {
       margin: 10px 0 10px 0;

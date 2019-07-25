@@ -34,10 +34,16 @@
 <script>
 import footer from "../components/Footer";
 import '../styles/C_pub.less';
+import store from'../vuex/store';
 export default {
+  store,
   name:'index',
   components:{
     pubfooter:footer
+  },
+  mounted(){
+    //this.$store.commit('con');
+     console.log(localStorage.user,2555)  
   }
 }
 </script>

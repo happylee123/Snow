@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "vuex-persist": "^2.0.1"
+  }
+}

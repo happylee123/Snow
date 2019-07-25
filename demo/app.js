@@ -63,10 +63,11 @@ app.use(A_Router);
 const B_Router= require('./router/B-Router.js');
 app.use(B_Router);
 
+//----------------------------lee的路由
 const C_Router= require('./router/C_loginrouter.js');
 app.use(C_Router);
 
 //配置端口号
-app.listen(1314,function () {
+app.listen(1818,function () {
     console.log('项目启动了')
 });

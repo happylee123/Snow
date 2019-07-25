@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import store from '../vuex/C_store';
+import store from '../vuex/store';
 export default {
  store,
  name:'login',
@@ -129,11 +129,11 @@ export default {
                     that.$alert('用户名或密码错误', '错误', {
                       confirmButtonText: '确定',
                     });
-                    //保存数据在vuex中
-                     this.$store.commit();
+                     that.$store.commit('save',1)
                      return false;
                 }
-                
+                //保存数据在vuex中 0表示没有登录
+                that.$store.commit('save',1)
                 that.$router.push('/index')
         })
      }

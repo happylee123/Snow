@@ -64,27 +64,27 @@
           </span>
           <!-- 两个图标 -->
           <!-- 修改 -->
-          <el-button type="text" @click="dialogFormVisible1(rew,index)">
+          <el-button type="text" @click="open1 = true" >
             <span class="iconfont icon-bianji D-s7"></span>
           </el-button>
           <!-- 修改弹框 -->
-          <el-dialog title="收货地址" :visible.sync="dialogFormVisible1" width="40%">
+          <el-dialog title="收货地址" :visible.sync="open1" width="40%">
             <el-form :model="form">
               <!-- 姓名 -->
               <el-form-item label="姓名" :label-width="formLabelWidth">
-                <el-input v-model="editObj.name1" autocomplete="off"></el-input>
+                <el-input v-model="todos.name" autocomplete="off" property="name"></el-input>
               </el-form-item>
               <!-- 电话 -->
               <el-form-item label="电话" :label-width="formLabelWidth">
-                <el-input v-model="editObj.name2" autocomplete="off"></el-input>
+                <el-input v-model="todos.name1" autocomplete="off"></el-input>
               </el-form-item>
               <el-form-item label="详细街道" :label-width="formLabelWidth">
-                  <el-input v-model="editObj.name3" autocomplete="off" ></el-input>
+                  <el-input v-model="todos.name2" autocomplete="off" ></el-input>
               </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer dialog-footer1">
-              <el-button @click="dialogFormVisible1 = false">取 消</el-button>
-              <el-button type="primary" @click="dialogFormVisible1">确 定</el-button>
+              <el-button @click="open1 = false">取 消</el-button>
+              <el-button type="primary" @click="open1 = false">确 定</el-button>
             </div>
           </el-dialog>
           <!-- 删除 -->
@@ -98,7 +98,7 @@
 </template>
 <script>
 export default {
-  name: ".D-con3-b",
+  //name: ".D-con3-b",
   data() {
     return {
       todos: [
@@ -129,15 +129,10 @@ export default {
         },
         
       ],
-      editObj:{
-        name1:'',
-        name2:'',
-        name3:'',
-      },
         dialogTableVisible: false,
-        dialogTableVisible1: false,
         dialogFormVisible: false,
-        dialogFormVisible1: false,
+        open1:false,
+        msg: '',
         form: {
           name1: '',
           name2: '',
@@ -155,21 +150,10 @@ export default {
     };
   },
   methods: {
-    dialogFormVisible1(row,index){
-                 //记录索引
-                 this.formIndex=_index;
-                 //记录数据
-                 this.editObj=row;
-                 //显示弹窗
-                 this.dialogFormVisible1=true;
-             },
-             editDo(){
-                 let _index=this.formIndex
-                 //根据索引，赋值到list制定的数
-                 this.list[_index]=editObj;
-                 //关闭弹窗
-                 this.dialogFormVisible1=false;
-             },
+    open1(){
+      this.todas.name,
+      console.log(1);
+    },
     open2(i) {
       this.i = i,
       this.$confirm("是否确定删除该栏收货地址, 是否继续?", "提示", {

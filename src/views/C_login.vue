@@ -5,21 +5,21 @@
         <img src="../assets/logo2.png" class="img3" height="130" width="130"/>
         <div class="d11">登录</div>
         <div >
-            <span class="glyphicon glyphicon-earphone">@</span>
-            <input type="text" id="ipt1" placeholder="请输入账号名" v-model="usernametext" @blur="Musername" @input="Musername">
+            <span class="iconfont icon-xingmingyonghumingnicheng icon"></span>
+            <input type="text" id="ipt1" placeholder="请输入账号名" v-model="usernametext" @blur="Musername" @input="Musername" >
             <div class="div1" v-show="isuser">{{Uwron}}</div>
         </div>
         <div >
-            <span class="glyphicon glyphicon-lock">$</span>
+            <span class="iconfont icon-mima icon"></span>
             <input type="password" id="ipt2" placeholder="请输入密码" v-model="passtext" @blur="Mpass" @input="Mpass">
             <div class="div2" v-show="ispass">{{Pwron}}</div>
         </div>
         <div class="log-d1"></div>
         <div class="d5">
-        <input type="checkbox" class="ipt3" ><span>自动登录</span>
+        <input type="checkbox" class="ipt3" id="checkinput"><span>自动登录</span>
           <div class="d9">
             <router-link to='/register' id="register">注册账号</router-link>
-            <a href="C-forget.html">忘记密码</a>
+            <router-link to="/forget" id="forget">忘记密码?</router-link>
           </div>
         </div>
         <button type="button" class="btn btn-primary" id="uploadbtn" @click="loginbtn">登录</button>
@@ -27,7 +27,6 @@
        
         <div class="d8"></div>
     </div>
-
 </div>
    
     
@@ -35,7 +34,9 @@
 </template>
 
 <script>
+import store from '../vuex/store';
 export default {
+ store,
  name:'login',
  data(){
    return {
@@ -115,8 +116,26 @@ export default {
 
      if(usertrue && passtrue){
        //------------------------发送axios请求,验证用户名和密码是否正确
-        this.axios.get('/login',)
-         this.$router.push('/index')
+        this.$axios.post("/api/login",{
+             params:{
+                name:this.usernametext,
+                pass:this.passtext
+             }
+        }).then(function(res){
+               let data=res.data.error
+               //返回{error：1}，弹出警示框
+                if(data){
+                    //弹框
+                    that.$alert('用户名或密码错误', '错误', {
+                      confirmButtonText: '确定',
+                    });
+                     that.$store.commit('save',1)
+                     return false;
+                }
+                //保存数据在vuex中 0表示没有登录
+                that.$store.commit('save',1)
+                that.$router.push('/index')
+        })
      }
   
      
@@ -129,9 +148,17 @@ export default {
 
 <style scope lang='less'>
 @import '../styles/C_pub.less';
+@import '../font/C_font/iconfont.css';
 * {
   margin: 0;
   padding: 0;
+}
+.icon{
+  font-size: 16px;
+  color: #b4b4b4;
+  margin-left:14px;
+  position: relative;
+  top:px;
 }
 .login{
   //注册
@@ -147,6 +174,10 @@ export default {
   &:hover{
     background-color: #3296dd;
   }
+}
+//忘记密码
+#forget{
+  color: #b4b4b4;
 }
 .d1 {
   border: 1px solid #d6d6d6;
@@ -183,8 +214,11 @@ export default {
   vertical-align: middle;
   outline: none;
   border: 0px;
-  margin-left: 33px;
+  margin-left: 10px;
   font-size: 15px;
+}
+#checkinput{
+  margin-left:10px;
 }
 .d1 .sa-ipt1 {
   height: 44px;
@@ -201,6 +235,9 @@ export default {
 }
 #ipt2::-webkit-input-placeholder{
    color: #bdbdbd;
+}
+#ipt2,#ipt1{
+  width: 329px;
 }
 .d1 .sa-div1 {
   width: 77px;
@@ -264,7 +301,7 @@ export default {
   border: 0;
   margin: 0;
   position: absolute;
-  right: -31px;
+  right: -23px;
   top: 14px;
 }
 .d1 .div1 {
@@ -435,19 +472,15 @@ export default {
 .d1 .d10 span {
   margin-left: 20px;
 }
-/* @font-face {
-  font-family: 'iconfont';
-  src: url('../font/C-font/iconfont.eot');
-  src: url('../font/C-font/iconfont.eot?#iefix') format('embedded-opentype'), url('../font/C-font/iconfont.woff2') format('woff2'), url('../font/C-font/iconfont.woff') format('woff'), url('../font/C-font/iconfont.ttf') format('truetype'), url('../font/C-font/iconfont.svg#iconfont') format('svg');
-} */
-.d1 .d10 .qq,
-.d1 .d10 .wechat {
-  font-family: "iconfont" !important;
-  font-size: 23px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+
+// .d1 .d10 .qq,
+// .d1 .d10 .wechat {
+//   font-family: "iconfont" !important;
+//   font-size: 23px;
+//   font-style: normal;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+// }
 .d1 .inp1 {
   margin: 0;
   border-radius: 45px;

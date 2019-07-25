@@ -17,9 +17,24 @@ export default new Router({
       name: 'register',
       component: () => import('./views/C-register.vue'),
     },
+    {
+      //忘记密码
+      path: '/forget',
+      name: 'forget',
+      component: () => import('./views/C_forget.vue'),
+    },
+    {
+      //修改密码
+      path: '/changepass',
+      name: 'changepass',
+      component: () => import('./views/C_changepass.vue'),
+    },
     {//首页
       path: '/index',
       name: 'index',
+      meta:{
+        requireAuth:true
+      },
       component: () => import('./views/index.vue'),
       children:[
         {//首页
@@ -85,26 +100,41 @@ export default new Router({
     {
       path: '/cart',
       name: 'cart',
+      meta:{
+        requireAuth:true
+      },
       component: () => import('./views/C_cart.vue'),
     },
     {
       path: '/order',
       name: 'order',
+      meta:{
+        requireAuth:true
+      },
       component: () => import('./views/C_order.vue'),
     },
     {
       path: '/compelet',
       name: 'compelet',
+      meta:{
+        requireAuth:true
+      },
       component: () => import('./views/C_compelet.vue'),
     },
     {
       path: '/pay',
       name: 'pay',
+      meta:{
+        requireAuth:true
+      },
       component: () => import('./views/C_pay.vue'),
     },
     {//个人中心
       path: '/personIndex',
       name: 'personIndex',
+      meta:{
+        requireAuth:true
+      },
       component: () => import('./views/C-personIndex.vue'),
       children:[
         {//个人中心详情
@@ -136,4 +166,6 @@ export default new Router({
       ]
     }
   ]
-})
+});
+
+

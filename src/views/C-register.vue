@@ -5,37 +5,38 @@
         <div class="d2">注册账号</div>
         <div>
 
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <input type="text" class="ipt1" placeholder="用户名"  v-model="text.username" @blur="Musername" @input="Musername" >
+            <span class="iconfont icon-xingmingyonghumingnicheng" aria-hidden="true"></span>
+            <input type="text" class="ipt1 pubinput " placeholder="用户名"  v-model="text.username" @blur="Musernameexists" @input="Musernameexists" >
             <div class="div1" v-show="is.username">{{wron.username}}</div>
         </div>
         <div class="div5"></div>
         <div>
-            <span class="glyphicon glyphicon-earphone"></span>
-            <input type="text"  class="ipt2 in1" placeholder="手机号" v-model="text.phone" @blur="phone"  @input="phone">
+            <span class="iconfont icon-group48"></span>
+            <input type="text"  class="ipt2 in1 pubinput " placeholder="手机号" v-model="text.phone" @blur="phone"  @input="phone">
             <div class="div2" v-show="is.phone">{{wron.phone}}</div>
         </div>
         <div class="d3">
         <div class="d4" >
             <span class="glyphicon glyphicon-comment"></span>
-            <input type="text"  class="reg-ipt " placeholder="短信验证码" v-model="text.messge">
-             <div class="reg-div1" v-show="is.messge">{{wron.messge}}</div>
+            <input type="text"  class="reg-ipt " placeholder="请输入短信验证码" v-model="text.messge">
+             <div class="reg-div1" id='reg-div1' v-show="is.messge">{{wron.messge}}</div>
         </div>
-            <button class="btn1">获取验证码</button>
+            <button class="btn1" :style="[sty]" @click="Myzbtn" :disabled='disbtn'>{{yztext}}</button>
         </div>
         <div>
-            <span class="glyphicon glyphicon-lock"></span>
-            <input type="password"   class="ipt3 in1" placeholder="密码" v-model="text.pass" @blur="password" @input="password">
+            <span class="iconfont icon-mima"></span>
+            <input type="password"   class="ipt3 in1 pubinput " placeholder="密码" v-model="text.pass" @blur="password" @input="password">
             <div class="div3" v-show="is.pass">{{wron.pass}}</div>
         </div>
         <div class="div6"></div>
         <div>
-            <span class="glyphicon glyphicon-lock"></span>
-            <input type="password"   class="ipt4 in1" placeholder="重复密码" v-model="text.confpass"  @blur="isconfpass"  @input="isconfpass">
+            <span class="iconfont icon-iconfontmima1"></span>
+            <input type="password"   class="ipt4 in1 pubinput " placeholder="重复密码" v-model="text.confpass"  @blur="isconfpass"  @input="isconfpass">
             <div class="div4" v-show="is.confpass">{{wron.confpass}}</div>
         </div>
        <div class="d5">
-        <input type="checkbox" class="reg-ipt1">
+        <input type="checkbox" class="reg-ipt1" :checked='ischeckd' @click="clause">
+        <span :id="isxing">*</span>
         <span>我已阅读并同意遵守<a class="lay">法律声明</a >和<a class="self">隐私条款</a></span>
         </div>
         <button type="button" class="btn btn-primary" @click="register">注册</button>
@@ -79,20 +80,22 @@ export default {
         pass:false,
         confpass:false
      },
-     isor:{
-        username:false,
-        phone:false,
-        messge:false,
-        pass:false,
-        confpass:false
-     },
      reg:{
         username:/[a-zA-z0-9]{3,12}/,
         phone:/[0-9]{11}/,
         pass:/[a-zA-z0-9]{3,12}/,
         confpass:/[a-zA-z0-9]{3,12}/,
 
-     }
+     },
+     isor:false,  //用户名验证时使用的中间键
+     ischeckd:false,  //条款选择
+     isxing:'' ,    //星星类的杨思显示
+     sty:{
+              'color':'#fff',
+               'background-color': '#0a83d7'
+      },
+      yztext:'获取验证码',
+      disbtn:false
    }
  },
  methods:{
@@ -138,6 +141,29 @@ export default {
      })
   
    },
+   Musernameexists(){
+       let that=this;
+       this.fn('username',function(){  
+          //------------------------发送axios请求,验证用户名和密码是否正确
+         that.$axios.post('/api/existsUser',{
+             parmas:{
+                name:that.text.username
+            }
+          }).then(function(res){
+            let data=res.data.error
+            if(data){
+               that.is.username=true;
+               that.wron.username='用户名已经存在';
+               that.isor=false;
+            }else{
+               that.is.username=false;
+               that.wron.username='';
+               that.isor=true;
+            }
+          });
+    
+        })
+   },
    //验证电话号码
    phone(){
      let that=this;
@@ -161,37 +187,169 @@ export default {
       let that=this;
       this.fn('confpass',function(){
         that.is.confpass=false;
-        return true;
+      
+        if(that.text.confpass==that.text.pass){
+            that.is.confpass=false;
+            that.wron.confpass='';
+           return true;
+        }else{
+           that.is.confpass=true;
+           that.wron.confpass='两次密码不一致';
+           return false;
+        }
+        
      })
      
    },
    //点击注册验证
    register(){
       let that=this;
-      let istrue=false;
+      let istrue=[];
       let arr=[];
+      let success=0;
       for (const k in this.is) {
         if(k!='messge'){
            arr.push(k)                        
         }
         
       }
-      for (let i = 0; i < arr.length; i++) {
-        let is=this.fn(arr[i],function(){
+      for (let i = 0; i < arr.length; i++) { 
+        if(arr[i]=='username'){
+           this.fn('username',function(){
+                     //------------------------发送axios请求,验证用户名和密码是否正确
+                    that.$axios.post('/api/existsUser',{
+                        parmas:{
+                            name:that.text.username
+                        }
+                      }).then(function(res){
+                        let data=res.data.error
+                        if(data){
+                          that.is.username=true;
+                          that.wron.username='用户名已经存在';
+                          that.isor=false;
+                        }else{
+                          that.is.username=false;
+                          that.wron.username='';
+                          that.isor=true;
+                        }
+                      });
+                
+                    })
+          istrue.push(that.isor);
+        }else if(arr[i]=='confpass'){
+          let is= this.fn('confpass',function(){
+                  that.is.confpass=false;
+                
+                  if(that.text.confpass==that.text.pass){
+                      that.is.confpass=false;
+                      that.wron.confpass='';
+                    return true;
+                  }else{
+                    that.is.confpass=true;
+                    that.wron.confpass='两次密码不一致';
+                    return false;
+                  }
+                  
+              })
+            istrue.push(is)   
+        }
+        else{
+           let is=this.fn(arr[i],function(){
                     that.is[arr[i]]=false;
                     return true;
-                })
-        
-        istrue=is
+             })
+           istrue.push(is)  
+        }
+           
       }
-       
-       if(istrue){
-         //-----------------验证短信验证码
-         //-----------------验证有没有勾选条款
-         //-----------------注册成功弹框
-         alert("注册成功")
-         this.$router.push('/')
+      //如果istrue数组里面有一个true就让变量success+1
+       for (let i = 0; i < istrue.length; i++) {  
+        if(!istrue[i]){
+          break;
+        }else{
+          success++
+        }
+         
        }
+       //success=4的时候进行短信验证和勾选条款的验证
+       if(success==4){
+         
+           //-----进行短信验证
+           if(this.text.messge=='5201314'){
+              this.is.messge=false;
+              this.wron.messge='';
+              //-----------------验证有没有勾选条款
+              if(this.ischeckd){
+                  
+                  //-------------------请求添加一个用户账号
+                  this.$axios.post('/api/adduser',{
+                      parmas:{
+                        name:this.text.username,
+                        phone:this.text.phone,
+                        pass:this.text.pass
+                      }
+                  }).then(function(res){
+                         console.log(res)
+                         let data=res.data.error
+                         if(!data){
+                            //-----------------注册成功弹框
+                            that.$alert('注册成功', '成功', {
+                              confirmButtonText: '确定',
+                                callback: action => {
+                                  that.$router.push("/")
+                                }
+                            });
+                         }else{
+                            //-----------------注册失败弹框
+                            console.log(res.data.data)
+                            that.$alert('注册失败', '失败', {
+                              confirmButtonText: '确定',
+                            });
+                         }
+                  })
+                  
+              }else{
+                  //-----------------显示一个红色的*号在条款前面        
+                this.isxing='xing';
+              }
+               
+           }else{
+              this.is.messge=true;
+              this.wron.messge='验证码不正确'
+           }
+           
+           
+         
+       }
+      
+   },
+   //条款选择
+   clause(){
+     this.ischeckd=!this.ischeckd;
+   },
+   //点击获取验证码按钮效果
+   Myzbtn(){
+     //--------------------发送axios的请求发送验证码
+     let that=this
+     this.sty={
+              'color':'#fff',
+              'background-color': '#bababa'
+      }
+     this.yztext=60;
+     this.disbtn=true;
+      let time=setInterval(function(){
+        that.yztext--
+        if(that.yztext==0){
+          clearInterval(time);
+          this.disbtn=false;
+          that.sty={
+              'color':'#fff',
+              'background-color': '#0a83d7'
+              };
+          that.yztext='重新发送验证码';
+        }
+        
+      }, 1000);
       
    }
 
@@ -202,12 +360,14 @@ export default {
 </script>
 <style scope lang='less'>
 @import '../styles/C_pub.less';
+@import '../font/C_font/iconfont.css';
 
 * {
   margin: 0;
   padding: 0;
 }
-//注册
+.register{
+    //注册
 #register{
   color: @colormain;
   margin-right:6px;
@@ -239,6 +399,7 @@ input::-webkit-input-placeholder{
         color: #3aa0e9;
     }
 }
+
 
 .d5 a.lay{
     margin-right: 2px;
@@ -299,7 +460,7 @@ input::-webkit-input-placeholder{
   vertical-align: middle;
   outline: none;
   border: 0px;
-  margin-left: 33px;
+  margin-left: 10px;
   font-size: 15px;
 }
 .d1 .sa-ipt1 {
@@ -318,6 +479,7 @@ input::-webkit-input-placeholder{
 #ipt2::-webkit-input-placeholder{
    color: #bdbdbd;
 }
+
 .d1 .sa-div1 {
   width: 77px;
   right: 10px;
@@ -451,19 +613,22 @@ border:none;
   line-height: 30px;
 }
 .d1 .reg-ipt {
-  width: 80px;
+  width: 130px;
 }
 .d1 .reg-div1 {
-  width: 82px;
-  right: 10px;
+  font-size: 12px;
+  width: 80px;
+  right: 6px;
   position: absolute;
   height: 30px;
-  color: white;
-  background: #d16d62;
+  color: #c03e30;
   top: -9px;
   border: 0;
   text-align: center;
   line-height: 30px;
+}
+#reg-div1{
+  border: 1px solid #d16d62;
 }
 .d1 #for-ipt2 {
   width: 100px;
@@ -583,6 +748,21 @@ border:none;
   font-size: 15px;
 }
 /*# sourceMappingURL=C-lulu.css.map */
-
+//星星
+#xing{
+  color: rgb(228, 23, 23);
+  font-size: 18px;
+}
+.pubinput{
+  width: 320px
+}
+.iconfont{
+  font-size: 16px;
+  color: #b4b4b4;
+  margin-left:14px;
+  position: relative;
+  top:px;
+}
+}
 
 </style>

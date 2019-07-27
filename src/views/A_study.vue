@@ -40,13 +40,13 @@
             <h3>指南</h3>
             <div class="demo-image__placeholder">
                 <div class="block">
-                    <el-image :src="guide"></el-image>
+                    <el-image :src="guide1"></el-image>
                  </div>
                  <div class="block">
-                    <el-image :src="guide"></el-image>
+                    <el-image :src="guide2"></el-image>
                  </div>
                  <div class="block">
-                    <el-image :src="guide"></el-image>
+                    <el-image :src="guide3"></el-image>
                  </div>
             </div>
         </div>
@@ -56,7 +56,9 @@
 export default {
     data(){
         return {
-            guide:"https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
+            guide1:require('./../assets/study1.png'),
+            guide2:require('./../assets/study2.png'),
+            guide3:require('./../assets/study3.png'),
         }
     }
 }

@@ -4,7 +4,7 @@
       <div class="D-space">
         <div class="header">
           <span class="s1">收货信息</span>
-          <el-button type="text" @click="dialogFormVisible = true">
+          <el-button type="text" @click="dialogFormVisible = true;show">
             <button class="D-btn">添加新地址</button>
           </el-button>
           <!-- Form -->
@@ -12,27 +12,20 @@
             <el-form :model="form">
               <!-- 姓名 -->
               <el-form-item label="姓名" :label-width="formLabelWidth">
-                <el-input v-model="form.name1" autocomplete="off"></el-input>
+                <el-input v-model="form.name1" autocomplete="off" placeholder="请输入姓名" v-m></el-input>
               </el-form-item>
               <!-- 电话 -->
               <el-form-item label="电话" :label-width="formLabelWidth">
-                <el-input v-model="form.name2" autocomplete="off"></el-input>
+                <el-input v-model="form.name2" autocomplete="off" placeholder="请输入电话号码"></el-input>
               </el-form-item>
-              <el-form-item label="详细地址" :label-width="formLabelWidth">
-                <el-select v-model="form.region" placeholder="请选择省份">
-                  <el-option label="四川省" value="shanghai"></el-option>
-                  <el-option label="广东省" value="beijing"></el-option>
-                  <el-option label="河北省" value="beijing"></el-option>
-                  <el-option label="重庆市" value="beijing"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="具体街道" :label-width="formLabelWidth">
+              
+              <el-form-item label="具体地址" :label-width="formLabelWidth">
                   <el-input v-model="form.name3" autocomplete="off" placeholder="具体地址"></el-input>
               </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
               <el-button @click="dialogFormVisible = false">取 消</el-button>
-              <el-button type="primary" @click="dialogFormVisible">确 定</el-button>
+              <el-button type="primary" @click="dialogFormVisible= false ;add([form.name1,form.name2,form.name3])">确 定</el-button>
             </div>
           </el-dialog>
 
@@ -54,17 +47,17 @@
         <!-- -----------------有收货地址的页面显示 -->
         <div class="D-con3-b" v-for="(todo,i) in todos" :key="i">
           <!-- 姓名 -->
-          <span class="D-operate">{{todo.name}}</span>
+          <span class="D-operate" >{{todo.user_name}}</span>
           <!-- 电话 -->
-          <span class="D-s5">{{todo.name1}}</span>
+          <span class="D-s5" >{{todo.phone}}</span>
           <!-- 地址 -->
-          <span class="D-s6">
-            {{todo.name2}}
-            <span class="D-moren">(默认地址)</span>
+          <span class="D-s6" >
+            {{todo.pass}}
+            <!-- <span class="D-moren">(默认地址)</span> -->
           </span>
           <!-- 两个图标 -->
           <!-- 修改 -->
-          <el-button type="text" @click="open1 = true" >
+          <el-button type="text" @click="open1 = true;open4(i)" >
             <span class="iconfont icon-bianji D-s7"></span>
           </el-button>
           <!-- 修改弹框 -->
@@ -72,19 +65,19 @@
             <el-form :model="form">
               <!-- 姓名 -->
               <el-form-item label="姓名" :label-width="formLabelWidth">
-                <el-input v-model="todos.name" autocomplete="off" property="name"></el-input>
+                <el-input v-model="form.name1" autocomplete="off" ></el-input>
               </el-form-item>
               <!-- 电话 -->
               <el-form-item label="电话" :label-width="formLabelWidth">
-                <el-input v-model="todos.name1" autocomplete="off"></el-input>
+                <el-input v-model="form.name2" autocomplete="off"></el-input>
               </el-form-item>
-              <el-form-item label="详细街道" :label-width="formLabelWidth">
-                  <el-input v-model="todos.name2" autocomplete="off" ></el-input>
+              <el-form-item label="详细地址" :label-width="formLabelWidth">
+                  <el-input v-model="form.name3" autocomplete="off" ></el-input>
               </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer dialog-footer1">
-              <el-button @click="open1 = false">取 消</el-button>
-              <el-button type="primary" @click="open1 = false">确 定</el-button>
+              <el-button @click="open1 = false;open6()">取 消</el-button>
+              <el-button type="primary" @click="open1 = false;open5()">确 定</el-button>
             </div>
           </el-dialog>
           <!-- 删除 -->
@@ -97,42 +90,43 @@
   </div>
 </template>
 <script>
+import { Script } from 'vm';
 export default {
   //name: ".D-con3-b",
   data() {
     return {
       todos: [
-        {
-          name: "xls",
-          name1: "123",
-          name2: "成都1"
-        },
-        {
-          name: "xlss",
-          name1: "1233",
-          name2: "成都2"
-        },
-        {
-          name: "xlsss",
-          name1: "12333",
-          name2: "成都3"
-        },
-        {
-          name: "xlsss",
-          name1: "12333",
-          name2: "成都4"
-        },
-        {
-          name: "xlsss",
-          name1: "12333",
-          name2: "成都5"
-        },
-        
+        // {
+        //   name: "xls",
+        //   name1: "123",
+        //   name2: "成都1"
+        // },
+        // {
+        //   name: "xlss",
+        //   name1: "1233",
+        //   name2: "成都2"
+        // },
+        // {
+        //   name: "xlsss",
+        //   name1: "12333",
+        //   name2: "成都3"
+        // },
+        // {
+        //   name: "xlsss",
+        //   name1: "12333",
+        //   name2: "成都4"
+        // },
+        // {
+        //   name: "xlsss",
+        //   name1: "12333",
+        //   name2: "成都5"
+        // },
       ],
+      todos1:[],
         dialogTableVisible: false,
         dialogFormVisible: false,
         open1:false,
-        msg: '',
+        value:'',
         form: {
           name1: '',
           name2: '',
@@ -143,16 +137,76 @@ export default {
           delivery: false,
           type: [],
           resource: '',
-          desc: ''
+          desc: '',
         },
         formLabelWidth: '70px',
-        i: ''
+        i: '',
+        index: ''
     };
   },
+  beforeMount: function(){
+      this.show()
+  },
   methods: {
-    open1(){
-      this.todas.name,
-      console.log(1);
+    open6(){
+      this.form.name1 = ''
+      this.form.name2 = ''
+      this.form.name3 = ''
+    },
+    open4(index){
+      this.index = index;
+      //console.log('一：'+index)
+      this.todos[index]
+      //console.log(this.todos[index].name)
+
+      this.form.name1 = this.todos[index].user_name
+      this.form.name2 = this.todos[index].phone
+      this.form.name3 = this.todos[index].pass
+      //console.log(this.form.name1)
+    },
+    open5(){
+      // console.log('二:'+i)
+      if (this.form.name1 =='' ) {
+        alert('姓名不能为空')
+      }else if(this.form.name2 == ''){
+        alert('电话号码不能为空')
+      }else if(this.form.name3 == ''){
+        alert('地址栏不能为空')
+      }else {
+      this.todos[this.index].user_name = this.form.name1
+      this.todos[this.index].phone = this.form.name2
+      this.todos[this.index].pass = this.form.name3
+      }
+      this.form.name1 = ''
+      this.form.name2 = ''
+      this.form.name3 = ''
+    },
+    add(arr){
+      // console.log(arr)
+      // console.log(arr)
+      //console.log(arr[0])
+      if (this.form.name1 =='' ) {
+        alert('姓名不能为空')
+      }else if(this.form.name2 == ''){
+        alert('电话号码不能为空')
+      }else if(this.form.name3 == ''){
+        alert('地址栏不能为空')
+      }else {
+          this.$data.todos.push({user_name: arr[0],phone: arr[1],pass: arr[2]});
+      }
+      this.form.name1 = ''
+      this.form.name2 = ''
+      this.form.name3 = ''
+      //发送axios请求，添加收获地址
+      // this.$axios.get('/api/show',{
+      //   params: {
+      //     name1:'',
+      //     name2:'',
+      //     name3:'',
+      //   }
+      // }).then((res)=>{
+
+      // })
     },
     open2(i) {
       this.i = i,
@@ -162,7 +216,7 @@ export default {
         type: "warning"
       }).then(() => {
         var i = this.i
-        console.log(i)
+        //console.log(i)
           this.todos.splice(i,1)
           this.$message({
             type: "success",
@@ -175,7 +229,35 @@ export default {
             message: "已取消删除"
           });
         });
-    }
+    },
+    show(){
+      this.$axios.get('/api/show',function(){
+        params: {
+          name1:'';
+          name2:'';
+          name3:'';
+        }
+      }).then((res)=>{
+        var todos = res.data.msg;
+        this.todos = todos
+        //this.todos.name =todos.user_name;
+        //this.todos.name1 =todos.phone;
+        //this.todos.name2 =todos.pass;
+         //console.log(typeof(todos))
+        //for(let iNow in todos){
+            //this.todos1.push(tod[iNow])
+            // console.log(this.todos1[iNow].pass)
+            //this.todos.name =this.todos1[iNow].user_name;
+            //this.todos.name1 =this.todos1[iNow].phone;
+            //this.todos.name2 =this.todos1[iNow].pass;
+            // console.log(this.todos)
+        //}
+         //console.log(this.todos)
+      //   this.todos = todos
+        
+      })
+    },
+    
   }
 };
 </script>
@@ -199,7 +281,7 @@ export default {
   transform: translate(-50%, -50%);
 }
 .dialog-footer1{
-  margin-left: 350px;
+  margin-left: 300px;
 }
 .clearfix:after {
   content: "";
@@ -278,9 +360,9 @@ export default {
   .D-operate {
     width: 65px;
     margin-left: 14%;
+    overflow: hidden;
   }
   .D-s7 {
-    margin-left: 40px;
     font-size: 30px;
     color: rgb(185, 185, 185);
   }
@@ -289,11 +371,14 @@ export default {
     color: rgb(185, 185, 185);
   }
   .D-s5 {
-    margin-left: 10%;
+    margin-left: 13%;
+    width: 65px;
+    //overflow: hidden;
   }
   .D-s6 {
-    margin-left: 8%;
-    width: 281px;
+    margin-left: 18%;
+    width: 100px;
+    overflow: hidden;
   }
   .D-s6 span {
     font-size: 10px;
@@ -419,7 +504,8 @@ export default {
   button {
     width: 90px;
     height: 30px;
-    margin-top: 3%;
+    margin-top: 2%;
+    margin-left: 10px;
     border: none;
     border-radius: 5px;
     outline: none;

@@ -37,7 +37,7 @@
                {{ v.add_name}}
                 <span class="rt">{{ v.add_tel}}</span>
               </p>
-              <p class="f-addresstext">{{ v.sheng}}  {{ v.shi}}  {{ v.xian}}  {{ v.add_all}}</p>
+              <p class="f-addresstext">{{v.sheng}}  {{ v.shi}}  {{ v.xian}}  {{ v.add_all}}</p>
             </div>
             
           </div>
@@ -86,7 +86,7 @@
         <ul class="f-send clear pad_36 mrg_t16">
           <li class="lf">
             <p>订单备注</p>
-            <textarea rows="4" placeholder="选填留下你的私人小要求" id="textarea"></textarea>
+            <textarea rows="4" placeholder="选填留下你的私人小要求" id="textarea" v-model="beizhu"></textarea>
           </li>
           <li class="f-right rt f-to">
             <p>配送方式</p>
@@ -129,24 +129,20 @@
             <!-- 左 -->
             <div class="f-leftbox lf">
               <ul class="clear">
-                <li>
-                  <input type="checkbox" class="f-pay_tiaokuan" />
-                  <a href="./F-01noresontext.html">7天无理由退货须知</a>
-                </li>
-                <li>
-                  <input type="checkbox" class="f-pay_tiaokuan" />
-                  <a href="./F-02othertext.html">其他条款</a>
+                <li v-for="(v,i) in checkaarr" :key='i'>
+                  <input type="checkbox" class="f-pay_tiaokuan" :checked='v.is'  @click="Mchoosesinge(i)" />
+                  <a href="./F-01noresontext.html">{{v.text}}</a>
                 </li>
               </ul>
             </div>
             <!-- 右 -->
-            <button class="rt" id="f-pay_agreenall">全部同意</button>
+            <button class="rt" id="f-pay_agreenall" @click="Mchoosetk">{{alltext}}</button>
           </div>
           <!-- 下 -->
           <div class="f-button">
             <p>
               共：
-              <span class="f-numb rmb">0</span> 件商品，总商品金额： RMB
+              <span class="f-numb rmb">{{data.length}}</span> 件商品，总商品金额： RMB
               <span class="rmb f-pay_RMBsum">{{sum | price}}</span>
             </p>
             <p class="freight">
@@ -164,13 +160,12 @@
           <p class="f-sendaddress font_12">
             寄送至：
             <span class="font_12">
-              成都市 锦江区 三圣街道 锦蓉佳苑小区 收货人：李雪
-              18708182069
+              {{chooseadr}}
             </span>
           </p>
-          <router-link to="/compelet">
-            <button id="f-gopaybtn">提交订单</button>
-          </router-link>
+          <!-- <router-link to="/compelet"> -->
+            <button id="f-gopaybtn" @click="Mcommit">提交订单</button>
+          <!-- </router-link> -->
         </div>
       </div>
     </div>
@@ -187,81 +182,29 @@ export default {
   name: "order",
   data() {
     return {
+      isallcheck:false,
+      alltext:'全部同意',
       issanjia:false,
       isoption:false,
       timeIndex:0,
       isborder:true,
+      beizhu:'',
       istiket:0,
       text:'个人',
+      checkaarr:[{is:false,text:'7天无理由退货须知'},{is:false,text:'其他条款'}],
+      chooseadr:'成都市 锦江区 三圣街道 锦蓉佳苑小区 收货人：李雪18708182069',
       tiketarr:["个人","公司"],
-      address: [
-        {
-          add_all: "国信安教育web190-1",
-          add_name: "熊林爽",
-          add_tel: "18161169768",
-          address_id: 1,
-          sheng: "四川",
-          shi: "成都",
-          user_id: 1,
-          xian: "高新区"
-        },
-        {
-          add_all: "桃花山",
-          add_name: "lee",
-          add_tel: "11111111111",
-          address_id: 7,
-          sheng: "四川",
-          shi: "成都",
-          user_id: 1,
-          xian: "青白江"
-        }
-      ],
-      data:[ 
-        {
-            cart_id: 8,
-            cart_num: 2,
-            class_id: 2,
-            img_id: 4,
-            img_src: "/img/B-img/m1.png",
-            main_content: "超高清50000W像素",
-            main_head: "索尼阿尔法5专业级单反",
-            model_id: 2,
-            price: 4299,
-            priduct_id: 5,
-            product_id: 5,
-            second_body: "索尼阿尔法5专业级单反",
-            second_content: "想拍就拍5",
-            second_id: 2,
-            second_name: "2000w",
-            stock_num: 23,
-            user_id: 1
-          },
-          {
-            cart_id: 8,
-            cart_num: 1,
-            class_id: 2,
-            img_id: 4,
-            img_src: "/img/B-img/m1.png",
-            main_content: "超高清50000W像素",
-            main_head: "索尼阿尔法5专业级单反",
-            model_id: 2,
-            price: 4299,
-            priduct_id: 5,
-            product_id: 5,
-            second_body: "索尼阿尔法5专业级单反",
-            second_content: "想拍就拍5",
-            second_id: 2,
-            second_name: "2000w",
-            stock_num: 23,
-            user_id: 1
-          }
-        ]
+      address: [],
+      data:[]
     };
   },
   
   methods:{
     ischoose(index){
       this.timeIndex=index;
+      let address=this.address[index]
+      this.chooseadr=address.sheng+address.shi+address.xian+address.add_all+address.add_name+address.add_tel;
+
     },
     // 发票的下拉框显示
     isshow(){
@@ -284,6 +227,91 @@ export default {
      this.isoption=false;
      this.text=this.tiketarr[i];
      console.log(this.text)
+    },
+    //提交订单
+    Mcommit(){
+      
+      //判断有没有选择条款
+      let num =0;
+      for (let j = 0; j < this.checkaarr.length; j++) {
+        if(this.checkaarr[j].is){
+          num++;
+          //orderinfo.product_ids=this.data[j].product_id
+        }
+      }
+      if(num!=2){
+         this.$alert('请查看条款', '', {
+            confirmButtonText: '确定',
+        }); 
+        return
+      }
+      //--------------需要传入的数据集合
+      let orderinfo={};
+      //产品id
+      let proids=[];
+      //购买数量
+      let paynumber=[];
+      //订单金额
+       let price=[];
+      //订单状态
+       let state=[];
+      //收货地址
+       let  relname=[];
+       let  retel=[];
+       let  adress=[];
+       //订单备注
+       let beizhu=[];
+      for (let k = 0; k < this.data.length; k++) {
+         proids.push(this.data[k].product_id);
+         paynumber.push(this.data[k].cart_num);
+         price.push(this.data[k].price);
+         state.push(1);
+         let adr=this.address[this.timeIndex];
+         relname.push(adr.add_name);
+         retel.push(adr.add_tel);
+         adress.push(adr.sheng+adr.shi+adr.xian+adr.add_all);
+         beizhu=this.beizhu;  
+      }
+      orderinfo.product_ids=proids;
+      orderinfo.paynumber=paynumber;
+      orderinfo.price=price;
+      orderinfo.state=state;
+      orderinfo.relname=relname;
+      orderinfo.retel=retel;
+      orderinfo.adress=adress;
+      orderinfo.beizhu=beizhu;
+      console.log(orderinfo)
+      
+      if(num==2){
+      //--------------axios保存订单
+        this.$axios.post('/api/F_save_orderlist',{
+          params:{
+            info:JSON.stringify(orderinfo)
+          }
+        }).then((res)=>{
+         if(!res.data.error){
+            this.$router.push({path:'/compelet',query:{ordernum:res.data.data}})
+         }else{
+           alert('保存失败')
+         }
+        })
+         
+      }
+    },
+    //全部选择条款
+    Mchoosetk(){
+      this.allcheck=!this.allcheck;
+      if(this.allcheck){
+        this.alltext='全部同意'
+      }else{
+        this.alltext='全部取消'
+      }
+       for (let i = 0; i < this.checkaarr.length; i++) {
+         this.checkaarr[i].is=this.allcheck;        
+       }
+    },
+    Mchoosesinge(i){
+      this.checkaarr[i].is=!this.checkaarr[i].is;
     }
     
   },
@@ -305,9 +333,28 @@ export default {
     Cheader,
     Footer
   },
-  created() {
-    // --------------用axios获取数据
-    
+  mounted() {
+    let that =this;
+   //接收数据 
+   let ids=this.$route.query.cart;
+   // --------------用axios获取地址
+   this.$axios.post("/api/F_address").then((res)=>{
+        if(!res.data.error){
+          console.log(res.data.data)
+          that.address=res.data.data
+        }
+   })
+   // --------------用axios获取订单列表
+    this.$axios.post("/api/F_orderlist",{
+      params:{
+        id:JSON.stringify(ids)
+      }
+    }).then((res)=>{
+        if(!res.data.error){
+          console.log(res.data.data)
+          this.data=res.data.data
+        }
+   })
     //设置地址的true或者false
     
   }

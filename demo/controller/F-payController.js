@@ -2,7 +2,7 @@ var f_payModule=require("../module/F-payModule")
 
 var json={
     F_address:function(req,res){
-        var user_id=req.body.user_id
+        var user_id=req.session.userid;
         f_payModule.F_address(user_id,function(err,data){
             if(!err){
                 res.send({error:0,data:data})
@@ -12,7 +12,7 @@ var json={
         })
     },
     F_orderlist:function(req,res){
-        var ids=JSON.parse(req.body.id).join(",") ;
+        var ids=JSON.parse(req.body.params.id).join(",") ;
         console.log(ids)
         f_payModule.F_orderlist(ids,function(err,data){
             if(!err){
@@ -23,39 +23,67 @@ var json={
         })
     },
     F_save_orderlist:function(req,res){
-        var address_id=req.body.address_id;
-        var product_ids=req.body.product_ids.split(",");
-        var product_single_price=req.body.product_single_price.split(",");
-        var product_num_str=req.body.product_num_str.split(",");
-        var product_small_price=req.body.product_small_price.split(",");
-        var big_price=req.body.big_price.split(",");
-        var sunfei=req.body.sunfei.split(",");
-        var sumprice=req.body.sumprice.split(",");
-        var text=req.body.text.split(",");
-        var user_id=req.body.user_id
+        let info=JSON.parse(req.body.params.info);
+        //--------------获取参数
+        let ids=[];
+        let ordernums=[];
+        let buytime=[];   
+        //用户id
+        let id=req.session.userid;
+        //时间轴订单号
+        let ordernumber=Date.now();
+        //下单日期
+        var myDate = new Date();  
+        let downdate=myDate.getFullYear()+'-'+ myDate.getMonth()+'-'+myDate.getDate()+' '+myDate.getHours()+':'+ myDate.getMinutes()+':'+myDate.getSeconds();
+        for (let i = 0; i < info.price.length; i++) {
+            ids.push(id);
+            ordernums.push(ordernumber);
+            buytime.push(downdate)
+             
+        } 
 
-        var time=new Date();
-        var year=time.getFullYear();
-        var mouth=time.getMonth();
-        if(mouth.toString.length==1){
-            mouth="0"+mouth
+
+        //产品id
+        let proids=info.product_ids;
+        //购买数量
+        let paynumber=info.paynumber;
+        //订单金额
+        let price=info.price;
+        //订单状态
+        let state=info.state;
+        //收货地址
+        let  relname=info.relname;
+        let  retel=info.retel;
+        let  adress=info.adress;
+        //订单备注
+        let beizhu=info.beizhu;
+
+        let objinfo={
+            ids:ids,
+            proids:proids,
+            ordernums:ordernums,
+            buytime:buytime,
+            paynumber:paynumber,
+            price:price,
+            beizhu:beizhu,
+            state:state,
+            adress:adress,
+            relname:relname,
+            retel:retel
         }
-        var day=time.getDate();
-
-        var order_num=''+year+mouth+day+'';
-        var date=year+"-"+mouth+"-"+day;
-        //console.log(order_num,date);
-
+        console.log(ordernums,buytime);
         var is=0;
-        f_payModule.F_save_orderlist(user_id,product_ids,order_num,date,product_num_str,address_id,text,sumprice,function(err,data){
+        f_payModule.F_save_orderlist(objinfo,function(err,data){
             if(!err){
                 is++;
                 console.log(is)
                 console.log("保存成功");
-               // console.log(data)               
-                if(is==product_ids.length){
+                              
+                if(is==info.product_ids.length){
                     res.send({error:0,data:data.insertId})
+                    console.log(data)
                 }
+            console.log(data)
             }else{
                 console.log(err)
                 res.send({error:1,data:err})
@@ -65,10 +93,9 @@ var json={
         
     },
     F_watch_order:function(req,res){
-        var order_id=req.body.order_id ;
-        var user_id=req.body.user_id
+        var order_id=req.body.params.order_id ;
         console.log(order_id)
-        f_payModule.F_watch_order(order_id,user_id,function(err,data){
+        f_payModule.F_watch_order(order_id,function(err,data){
             if(!err){
                 res.send({error:0,data:data})
             }else{

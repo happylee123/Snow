@@ -1,6 +1,6 @@
 export default {
     state: {
-       user:0
+       user:''
     },
     getters:{
       
@@ -9,8 +9,12 @@ export default {
     mutations: {     
         save(state,num){
             state.user=num;
-            localStorage.user=num;
+            localStorage.user=num.user_id;
             console.log(state.user)
+          },
+          delete(state){
+            state.user='';
+            delete localStorage.user;
           },
           con(state){
               console.log(state.user)

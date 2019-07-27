@@ -11,7 +11,7 @@ var db=mysql.createConnection({
 var obj={
     login:function(username,pass,fn){
         //console.log("jlkjlkj")
-        let sql=`SELECT user_id FROM user_t WHERE user_name='${username}' and pass='${pass}'`
+        let sql=`SELECT * FROM user_t WHERE user_name='${username}' and pass='${pass}'`
         db.query(sql,function(err,data){
            fn(err,data)
         }) 
@@ -36,6 +36,12 @@ var obj={
     },
     finduser:function(phone,fn){
         let sql=`SELECT user_id FROM user_t WHERE phone=${phone}`
+        db.query(sql,function(err,data){
+           fn(err,data)
+        }) 
+    },
+    username:function(userid,fn){
+        let sql=`SELECT * FROM user_t WHERE user_id=${userid}`
         db.query(sql,function(err,data){
            fn(err,data)
         }) 

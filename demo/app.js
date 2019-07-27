@@ -22,7 +22,7 @@ app.use(session({
     rolling:true,// 在每个seesion请求后重新计时
     saveUninitialized:true,  //初始化session是否保存
     cookie:{
-        maxAge:20*1000  //设置过期时间  单位是毫秒
+        maxAge:24*60*60*1000  //设置过期时间  单位是毫秒
     }
 }));
 
@@ -81,6 +81,9 @@ app.use(C_Router);
 
 const carRouter= require('./router/F-carRouter.js');
 app.use(carRouter);
+
+const payRouter= require('./router/F-payRouter.js');
+app.use(payRouter);
 
 //配置端口号
 app.listen(1818,function () {

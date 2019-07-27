@@ -36,38 +36,43 @@ var json={
         })
         
     },
-    F_save_orderlist:function(user_id,product_ids,order_num,date,product_num_str,address_id,text,sumprice,fn){
-        if(product_ids.length==1){
-            var sql=`INSERT INTO order1_t
-                     VALUES (NULL,'${user_id}','${parseInt(product_ids)}','${order_num}','${date}','${parseInt(product_num_str)}','1',NULL,NULL,NULL,NULL,'${address_id}','${text}','${sumprice}'); `
-            db.query(sql,function(err,data){
-                fn(err,data)
-            })
-        }else if(product_ids.length>1){
-            for (let i = 0; i < product_ids.length; i++) {
-                var sql=`INSERT INTO order1_t
-                         VALUES (NULL,'${user_id}','${parseInt(product_ids[i])}','${order_num}','${date}','${parseInt(product_num_str[1])}','1',NULL,NULL,NULL,NULL); `
-                db.query(sql,function(err,data){
-                    fn(err,data)
-                })
-                
-            }
-        }
+    F_save_orderlist:function(objinfo,fn){
+ 
+    for (let i = 0; i < objinfo.ids.length; i++) {
+        var sql=`INSERT INTO order1_t VALUES 
+        (NULL,${objinfo.ids[i]},${objinfo.proids[i]},'${objinfo.ordernums[i]}','${objinfo.buytime[i]}',
+        ${objinfo.paynumber[i]},'${objinfo.price[i]}',
+        '${objinfo.beizhu[i]}',${objinfo.state[i]},NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,
+        '${objinfo.adress[i]}','${objinfo.relname[i]}','${objinfo.retel[i]}');`
+        db.query(sql,function(err,data){
+            fn(err,data)
+        })
+        
+    }
+        
         
         
         
     },
-    F_watch_order:function(order_id,user_id,fn){
+    F_watch_order:function(order_id,fn){
+        var sql1=`
+        SELECT order_num FROM order1_t
+        WHERE order_id=${order_id}
+        `
         
-        var sql=`SELECT * 
-        FROM order1_t AS a
-             JOIN address_t AS b
-             ON a.address_id=b.address_id
-             JOIN product_t AS c
-             ON a.product_id=c.product_id
-        WHERE a.order_id=${order_id} AND a.user_id=${user_id}`
-        db.query(sql,function(err,data){
-            fn(err,data)
+        db.query(sql1,function(err,data){
+            let order_num=data[0].order_num;
+            console.log(order_num)
+            var sql=`SELECT order_id,user_id,order_num,order_price,number,re_address,re_name,re_tel,p.main_head
+            FROM order1_t AS o  
+                JOIN product_t AS p
+                ON o.product_id=p.product_id  
+            WHERE o.order_num='${order_num}'`
+             db.query(sql,function(err,data){
+                
+                fn(err,data)
+             })
+           
         })
         
     }

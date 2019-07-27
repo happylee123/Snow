@@ -12,8 +12,8 @@ var obj={
             }else{
                 //添加session
                 req.session.userid=data[0].user_id;
-                console.log(data[0].user_id)
-                res.send({error:0});
+                //console.log(data[0].user_id+'jklkl')
+                res.send({error:0,data:data[0]});
             }
            }else{
              res.send('数据库连接失败')
@@ -91,7 +91,27 @@ var obj={
             }
         })
         
-    }
+    },
+    username:function(req,res){
+      let userid= req.session.userid
+
+        loginModule.username(userid,function(err,data){
+            if(!err){
+                if(data.length==0){
+                    res.send({error:1,data:data})
+                }else{
+                    res.send({error:0,data:data})
+                }
+            }else{
+                console.log(data)
+            }
+        })
+    },
+    C_exit:function(req,res){
+        req.session.destroy();
+        res.send({error:0});
+    },
+
 }
 
 module.exports=obj;

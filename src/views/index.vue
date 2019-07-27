@@ -7,19 +7,20 @@
             <span class="login-logo">
               <img src="../assets/logoB.png" alt="" id="logo">
             </span>
-            <span class="login-lo">
-              <router-link to='/login'> 
-                 <span id="load">登录</span> 
-              </router-link >/
-              <router-link to='/register'> 
-              注册
-              </router-link>
+            <span class="login-lo"> 
+              <span id="load" :style="{color:color.login}" @click="Mlogin">{{login}}</span> 
+                 /
+
+                  <span :style="{color:color.register}" @click="Mregister">
+                  {{register}}
+                  </span>
+
               <router-link to='/personIndex' id="personcenter">个人中心</router-link>
               <router-link to='/cart' target="_blank" class="iconfont" id="carticon">&#xf0179;</router-link>            
             </span>
           </div>
           <div id="nav" :span="24">
-            <router-link tag="a" to="/index">主页</router-link> 
+            <router-link tag="a" to="/">主页</router-link> 
             <router-link tag="a" to="/BCommodity">旗舰单反</router-link>
             <router-link tag="a" to="/bdetails">旗舰微单</router-link>
             <router-link tag="a" to="/lens">旗舰镜头</router-link>
@@ -43,12 +44,71 @@ import store from'../vuex/store';
 export default {
   store,
   name:'index',
+  data(){
+    return {
+       login:'登录',
+       register:'注册',
+       color:{
+         login:"#45affc",
+         register:"#fff"
+       }
+    }
+  },
   components:{
     pubfooter:footer
   },
+  methods:{
+    Mlogin(){
+      //做登录字符的判断
+      if(this.login=='登录'){
+        this.$router.push('/login');
+      }else{
+        this.$router.push('/personIndex');
+      };
+      
+    },
+    Mregister(){
+      //做退出字符的判断
+      if(this.register=='注册'){
+        this.$router.push('/register');
+      }else if(this.register=='退出'){
+
+        //----确定退出弹框
+         this.$confirm('确定退出吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          //type: 'warning'
+        }).then(() => {      
+           //-----------------------发起删除session的请求
+          this.$axios.post('/api/C_exit').then((res)=>{
+            if(!res.data.error){ 
+              //储存localstotage和vuex
+              this.$store.commit('delete');
+              this.$router.push('/login');
+              alert('okok')
+            }else{
+              alert('nono')
+            }
+          })
+         
+        })
+
+
+        
+        
+      
+      };
+    }
+  },
   mounted(){
-    //this.$store.commit('con');
-     console.log(localStorage.user,2555)  
+    let that=this;
+    if(!localStorage.user){
+      this.login='登录',
+      this.register='注册'
+    }else{
+      this.login=this.$store.state.C_store.user.user_name;
+       this.register='退出'
+    }
   }
 }
 </script>

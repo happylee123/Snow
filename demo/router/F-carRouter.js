@@ -15,7 +15,7 @@ router.post('/F_car_remove_ss',f_carController.F_car_remove_ss);
 router.get('/F_howmuch',f_carController.F_howmuch);
 
 //保存购物车每个产品加购的数量
-router.get('/F_savenumber',f_carController.F_savenumber);
+router.post('/F_savenumber',f_carController.F_savenumber);
 
 
 

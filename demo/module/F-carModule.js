@@ -29,12 +29,16 @@ var json={
         
     },
      F_car_remove_ss:function(ids,fn){
-        var id=ids.join(",");
-
-        var sql=`DELETE FROM shoppingcart_t WHERE cart_id IN(${id})`
-        db.query(sql,function(err,data){
-            fn(err,data)
-        })
+        //var id=ids.join(",");
+        //console.log(id)
+        for (let k = 0; k < ids.length; k++) {
+            var sql=`DELETE FROM shoppingcart_t WHERE cart_id IN(${ids[k]})`
+            db.query(sql,function(err,data){
+                fn(err,data)
+            })
+            
+        }
+        
        
        
      

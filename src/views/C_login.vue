@@ -116,7 +116,7 @@ export default {
 
      if(usertrue && passtrue){
        //------------------------发送axios请求,验证用户名和密码是否正确
-        this.$axios.post("/api/login",{
+        this.$axios.post("/api/C_login",{
              params:{
                 name:this.usernametext,
                 pass:this.passtext
@@ -129,14 +129,12 @@ export default {
                     that.$alert('用户名或密码错误', '错误', {
                       confirmButtonText: '确定',
                     });
-                     that.$store.commit('save',1)
                      return false;
                 }
                 //保存数据在vuex中 0表示没有登录
-                    that.$store.commit('save',1)
-                    that.$router.push('/index')
-
-               
+                    console.log(res.data)
+                    that.$store.commit('save',res.data.data)
+                    that.$router.push('/')    
         })
      }
   

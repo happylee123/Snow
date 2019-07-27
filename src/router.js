@@ -8,7 +8,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {//登录
-      path: '/',
+      path: '/login',
       name: 'login',
       component: () => import('./views/C_login.vue'),
     },
@@ -30,11 +30,8 @@ export default new Router({
       component: () => import('./views/C_changepass.vue'),
     },
     {//首页
-      path: '/index',
+      path: '/',
       name: 'index',
-      meta:{
-        requireAuth:true
-      },
       component: () => import('./views/index.vue'),
       children:[
         {//首页
@@ -96,7 +93,7 @@ export default new Router({
       }
      ]
     }
-    ,
+    ,//购物车
     {
       path: '/cart',
       name: 'cart',

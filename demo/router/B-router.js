@@ -6,10 +6,11 @@ const B_Controller=require('../controller/B-Controller.js');
 //banner 图的请求
 myRouter.get('/getBannerImg',B_Controller.getBannerImg);
 //下方展示区域的img 请求
-myRouter.get('/getExhibitionImg',function(req,res){
-    var json = req.query;
-    console.log('展示区',json)
-})
+myRouter.get('/getExhibitionImg',B_Controller.getExhibitionImg);
+
+
+
+
 //子选项赛选功能
 myRouter.get('/getChild1Send',function (req,res) {
     var json = req.query;

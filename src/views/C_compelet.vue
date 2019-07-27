@@ -22,20 +22,24 @@
           <p class="f-con_warn">! 温馨提示：订单中存在不支持7天无理由退换商品，请确认相关商品信息后提交订单。</p>
           <p class="f-con_nub_p">
             订单提交成功，请尽快付款！您的订单编号：
-            <span class="f-con_number">100000000405908</span>
+            <span class="f-con_number">{{order_num}}</span>
           </p>
           <div class="f-con_address">
             <p>
               收货地址：
-              <span id="address_descrption"></span>
+              <span id="address_descrption">{{address}}</span>
             </p>
             <p>
               收货人：
-              <span id="address_username"></span>
+              <span id="address_username">{{name}}</span>
+            </p>
+            <p>
+              收货电话：
+              <span id="address_username">{{tel}}</span>
             </p>
             <p>
               商品名称：
-              <span id="product_name"></span>
+              <span id="product_name" > {{product_name}}</span> 
             </p>
           </div>
           <div class="f-con_paymethod">
@@ -43,14 +47,14 @@
             <button>在线支付</button>
           </div>
           <div class="f-con_RMB clear">
-            <router-link id="pay_nowbtn" to="/pay">
-              <button class="btn_active rt f-con_nowpay">立即支付</button>
-            </router-link>
+            <!-- <router-link id="pay_nowbtn" to="/pay"> -->
+              <button class="btn_active rt f-con_nowpay" @click="Mtopay">立即支付</button>
+            <!-- </router-link> -->
             <div class="F-con_RMB_number rt">
               应付金额：
               <span>
                 RMB
-                <span id="sum_proce"></span>
+                <span id="sum_proce">{{sum}}</span>
               </span>
             </div>
           </div>
@@ -68,9 +72,56 @@ import Cheader from "../components/C_header";
 import Footer from "../components/Footer";
 export default {
   name: "compelet",
+  data(){
+      return {
+        product_name:'',
+        order_num:'',
+        address:'',
+        tel:'',
+        name:'',
+        sum:0,
+        orderid:0
+      }
+  },
   components: {
     Cheader,
     Footer
+  },
+  methods:{
+    Mtopay(){
+      this.$router.push({path:'/pay',query:{ordernum:this.orderid}})
+    }
+  },
+  mounted(){
+    let order_id=this.$route.query.ordernum;
+    this.orderid=order_id;
+    console.log(order_id)
+    //----------------请求订单信息
+    this.$axios.post('/api/order/F_watch_order',{
+      params:{
+         order_id:order_id
+      }
+    }).then((res)=>{
+      if(!res.data.error){
+        let data=res.data.data;
+        this.address=data[0].re_address;
+        this.name=data[0].re_name;
+        this.tel=data[0].re_tel;
+        this.order_num=data[0].order_num;
+        let proname='';
+        let sum=0;
+        for (let k = 0; k < data.length; k++) {
+          proname+=data[k].main_head+'   ';
+          sum+=data[k].number * data[k].order_price;
+        }
+        this.product_name=proname;
+        this.sum=sum;
+        
+      }else{
+        console.log(res.data.err)
+      }
+      console.log(res.data)
+    })
   }
 };
 </script>

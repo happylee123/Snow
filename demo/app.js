@@ -22,7 +22,7 @@ app.use(session({
     rolling:true,// 在每个seesion请求后重新计时
     saveUninitialized:true,  //初始化session是否保存
     cookie:{
-        maxAge:20000  //设置过期时间  单位是毫秒
+        maxAge:24*60*60*1000  //设置过期时间  单位是毫秒
     }
 }));
 
@@ -54,7 +54,19 @@ app.use(bodyParse.urlencoded({extended:false}));
 // })
 
 
-
+//路由拦截
+/*server.all('*',function (req,res,next) {
+    if(req.session.user){
+        next();
+    }else{
+        //进入登录页面，和在登录页面发送的请求都不能拦截
+        if(req.url=='/login.html' || req.headers.referer=='http://localhost/login.html') {
+            next();
+        }else{
+            res.redirect('/login.html');
+        }
+    }
+});*/
 
 //路由的拦截与使用
 const A_Router= require('./router/A-Router.js');
@@ -66,6 +78,12 @@ app.use(B_Router);
 //----------------------------lee的路由
 const C_Router= require('./router/C_loginrouter.js');
 app.use(C_Router);
+
+const carRouter= require('./router/F-carRouter.js');
+app.use(carRouter);
+
+const payRouter= require('./router/F-payRouter.js');
+app.use(payRouter);
 
 //配置端口号
 app.listen(1818,function () {

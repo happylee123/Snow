@@ -68,36 +68,40 @@
                     RMB:
                     <span class="f-car_sumbig">{{smallprice(i) | price}}</span>
                   </div>
-                  <div class="f-car_pro05 f-car_remove">删除</div>
+                  <div class="f-car_pro05 f-car_remove" @click="deletep(i)">删除</div>
                 </div>
               </div>
               <!-- -- 1结束 ------>
+
+              <!-- 出现暂时还没有购物商品页面 -->
+              <div id="nothing" v-show="pp">
+                 <p>亲，您购车暂时没有商品哟!</p>
+              </div>
             </div>
-          </div>
+           </div>
+
 
           <!-- 结算 -->
-          <!-- 结算 -->
-
           <div id="f-car_pay">
             <div class="f-car_btnbox clear">
               <div class="f-car_tools lf">
                 <input type="checkbox" id="f-car_cheak_all2" :checked="ischeckedall" @click="checkall" />
                 <span>全选</span>
-                <span id="f-car_remove_ss">
-                  <a href="javascript:void(0)">删除</a>
+                <span id="f-car_remove_ss" @click="deletemore()">
+                  <span href="javascript:void(0)">删除</span>
                 </span>
                 <!-- <a href="javascript:void(0)">移入收藏夹</a> -->
               </div>
               <div class="f-car_paybtn rt" @click="paynumber">
                 <span>
                   总价: RMB &nbsp;
-                  <span id="f-car_sumprice">{{sum | price}}</span>
+                  <span id="f-car_sumprice">{{sum| price}}</span>
                 </span>
-                <router-link id="f-car_topaybtn" to="/order">
-                   <button>
+                <!-- <router-link id="f-car_topaybtn" to="/order"> -->
+                   <button @click="Mtopay">
                     去结算(<span id="f-car_pay_ss" >{{paynum}}</span>)               
                   </button>
-                </router-link>
+                <!-- </router-link> -->
               </div>
             </div>
           </div>
@@ -121,83 +125,53 @@ export default {
     return {
       msg:[],
       smallqian:0,
-      paynum:0,
       ischeckedall:false,
-      ischeckedarr: [false,false,false],
+      ischeckedarr: [],
+      paynum:0,
       writenum:"",
-      data: [
-          {
-            cart_id: 8,
-            cart_num: 23,
-            class_id: 2,
-            img_id: 4,
-            img_src: "/img/B-img/m1.png",
-            main_content: "超高清50000W像素",
-            main_head: "索尼阿尔法5专业级单反",
-            model_id: 2,
-            price: 4299,
-            priduct_id: 5,
-            product_id: 5,
-            second_body: "索尼阿尔法5专业级单反",
-            second_content: "想拍就拍5",
-            second_id: 2,
-            second_name: "2000w",
-            stock_num: 23,
-            user_id: 1
-          },
-          {
-            cart_id: 8,
-            cart_num: 23,
-            class_id: 2,
-            img_id: 4,
-            img_src: "/img/B-img/m1.png",
-            main_content: "超高清50000W像素",
-            main_head: "索尼阿尔法5专业级单反",
-            model_id: 2,
-            price: 4299,
-            priduct_id: 5,
-            product_id: 5,
-            second_body: "索尼阿尔法5专业级单反",
-            second_content: "想拍就拍5",
-            second_id: 2,
-            second_name: "2000w",
-            stock_num: 23,
-            user_id: 1
-          },
-          {
-            cart_id: 1,
-            cart_num: 35,
-            class_id: 1,
-            img_id: 2,
-            img_src: "/img/B-img/m4.png",
-            main_content: "超高清30000W像素",
-            main_head: "索尼阿尔法3专业级单反",
-            model_id: 3,
-            price: 4399,
-            priduct_id: 3,
-            product_id: 3,
-            second_body: "索尼阿尔法3专业级单反",
-            second_content: "想拍就拍3",
-            second_id: 3,
-            second_name: "3000w",
-            stock_num: 40,
-            user_id: 1
-          }
-        ]
-
+      data:'',
+      pp:false,
+      sum:0,
     };
   },
   methods: {
+    //修改购物数量数据的修改
+    numfn(that,i){
+      console.log(that.data[i].cart_num)
+      that.$axios.post('/api/F_savenumber',{
+          params:{
+            cartid:that.data[i].cart_id,
+            number:that.data[i].cart_num
+          }
+        }).then((res)=>{
+          if(res.data.error){
+            console.log('修改数据错误')
+          }
+        })
+    },
+    //总价的封装
+    Msum(that){     
+         var sum=0;
+         for(let i=0;i<this.ischeckedarr.length;i++){
+           if(that.ischeckedarr[i]){
+              sum+=that.data[i].price*that.data[i].cart_num;
+           }
+             
+         }
+         that.sum=sum;
+    },
     checkall() {
       this.ischeckedall = !this.ischeckedall;
+      
       for (let i = 0; i < this.ischeckedarr.length; i++) {    
-          this.ischeckedarr[i]=this.ischeckedall;
-          
+          this.ischeckedarr[i]=this.ischeckedall;         
       };
       if(this.ischeckedall){
           this.paynum=this.ischeckedarr.length;
+          this.Msum(this);
       }else{
           this.paynum=0;
+          this.Msum(this);
       }
        //this.$options.methods.paynumber()
     },
@@ -207,26 +181,65 @@ export default {
         return this.smallqian
     },
     addnum(i){
+        let that=this;
         this.msg[i]=this.data[i].cart_num=this.data[i].cart_num+1;
-
+        console.log(that.data[i].cart_num)
+        //----------进行产品数据保存
+         this.numfn(that,i);
+         //sum
+         var sum=0;
+         for(let i=0;i<this.ischeckedarr.length;i++){
+           if(that.ischeckedarr[i]){
+              sum+=that.data[i].price*that.data[i].cart_num;
+           }
+             
+         }
+         that.sum=sum;
+         console.log(sum)
     },
     reducenum(i){
-          this.msg[i]=this.data[i].cart_num=this.data[i].cart_num-1;
+      let that=this;
+      if(this.msg[i]>1){
+       this.msg[i]=this.data[i].cart_num=this.data[i].cart_num-1;
+      }else if(this.msg[i]==1){
+         this.msg[i]=1;
+      }
+        
+        //----------进行产品数据保存
+        this.numfn(that,i);
+        //sum
+         var sum=0;
+         for(let i=0;i<this.ischeckedarr.length;i++){
+           if(that.ischeckedarr[i]){
+              sum+=that.data[i].price*that.data[i].cart_num;
+           }
+             
+         }
+         that.sum=sum;
+         console.log(sum)
     },
     //单个点击计算购买数量
     paynumber(i){
+      let sum=0;
       let num=0;
       this.ischeckedarr[i]=!this.ischeckedarr[i];
+      console.log(this.ischeckedarr)    
       for (let i = 0; i < this.ischeckedarr.length; i++) {    
          if(this.ischeckedarr[i]){
-             num=num+1;            
-         }
+            num=num+1;  
+            sum+=this.data[i].price*this.data[i].cart_num;
+                      
+        }
       };
+      this.sum=sum;
+      console.log(this.sum,this.ischeckedarr)
+      this.paynum=num;
       if(num!=this.data.length){
           this.ischeckedall=false;
+      }else{
+        this.ischeckedall=true;
       }
-      this.paynum=num;
-
+        
     },
     //inpu框输入的时候
     input(i){
@@ -250,21 +263,188 @@ export default {
                
     },
     //当inutp的值改变的时候
-   numchange(i){
-       this.data[i].cart_num=this.msg[i];
-   }
+    numchange(i){
+        let that=this;
+        this.data[i].cart_num=this.msg[i];
+        //方法调用
+        this.numfn(that,i)
+    },
+    //删除单个商品
+    deletep(i){
+      let that=this;
+       //---------------出现确认删除按钮
+      this.$confirm('确定删除此产品', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            let _this=this;
+            //---------------------------------在数据库删除商品
+            that.$axios.post('/api/F_car_remove_ss',{
+              params:{
+                id:'['+that.data[i].cart_id+']'
+              }
+            }).then((res)=>{
+              if(!res.data.error){
+                that.paynum=0;
+                //-----------------------重新加载产品
+                    that.$axios.post("/api/F_car_productlis").then(function(res){  
+
+                          let error=res.data.error;
+                        //alert('xinxnxini')
+                          if(error){
+                            return         
+                          }
+                          if(!error){
+                            if(res.data.data.length==0){
+                              //---------------------------展示暂时没有购物商品的页面
+                              that.ischeckedall=false;
+                              that.pp=true;
+                            }else{
+                              that.pp=false;
+                            }
+                            //给that.data赋值
+                            that.data=res.data.data;
+                            that.ischeckedarr=[];
+                            for (let k = 0; k < res.data.data.length; k++) {
+                              //添加input里面的数量字符
+                              that.msg.push(res.data.data[k].cart_num);
+                              //给子多选框赋值为false
+                            
+                              that.ischeckedarr.push(false)
+                            }
+                            
+                            
+                          }
+                    })      
+              }
+            })
+            //---------------------------------在数据库删除商品  
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            });
+          })
+      
+
+      
+      },
+    //删除多个商品
+    deletemore(){
+        let that=this;
+        let ids=[];
+        let is=0;
+         for (let i = 0; i < this.ischeckedarr.length; i++) {    
+            if(this.ischeckedarr[i]){
+                 is++;
+                 ids.push(this.data[i].cart_id);        
+            }
+          };
+          
+        if(!is){
+          //没有商品提示弹框
+          that.$alert('请选择购买商品', '', {
+            confirmButtonText: '确定',
+          });
+        }else{
+          console.log(JSON.stringify(ids))
+
+         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          //  --------------------------------------
+             //-------------------请求删除产品
+          that.$axios.post('/api/F_car_remove_ss',{
+            params:{
+              id:JSON.stringify(ids)
+            }
+           }).then((res)=>{
+             if(!res.data.error){
+               that.paynum=0;
+                //----------------------------
+                 that.$axios.post("/api/F_car_productlis").then(function(res){  
+
+                  let error=res.data.error;
+                 //alert('xinxnxini')
+                  if(error){
+                    return         
+                  }
+                  if(!error){
+                    if(res.data.data.length==0){
+                      //---------------------------展示暂时没有购物商品的页面
+                      that.ischeckedall=false;
+                      that.pp=true;
+                    }else{
+                       that.pp=false;
+                    }
+                    //给that.data赋值
+                    that.data=res.data.data;
+                     that.ischeckedarr=[];
+                    for (let k = 0; k < res.data.data.length; k++) {
+                      //添加input里面的数量字符
+                      that.msg.push(res.data.data[k].cart_num);
+                      //给子多选框赋值为false             
+                      that.ischeckedarr.push(false)
+                    }                                
+                  }
+            }) 
+             
+             }
+             
+            }) 
+
+
+          //  --------------------------------------
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
     
+        
+        
+        
+        
+        //-------------------------------------------
+        }
+    
+    },
+    //去支付
+    Mtopay(){
+      //cart_id数组
+      let ids=[];
+      //计数
+      let num=0;
+      for (let k = 0; k < this.ischeckedarr.length; k++) {
+        if(this.ischeckedarr[k]){
+          num++;
+         ids.push(this.data[k].cart_id);    
+        }
+      }
+      //没有选中的产品
+     if(num==0){
+        this.$alert('请选择购买商品', '', {
+            confirmButtonText: '确定',
+        }); 
+     }else{//有选中的产品
+       this.$router.push({path:'/order',query:{cart:ids}});
+     }
+
+    }
+    
+  },
+  watch:{
     
   },
   computed:{
-     sum(){
-         var obj=this.data
-         var sum=0;
-         for(let i=0;i<obj.length;i++){
-             sum+=obj[i].price*obj[i].cart_num;
-         }
-         return sum;
-     }
+   
   },
   filters:{
      price(v){   
@@ -275,11 +455,39 @@ export default {
     Cheader,
     Footer
   },
-  created(){
-    //-----------------axios请求数据，获取data
-    for (let k = 0; k < this.data.length; k++) {
-      this.msg.push(this.data[k].cart_num)
+  mounted(){
+    if(this.data.length==0){
+      this.pp=true;
     }
+    let that=this;
+     this.$axios.post("/api/F_car_productlis").then(function(res){  
+
+        let error=res.data.error;
+       
+        if(error){
+          return         
+        }
+        if(!error){
+          if(res.data.data.length==0){
+            //---------------------------展示暂时没有购物商品的页面
+          this.sum=0;
+          that.pp=true;
+          }else{
+             that.pp=false;
+          }
+            //给that.data赋值
+            that.data=res.data.data;
+            console.log(that.data);
+            
+            for (let k = 0; k < res.data.data.length; k++) {
+              //添加input里面的数量字符
+              that.msg.push(res.data.data[k].cart_num);
+              //给子多选框赋值为false
+              that.ischeckedarr.push(false)
+            }
+          
+        }
+   })
   }
 };
 </script>
@@ -419,6 +627,17 @@ export default {
     }
 
     //产品部分
+    #F-carproduct_list{
+      min-height: 600px;
+      #nothing p{
+        width: 1200px;
+        height: 600px;
+        background: #fff;
+        text-align: center;
+        line-height: 600px;
+        font-size: 18px;
+      }
+    }
     .f-car_product {
       padding: 42px 30px 30px 14px;
       background-color: #fff;

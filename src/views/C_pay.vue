@@ -19,35 +19,35 @@
       <!-- 版心 -->
       <div id="f-RMB_content">
         <div class="center_950">
-          <p class="font_12 border_b">正在使用即时到账交易 [?] 交易将在1小时26分钟后关闭，请及时付款！</p>
+          <p class="font_12 border_b">正在使用即时到账交易, 交易将在1小时26分钟后关闭，请及时付款！</p>
           <div class="F-RMB_texts mrg_t16">
             <p class="f-RMB_h bold">QNDB2VLR</p>
             <p class="f-RMB_p">
               <span>收款方：</span>
-              索尼（中国）有限公司上海分公司
+              雷霆有限公司上海分公司
             </p>
             <p class="f-RMB_p">
               <span>订单号：</span>
-              <span class="order_num">100000000405908_F</span>
+              <span class="order_num">{{order_num}}</span>
             </p>
             <p class="f-RMB_p">
               <span>商品名称：</span>
-              <span class="pro_name">QNDB2VLR</span>
+              <span class="pro_name">{{product_name}}</span>
             </p>
             <p class="f-RMB_p">
               <span>商品描述：</span>
-              <span class="pro_description">QNDB2VLR100000000405908_F NORMAL_AMOUNT</span>
+              <span class="pro_description">{{product_name}}</span>
             </p>
             <p class="f-RMB_s">
               <span class="bold font_18">
-                <span class="pro_price1">16499.00元</span>
+                <span class="pro_price1">{{sum}}元</span>
               </span>
             </p>
             <!-- 支付框 -->
             <div class="f-RMB_paybox">
               <p class="font_12 f-RMB_01">扫一扫付款</p>
               <p class="bold font_18 f-RMB_02">
-                <span class="pay_pro_price">16499.00</span>
+                <span class="pay_pro_price">{{sum| price}}</span>
               </p>
               <p class="f-RMB_03">
                 <img src="../assets/images/C_img/erw.png" alt class="f-RMB_erwimg" />
@@ -65,7 +65,53 @@
 
 export default {
   name: "rmb",
+   data(){
+      return {
+        product_name:'',
+        order_num:'',
+        address:'',
+        tel:'',
+        name:'',
+        sum:0
+      }
+  },
+  filters:{
+     price(v){   
+         return v.toFixed(2);
+     }    
+  },
+  mounted(){
+    let order_id=this.$route.query.ordernum;
+    console.log(order_id)
+    //----------------请求订单信息
+    this.$axios.post('/api/order/F_watch_order',{
+      params:{
+         order_id:order_id
+      }
+    }).then((res)=>{
+      if(!res.data.error){
+        let data=res.data.data;
+        this.address=data[0].re_address;
+        this.name=data[0].re_name;
+        this.tel=data[0].re_tel;
+        this.order_num=data[0].order_num;
+        let proname='';
+        let sum=0;
+        for (let k = 0; k < data.length; k++) {
+          proname+=' 、'+data[k].main_head;
+          sum+=data[k].number * data[k].order_price;
+        }
+        this.product_name=proname;
+        this.sum=sum;
+        
+      }else{
+        console.log(res.data.err)
+      }
+      console.log(res.data)
+    })
+  }
 };
+
 </script>
 
 <style scoped lang='less'>

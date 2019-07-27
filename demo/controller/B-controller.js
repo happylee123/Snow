@@ -11,7 +11,17 @@ let json = {
                 res.send({error: 0,msg: data})
             }
         })
-    }
+    },
+    getExhibitionImg: function(req,res){
+        B_module.getExhibitionImg(function (err,data) {
+            if(err){
+                console.log('数据查询失败'+err)
+            }else{
+                console.log("数据获取成功")
+                res.send({error: 0,msg: data})
+            }
+        })
+    },
 }
 
 

@@ -6,6 +6,7 @@
         <el-carousel-item v-for="(bsrc,i) in imgSrc_arr" :key="i">
           <a href="javascript:;">
             <img :src="bsrc.img_name" alt />
+            <!-- <img src="./../assets/suoni_files/banner1.jpg" alt=""> -->
           </a>
         </el-carousel-item>
       </el-carousel>
@@ -83,7 +84,7 @@ export default {
     return {
       arrNav: [
         {
-          nav: "有效分辨率",
+          nav: "系列分类",
           child1: " 黑卡®系列",
           child2: "长焦系列",
           child3: "缤纷系列"
@@ -208,6 +209,8 @@ export default {
         params: {
           exhibitionImg: this.exhibitionImg
         }
+      }).then((res)=>{  //展示区接接收到的img地址
+        console.log(res)
       })
     },
     //接收子组件（BOptional。vue）的数据

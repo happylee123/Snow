@@ -5,17 +5,21 @@
       <div id="nve_1200">
         <div id="c_nvebox">
           <div class="c_nve clear">
-            <div class="log lf">logo</div>
+            <div class="log lf">
+              <a href="/">
+                <img src="../assets/logoB.png" alt="" width="50px" id="logimg">
+               </a>
+            </div>
             <div class="icon rt">
-              <a href="">
-                <span class="iconfont">&#xe668;</span>
-              </a>
-              <a href="">
+              <router-link to='/personIndex'>
+                <span class="iconfont">{{person}}</span>
+              </router-link>
+              <router-link to='/cart' target="_blank">
                 <span class="iconfont">&#xf0179;</span>
-              </a>
-              <a href="">
+              </router-link>
+              <router-link to='/' target='_blank'>
                 <span class="iconfont">&#xe60d;</span>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>
@@ -23,14 +27,12 @@
       <!-- 列表 -->
       <div id="list_1200">
         <div id="c_listbox">
-            <div class="tag_a">
-              <a href="/#/index">首页</a>
+              <a href="/">首页</a>
             <a href="/#/BCommodity">单反</a>
             <a href="/#/microsheet">微单</a>
             <a href="/#/lens">镜头</a>
             <a href="/#/study">荣誉与奖项</a>
             <a href="/#/aboutUs">关于我们</a>
-            </div>
         </div>
       </div>
     </div>
@@ -38,7 +40,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return {
+     person:'&#xe668'
+    }
+  },
+  methods:{
+    
+  },
+  mounted(){
+    if(!localStorage.user){
+      this.person='&#xe668';
+    }else{
+      this.person=this.$store.state.C_store.user.user_name;      
+    }
+  }
+};
 </script>
 
 <style scope lang="less">
@@ -47,7 +65,10 @@ export default {};
   width: 100%;
 }
 #c_header {
-  
+  #logimg{
+    position: relative;
+    top: 6px;
+  }
   color: #fff;
   #nve_1200{
       background-color: #272727;
@@ -76,23 +97,21 @@ export default {};
  }
   //list
   #c_listbox{
-     width: 1200px;
      text-align: center;
      height: 60px;
      line-height: 60px;
      
      background-color: #fff;
      margin-bottom: 20px;
-     .tag_a{
-       width: 500px;
-       margin:  0 auto;
+
+
        a{
-       margin-right: 30px;
+       padding: 2%;
        &:hover{
          color: #202020;
          font-weight: bold;
        }
-     }
+
      }
      
   }

@@ -46,7 +46,8 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.A_abt{
+.about{
+    .A_abt{
     //width: 100%;
     padding-right: 15px;
     padding-left: 15px;
@@ -122,6 +123,8 @@ hr{
   //   margin-top:-130px;
   //   margin-right: 23%;
   // }
+}
+
 }
 
 </style>

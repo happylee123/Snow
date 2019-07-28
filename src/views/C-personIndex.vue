@@ -27,6 +27,11 @@ export default {
         Header,
         Footer,
         List        
+    },
+    data(){
+      return{
+        img:'../assets/logo.png'
+      }
     }
 }
 </script>
@@ -34,7 +39,8 @@ export default {
   body {
   background: #ededed;
 }
-.E-boss {
+.perserIndex{
+   .E-boss {
   width: 1200px;
   margin: 80px  auto  0 auto;
   position: relative;
@@ -53,6 +59,8 @@ export default {
   overflow: hidden;
   min-height: 556px;
 }
+}
+
 
 
 </style>

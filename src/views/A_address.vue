@@ -181,7 +181,6 @@ export default {
 </script>
 <style lang="less" scope>
 @import "../font/D-font/iconfont.css";
-.address{
    .el-dialog{
 
   position:absolute;
@@ -587,7 +586,7 @@ export default {
   }
   /*# sourceMappingURL=D-address.css.map */
 }
-}
+
 
 
 

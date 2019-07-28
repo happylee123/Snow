@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="index">
     <el-row id="top">
       <el-col :span="24">
         <div id="header">
@@ -85,9 +85,6 @@ export default {
               //储存localstotage和vuex
               this.$store.commit('delete');
               this.$router.push('/login');
-              alert('okok')
-            }else{
-              alert('nono')
             }
           })
          
@@ -116,7 +113,8 @@ export default {
 
 <style lang="less" scoped>
 //logo
-#logo{
+.index{
+   #logo{
   width: 50px;
   position: relative;
   top: 6px;
@@ -209,5 +207,7 @@ export default {
     border-bottom: 2px solid #5389af;
   }
 }
+}
+
 
 </style>

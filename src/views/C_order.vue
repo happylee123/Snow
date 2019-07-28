@@ -226,7 +226,6 @@ export default {
     litext(i){
      this.isoption=false;
      this.text=this.tiketarr[i];
-     console.log(this.text)
     },
     //提交订单
     Mcommit(){
@@ -337,25 +336,33 @@ export default {
     let that =this;
    //接收数据 
    let ids=this.$route.query.cart;
-   // --------------用axios获取地址
-   this.$axios.post("/api/F_address").then((res)=>{
-        if(!res.data.error){
-          console.log(res.data.data)
-          that.address=res.data.data
-        }
-   })
-   // --------------用axios获取订单列表
-    this.$axios.post("/api/F_orderlist",{
-      params:{
-        id:JSON.stringify(ids)
-      }
-    }).then((res)=>{
-        if(!res.data.error){
-          console.log(res.data.data)
-          this.data=res.data.data
-        }
-   })
-    //设置地址的true或者false
+   //----------判断是否有从购物车传值，没值的话返回购物车页面
+   console.log(ids.length)
+   if(!ids.length){
+     this.$router.push('/cart');
+     alert(111)
+   }else{
+      // --------------用axios获取地址
+      this.$axios.post("/api/F_address").then((res)=>{
+            if(!res.data.error){
+              console.log(res.data.data)
+              that.address=res.data.data
+            }
+      })
+      // --------------用axios获取订单列表
+        this.$axios.post("/api/F_orderlist",{
+          params:{
+            id:JSON.stringify(ids)
+          }
+        }).then((res)=>{
+            if(!res.data.error){
+              console.log(res.data.data)
+              this.data=res.data.data
+            }
+      })
+        //设置地址的true或者false
+   }
+   
     
   }
 

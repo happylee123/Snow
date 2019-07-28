@@ -116,7 +116,8 @@ export default {
 
 <style scoped lang='less'>
 @import "../styles/C_pub.less";
-.center_950 {
+.rmb{
+   .center_950 {
     margin: 0 auto;
     width: 950px
 }
@@ -212,4 +213,6 @@ body{
         }
     }
 }
+}
+
 </style>

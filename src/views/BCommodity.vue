@@ -56,19 +56,19 @@
         <div class="bdiv1 clearfix">
           <h4>黑卡®系列</h4>
           <ul>
-            <Boptional1 v-for="(v1,i) in arrImg" :key="i" :v1="v1"></Boptional1>
+            <Boptional1 v-for="(v1,i) in arr_img1" :key="i" :v1="v1"></Boptional1>
           </ul>
         </div>
         <div class="bdiv2 clearfix">
           <h4>长焦系列</h4>
           <ul>
-            <Boptional1 v-for="(v1,i) in arrImg" :key="i" :v1="v1"></Boptional1>
+            <Boptional1 v-for="(v1,i) in arr_img1" :key="i" :v1="v1"></Boptional1>
           </ul>
         </div>
         <div class="bdiv3 clearfix">
           <h4>缤纷系列</h4>
           <ul>
-            <Boptional1 v-for="(v1,i) in arrImg" :key="i" :v1="v1"></Boptional1>
+            <Boptional1 v-for="(v1,i) in arr_img1" :key="i" :v1="v1"></Boptional1>
           </ul>
         </div>
       </div>
@@ -85,7 +85,7 @@ export default {
       arrNav: [
         {
           nav: "系列分类",
-          child1: " 黑卡®系列",
+          child1: "黑卡®系列",
           child2: "长焦系列",
           child3: "缤纷系列"
         },
@@ -177,11 +177,17 @@ export default {
           bspan: "RMB 8,499"
         }
       ],
+      arr_img1: [],
+      arr_img2: [],
+      arr_img3: [],
       //bannner 的数据请求
       banner: 1,
       imgSrc_arr: [],
       //下方展示区域的img 请求
-      exhibitionImg: 2
+      heika: "",
+      
+      //系列类型判断
+      show1: 0
     };
   },
   beforeMount: function(){
@@ -189,6 +195,9 @@ export default {
     this.getBannerImg()
     //下方展示区域的img的函数调用
     this.getExhibitionImg()
+    // getheika()
+    // changjiao()
+    // binfen()
   },
   methods: {
     //banner get函数
@@ -203,19 +212,56 @@ export default {
         this.imgSrc_arr = imgSrc_arr
       });
     },
-    //下方展示区域img的获取函数 
+    //一加载便获取 下方展示区域img的获取函数 
+    //黑卡
+    // getheika(){
+    //   this.heika = "黑卡"
+    // },
+    // changjiao(){
+    //   this.heika = "长焦"
+    // },
+    // binfen(){
+    //   this.heika = "缤纷"
+    // },
     getExhibitionImg() {
       this.$axios.get("/api/getExhibitionImg",{
         params: {
-          exhibitionImg: this.exhibitionImg
+          // exhibitionImg: this.heika
         }
       }).then((res)=>{  //展示区接接收到的img地址
-        console.log(res)
+        var arr_Img = res.data.msg;
+        // console.log(arr_Img)
+        for(var i in arr_Img){
+          this.arr_img1.push(arr_Img[i])
+        }
+        // if(this.heika == "黑卡"){
+        //   var arr_Img = res.data.msg;
+        // // console.log(arr_Img)
+        // for(var i in arr_Img){
+        //   this.arr_img1.push(arr_Img[i])
+        // }
+        // }
+        // if(this.heika == "长焦"){
+        //   var arr_Img = res.data.msg;
+        // // console.log(arr_Img)
+        // for(var i in arr_Img){
+        //   this.arr_img2.push(arr_Img[i])
+        // }
+        // }
+        // if(this.heika == "缤纷"){
+        //   var arr_Img = res.data.msg;
+        // // console.log(arr_Img)
+        // for(var i in arr_Img){
+        //   this.arr_img3.push(arr_Img[i])
+        // }
+        // }
+        
       })
     },
     //接收子组件（BOptional。vue）的数据
-    fromChild(data){
-      console.log(data)
+    fromChild(arr){
+      console.log(arr[1])
+      
     }
   },
 

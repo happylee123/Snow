@@ -61,7 +61,7 @@
             <br />
             <span class="ex-span1">数量</span>
             <button class="but" >-</button>
-            <input type="text" placeholder="" v-model="Number" />
+            <input type="text" placeholder="1" />
             <button class="but" >+</button>
           </div>
           <hr class="bhr1" />

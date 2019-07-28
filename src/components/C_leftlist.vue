@@ -4,9 +4,9 @@
        <div id="E-left">
         <div id="E-user">
             <div id="E-user-img">
-                <img src="" alt="">
+                <img :src="img" alt="" width="50px">
             </div>
-            <p id="E-user-name">user-name</p>
+            <p id="E-user-name">{{this.$store.state.C_store.user.user_name}}</p>
         </div>
         
         <div id="E-list">
@@ -36,9 +36,15 @@
     
 </template>
 <script>
-
+import store from '../vuex/store'
 export default {
+    store,
     name:"leftlist",
+    data(){
+        return{
+          img:require('../assets/E-user-img.jpg')
+        }
+    }
     
 }
 </script>

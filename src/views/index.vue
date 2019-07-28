@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="index">
     <el-row id="top">
       <el-col :span="24">
         <div id="header">
@@ -85,9 +85,6 @@ export default {
               //储存localstotage和vuex
               this.$store.commit('delete');
               this.$router.push('/login');
-              alert('okok')
-            }else{
-              alert('nono')
             }
           })
          
@@ -116,98 +113,101 @@ export default {
 
 <style lang="less" scoped>
 //logo
-#logo{
-  width: 50px;
-  position: relative;
-  top: 6px;
-}
-//个人中心
-#personcenter{
-  margin-left: 12px;
-  &:hover{
-    color: #e7e7e7;
+.index{
+  #logo{
+    width: 50px;
+    position: relative;
+    top: 6px;
   }
-}
-#top{
-  background-color: #272727;
-   color: #fff;
-   a{
-     color: #fff;
-   }
-}
-#login{
-  text-align: center;
-  margin: 10px 0;
-  cursor: default;
-  
-  .login-logo{
-    margin-right: 614px;
-    
-   
-  }
-  .login-lo{
-    margin-left: 200px;
-  }
-  #carticon{
-    margin-left: 10px;
+  //个人中心
+  #personcenter{
+    margin-left: 12px;
     &:hover{
       color: #e7e7e7;
     }
   }
-  #load{
-    color:#45affc;
+  #top{
+    background-color: #272727;
+    color: #fff;
+    a{
+      color: #fff;
+    }
+  }
+  #login{
+    text-align: center;
+    margin: 10px 0;
+    cursor: default;
     
-    &:hover{
-      color:#82cbff;
+    .login-logo{
+      margin-right: 614px;
+      
+    
+    }
+    .login-lo{
+      margin-left: 200px;
+    }
+    #carticon{
+      margin-left: 10px;
+      &:hover{
+        color: #e7e7e7;
+      }
+    }
+    #load{
+      color:#45affc;
+      
+      &:hover{
+        color:#82cbff;
+      }
+    }
+  }
+  #nav{
+    text-align: center;
+    margin: 3px 0;
+    padding: 14px 0 14px 0;
+    .search__input {
+      // width: 100%;
+      padding: 4px 20px;
+      background-color: transparent;
+      transition: transform 250ms ease-in-out;
+      font-size: 14px;
+      line-height: 18px;
+      color: #575756;
+      background-color: transparent;
+      // background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
+      background-repeat: no-repeat;
+      background-size: 18px 18px;
+      background-position: 98% center;
+      border-radius: 50px;
+      border: 1px solid #979797;
+      transition: all 250ms ease-in-out;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+
+      margin-top: -16px;
+    }
+
+    .search__input::placeholder {
+        color: rgba(87, 87, 86, 0.8);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+    .search__input:hover,
+            .search__input:focus {
+        outline: 0;
+        border-radius: 50px;
+        background-position: 100% center;
+        background: #e6e5e5;
+        border: 1px solid #e6e5e5;
+    }
+    a{
+      margin-right: 80px;
+      padding: 2px;
+    }
+    a:hover {
+      border-bottom: 2px solid #5389af;
     }
   }
 }
-#nav{
-  text-align: center;
-  margin: 3px 0;
-  padding: 14px 0 14px 0;
-  .search__input {
-    // width: 100%;
-    padding: 4px 20px;
-    background-color: transparent;
-    transition: transform 250ms ease-in-out;
-    font-size: 14px;
-    line-height: 18px;
-    color: #575756;
-    background-color: transparent;
-    // background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
-    background-repeat: no-repeat;
-    background-size: 18px 18px;
-    background-position: 98% center;
-    border-radius: 50px;
-    border: 1px solid #979797;
-    transition: all 250ms ease-in-out;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
 
-    margin-top: -16px;
-  }
-
-  .search__input::placeholder {
-      color: rgba(87, 87, 86, 0.8);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-  }
-  .search__input:hover,
-          .search__input:focus {
-      outline: 0;
-      border-radius: 50px;
-      background-position: 100% center;
-      background: #e6e5e5;
-      border: 1px solid #e6e5e5;
-  }
-  a{
-    margin-right: 80px;
-    padding: 2px;
-  }
-  a:hover {
-    border-bottom: 2px solid #5389af;
-  }
-}
 
 </style>

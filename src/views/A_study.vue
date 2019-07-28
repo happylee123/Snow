@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <div class="main study">
         <!--logo展示-->
         <el-row>
             <el-col :span="24">
@@ -65,7 +65,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.main{
+.study{
+   .main{
     width: 80%;
     margin:  0 auto;
 }
@@ -147,5 +148,7 @@ export default {
         display: inline-block;
     }
 }
+}
+
 </style>
 

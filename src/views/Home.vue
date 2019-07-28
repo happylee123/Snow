@@ -147,12 +147,13 @@ export default {
 };
 </script>
 <style lang ="less" scoped>
-/deep/.el-row {
-  margin-bottom: 20px;
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
+
+  .el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+   }
 .el-col {
   border-radius: 4px;
   text-align: center;
@@ -175,6 +176,9 @@ export default {
 /* .el-carousel__item:nth-child(2n + 1) { */
   /* background-color: #d3dce6; */
 /* } */
+.home{
+
+
 .image{
   width: 100%;
 }
@@ -297,6 +301,8 @@ export default {
 }
 .button img:hover {
     transform: translateY(-20px);
+}
+
 }
 </style>
 

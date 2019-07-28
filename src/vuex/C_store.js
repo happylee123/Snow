@@ -15,9 +15,6 @@ export default {
           delete(state){
             state.user='';
             delete localStorage.user;
-          },
-          con(state){
-              console.log(state.user)
           }
     },
     actions: {

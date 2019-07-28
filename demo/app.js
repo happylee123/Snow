@@ -85,6 +85,9 @@ app.use(carRouter);
 const payRouter= require('./router/F-payRouter.js');
 app.use(payRouter);
 
+const orderRouter= require('./router/D-orderRouter.js');
+app.use(orderRouter);
+
 //配置端口号
 app.listen(1818,function () {
     console.log('项目启动了')

@@ -32,9 +32,11 @@ var json={
         let id=req.session.userid;
         //时间轴订单号
         let ordernumber=Date.now();
+        
         //下单日期
         var myDate = new Date();  
-        let downdate=myDate.getFullYear()+'-'+ myDate.getMonth()+'-'+myDate.getDate()+' '+myDate.getHours()+':'+ myDate.getMinutes()+':'+myDate.getSeconds();
+        let mouth=myDate.getMonth()+1;
+        let downdate=myDate.getFullYear()+'-'+mouth+'-'+myDate.getDate()+' '+myDate.getHours()+':'+ myDate.getMinutes()+':'+myDate.getSeconds();
         for (let i = 0; i < info.price.length; i++) {
             ids.push(id);
             ordernums.push(ordernumber);

@@ -68,7 +68,7 @@
                     RMB:
                     <span class="f-car_sumbig">{{smallprice(i) | price}}</span>
                   </div>
-                  <div class="f-car_pro05 f-car_remove" @click="deletep(i)">删除</div>
+                  <div class="f-car_pro05 f-car_remove" @click="deletep(i)" style="cursor: default;">删除</div>
                 </div>
               </div>
               <!-- -- 1结束 ------>

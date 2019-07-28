@@ -32,8 +32,8 @@
             <a href="/#/BCommodity">单反</a>
             <a href="/#/microsheet">微单</a>
             <a href="/#/lens">镜头</a>
-            <a href="/#/study">荣誉与奖项</a>
-            <a href="/#/aboutUs">关于我们</a>
+            <a href="/#/A_study">学习教程</a>
+            <a href="/#/about">关于我们</a>
           </div>
         </div>
       </div>

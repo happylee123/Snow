@@ -95,7 +95,7 @@
                     <p >订单详情</p>
                     </div>
                     <div class="lf" style="margin-left:10px;">
-                     <button class="buynow">立即购买</button>
+                     <button class="buynow" @click="Mbuynow(i)">立即购买</button>
                     </div>
                </span>  
                 <!-- 222 等待发货-->
@@ -404,6 +404,9 @@ export default {
            
 
         
+    },
+    Mbuynow(i){
+     
     }
   },
   mounted() {
@@ -438,9 +441,7 @@ export default {
 .rigtbox div{
     width: 60px;
     text-align: center;
-    padding: 20px;
-
-    
+    padding: 20px; 
 }
 .rigtbox div p:hover{
     color: #1b8cce;

@@ -2,11 +2,14 @@
   <!-- <ul id="bUl"> -->
   <li class="bLI">
     <a href="javascript:;">
+      <!-- <img :src=" v1.img_src " alt /> -->
       <img :src=" v1.img " alt />
       <div>
         <!-- <h4>黑卡®RX100 Ⅵ</h4> -->
+        <!-- <p class="bp">{{v1.second_body}}</p> -->
         <p class="bp">{{v1.bp}}</p>
-        <span class="bspan">{{ v1.bspan }}</span>
+        <!-- <span class="bspan">RMB {{ v1.price }}</span> -->
+        <span class="bspan">RMB {{ v1.bspan }}</span>
       </div>
     </a>
   </li>

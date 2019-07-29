@@ -16,12 +16,19 @@ const json = {
             fn(err,data)
         })
     },
-    getExhibitionImg: function (fn) {
-        var sql1 = `SELECT * FROM product_t`;
-        var sql2 = `SELECT * FROM product_t where `;
+    getExhibitionImg: function (from,fn) {
+        // console.log(from)
+        var sql1 = `
+        SELECT second_body,img_src,price
+        FROM product_t AS a
+        INNER JOIN second_t AS b ON a.second_id = b.second_id
+        INNER JOIN images_t AS c ON a.product_id = c.product_id
+        WHERE main_head LIKE  "%from%"
+        `;
+        
         db.query(sql1,function (err,data) {
-            console.log(data)
-            // fn(err,data)
+            // console.log(data)
+            fn(err,data)
         })
     }
 }

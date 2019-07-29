@@ -13,11 +13,14 @@ let json = {
         })
     },
     getExhibitionImg: function(req,res){
-        B_module.getExhibitionImg(function (err,data) {
+        var from = req.query.exhibitionImg;
+        // console.log(json)
+        B_module.getExhibitionImg(from,function (err,data) {
             if(err){
                 console.log('数据查询失败'+err)
             }else{
                 console.log("数据获取成功")
+                // console.log(data)
                 res.send({error: 0,msg: data})
             }
         })

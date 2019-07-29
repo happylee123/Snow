@@ -3,10 +3,10 @@
     <!-- 轮播图 -->
     <div class="banner">
       <el-carousel :interval="5000" arrow="always" height="379px">
-        <el-carousel-item v-for="(bsrc,i) in imgSrc_arr" :key="i">
+        <el-carousel-item v-for="(bsrc,i) in 6" :key="i">
           <a href="javascript:;">
-            <img :src="bsrc.img_name" alt />
-            <!-- <img src="./../assets/suoni_files/banner1.jpg" alt=""> -->
+            <!-- <img :src="bsrc.img_name" alt /> -->
+            <img src="./../assets/suoni_files/banner1.jpg" alt="">
           </a>
         </el-carousel-item>
       </el-carousel>
@@ -85,7 +85,7 @@ export default {
       arrNav: [
         {
           nav: "系列分类",
-          child1: " 黑卡®系列",
+          child1: "黑卡®系列",
           child2: "长焦系列",
           child3: "缤纷系列"
         },
@@ -108,80 +108,86 @@ export default {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 8,567"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 9,699"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 14099"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 4567"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 8,753"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 9,655"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 4,899"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 8,499"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 8,499"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 8,499"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 8,499"
         },
         {
           img: require("./../assets/suoni_files/img_dsc_h300_b.jpg.thumb.200.200.png"),
           bp:
             "约0.03秒高速对焦 / 24张/秒高速连拍 24-200mm F2.8-F4.5 大变焦镜头",
-          bspan: "RMB 8,499"
+          bspan: " 8,499"
         }
       ],
+      arr_img1: [],
+      arr_img2: [],
+      arr_img3: [],
       //bannner 的数据请求
       banner: 1,
       imgSrc_arr: [],
       //下方展示区域的img 请求
-      exhibitionImg: 2
+      heika: "",
+      
+      //系列类型判断
+      show1: 0
     };
   },
   beforeMount: function(){
@@ -189,6 +195,9 @@ export default {
     this.getBannerImg()
     //下方展示区域的img的函数调用
     this.getExhibitionImg()
+    // getheika()
+    // changjiao()
+    // binfen()
   },
   methods: {
     //banner get函数
@@ -203,19 +212,56 @@ export default {
         this.imgSrc_arr = imgSrc_arr
       });
     },
-    //下方展示区域img的获取函数 
+    //一加载便获取 下方展示区域img的获取函数 
+    //黑卡
+    // getheika(){
+    //   this.heika = "黑卡"
+    // },
+    // changjiao(){
+    //   this.heika = "长焦"
+    // },
+    // binfen(){
+    //   this.heika = "缤纷"
+    // },
     getExhibitionImg() {
       this.$axios.get("/api/getExhibitionImg",{
         params: {
-          exhibitionImg: this.exhibitionImg
+          // exhibitionImg: this.heika
         }
       }).then((res)=>{  //展示区接接收到的img地址
-        console.log(res)
+        var arr_Img = res.data.msg;
+        // console.log(arr_Img)
+        for(var i in arr_Img){
+          this.arr_img1.push(arr_Img[i])
+        }
+        // if(this.heika == "黑卡"){
+        //   var arr_Img = res.data.msg;
+        // // console.log(arr_Img)
+        // for(var i in arr_Img){
+        //   this.arr_img1.push(arr_Img[i])
+        // }
+        // }
+        // if(this.heika == "长焦"){
+        //   var arr_Img = res.data.msg;
+        // // console.log(arr_Img)
+        // for(var i in arr_Img){
+        //   this.arr_img2.push(arr_Img[i])
+        // }
+        // }
+        // if(this.heika == "缤纷"){
+        //   var arr_Img = res.data.msg;
+        // // console.log(arr_Img)
+        // for(var i in arr_Img){
+        //   this.arr_img3.push(arr_Img[i])
+        // }
+        // }
+        
       })
     },
     //接收子组件（BOptional。vue）的数据
-    fromChild(data){
-      console.log(data)
+    fromChild(arr){
+      console.log(arr[1])
+      
     }
   },
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="order">
+  <div id="order">
     <!-- header -->
     <Cheader></Cheader>
     <!-----主体 ------>
@@ -260,6 +260,8 @@ export default {
        let  adress=[];
        //订单备注
        let beizhu=[];
+       //购物车id
+       let cart_id=[];
       for (let k = 0; k < this.data.length; k++) {
          proids.push(this.data[k].product_id);
          paynumber.push(this.data[k].cart_num);
@@ -269,7 +271,8 @@ export default {
          relname.push(adr.add_name);
          retel.push(adr.add_tel);
          adress.push(adr.sheng+adr.shi+adr.xian+adr.add_all);
-         beizhu=this.beizhu;  
+         beizhu=this.beizhu; 
+         cart_id.push(this.data[k].cart_id) 
       }
       orderinfo.product_ids=proids;
       orderinfo.paynumber=paynumber;
@@ -279,6 +282,7 @@ export default {
       orderinfo.retel=retel;
       orderinfo.adress=adress;
       orderinfo.beizhu=beizhu;
+      orderinfo.cart_id=cart_id;
       console.log(orderinfo)
       
       if(num==2){
@@ -333,22 +337,17 @@ export default {
     Footer
   },
   mounted() {
-    let that =this;
+  let that =this;
    //接收数据 
    let ids=this.$route.query.cart;
-   //----------判断是否有从购物车传值，没值的话返回购物车页面
-   console.log(ids.length)
-   if(!ids.length){
-     this.$router.push('/cart');
-     alert(111)
-   }else{
-      // --------------用axios获取地址
+   // --------------用axios获取地址
       this.$axios.post("/api/F_address").then((res)=>{
             if(!res.data.error){
               console.log(res.data.data)
               that.address=res.data.data
             }
       })
+
       // --------------用axios获取订单列表
         this.$axios.post("/api/F_orderlist",{
           params:{
@@ -356,12 +355,14 @@ export default {
           }
         }).then((res)=>{
             if(!res.data.error){
-              console.log(res.data.data)
               this.data=res.data.data
             }
+             console.log(res.data.data)   
       })
-        //设置地址的true或者false
-   }
+   
+      
+    
+
    
     
   }
@@ -371,6 +372,9 @@ export default {
 
 <style scoped lang='less'>
 @import "../styles/C_pub.less";
+#order{
+
+
 .f-downli {
   background-color: #fff;
 }
@@ -804,5 +808,7 @@ export default {
 
 #f-pay #f-pay_content .f-address .f-addressdescrption .active_border {
   border: 1px solid #0b82e4;
+}
+
 }
 </style>

@@ -1,5 +1,4 @@
 const A_module=require('./../module/A-module.js');
-
 let json = {
     show: function (req,res) {
         A_module.show(function(err,data){

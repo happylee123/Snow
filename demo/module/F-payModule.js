@@ -43,7 +43,7 @@ var json={
         (NULL,${objinfo.ids[i]},${objinfo.proids[i]},'${objinfo.ordernums[i]}','${objinfo.buytime[i]}',
         ${objinfo.paynumber[i]},'${objinfo.price[i]}',
         '${objinfo.beizhu[i]}',${objinfo.state[i]},NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,
-        '${objinfo.adress[i]}','${objinfo.relname[i]}','${objinfo.retel[i]}');`
+        '${objinfo.adress[i]}','${objinfo.relname[i]}','${objinfo.retel[i]}',${objinfo.cart_id[i]});`
         db.query(sql,function(err,data){
             fn(err,data)
         })

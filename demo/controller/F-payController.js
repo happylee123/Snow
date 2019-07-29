@@ -24,6 +24,7 @@ var json={
     },
     F_save_orderlist:function(req,res){
         let info=JSON.parse(req.body.params.info);
+        console.log(info)
         //--------------获取参数
         let ids=[];
         let ordernums=[];
@@ -59,7 +60,9 @@ var json={
         let  adress=info.adress;
         //订单备注
         let beizhu=info.beizhu;
-
+        //购物车id
+        let cart_id=info.cart_id;
+        //let cart_id=1;
         let objinfo={
             ids:ids,
             proids:proids,
@@ -71,7 +74,8 @@ var json={
             state:state,
             adress:adress,
             relname:relname,
-            retel:retel
+            retel:retel,
+            cart_id:cart_id
         }
         console.log(ordernums,buytime);
         var is=0;

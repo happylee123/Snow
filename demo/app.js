@@ -3,7 +3,7 @@ const express=require('express');
 //搭建服务
 const app=express();
 //引入配置图标
-const favicon=require('serve-favicon');
+ const favicon=require('serve-favicon');
 //引入日志
 const morgan=require('morgan');
 //post映入
@@ -29,7 +29,7 @@ app.use(session({
 //配置静态文件访问目录
 app.use(express.static(__dirname+'/public'));
 //配置图标
-app.use(favicon(__dirname+'/public/favicon.ico'));
+ app.use(favicon(__dirname+'/public/favicon.ico'));
 
 
 //配置日志
@@ -69,11 +69,11 @@ app.use(bodyParse.urlencoded({extended:false}));
 });*/
 
 //路由的拦截与使用
-const A_Router= require('./router/A-Router.js');
-app.use(A_Router);
+// const A_Router= require('./router/A-Router.js');
+// app.use(A_Router);
 
-const B_Router= require('./router/B-Router.js');
-app.use(B_Router);
+// const B_Router= require('./router/B-Router.js');
+// app.use(B_Router);
 
 //----------------------------lee的路由
 const C_Router= require('./router/C_loginrouter.js');

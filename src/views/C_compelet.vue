@@ -129,6 +129,7 @@ export default {
 <style scoped lang='less'>
 @import "../styles/C_pub.less";
 #f-compeletpay {
+  background-color: #f5f5f5;
     padding-bottom: 100px;
 
     //header头
@@ -218,6 +219,7 @@ export default {
 
                 p {
                     padding-top: 16px;
+                    padding-left: 14px;
                     color: rgb(134, 134, 134);
                     span{
                         color: rgb(134, 134, 134);
@@ -228,7 +230,7 @@ export default {
             .f-con_paymethod {
                 background-color: #fff;
                 margin-top: 26px;
-                padding: 36px 0;
+                padding: 36px 0 36px 14px;
                 div{
                     padding-bottom: 10px;
                     border-bottom: 1px solid rgb(202, 202, 202);
@@ -249,7 +251,7 @@ export default {
             .f-con_RMB{
                 background-color: #fff;
                 margin-top: 26px;
-                padding: 36px 0;
+                padding: 36px 14px 36px 0;
                 .f-con_nowpay{   
                     width: 258px;
                     height: 54px;

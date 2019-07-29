@@ -74,7 +74,7 @@ export default {
       }else if(this.register=='退出'){
 
         //----确定退出弹框
-         this.$confirm('确定退出吗?', '提示', {
+         this.$confirm('确定退出登录吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           //type: 'warning'
@@ -114,6 +114,24 @@ export default {
 <style lang="less" scoped>
 //logo
 .index{
+  @font-face {
+  font-family: 'iconfont';
+  src: url('../C-font/font_ocnv4h6skj9/iconfont.eot');
+  src: url('../C-font/font_ocnv4h6skj9/iconfont.eot?#iefix') format('embedded-opentype'),
+      url('../C-font/font_ocnv4h6skj9/iconfont.woff2') format('woff2'),
+      url('../C-font/font_ocnv4h6skj9/iconfont.woff') format('woff'),
+      url('../C-font/font_ocnv4h6skj9/iconfont.ttf') format('truetype'),
+      url('../C-font/font_ocnv4h6skj9/iconfont.svg#iconfont') format('svg');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   #logo{
     width: 50px;
     position: relative;

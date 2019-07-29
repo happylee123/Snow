@@ -40,7 +40,7 @@
         <span>我已阅读并同意遵守<a class="lay">法律声明</a >和<a class="self">隐私条款</a></span>
         </div>
         <button type="button" class="btn btn-primary" @click="register">注册</button>
-        <p>如果您已拥有账号，则可在此 <router-link to="/" id="loginbtn">登陆</router-link></p>
+        <p>如果您已拥有账号，则可在此 <router-link to="/login" id="loginbtn">登陆</router-link></p>
     </div>
 
 </div>
@@ -81,10 +81,10 @@ export default {
         confpass:false
      },
      reg:{
-        username:/[a-zA-z0-9]{3,12}/,
-        phone:/[0-9]{11}/,
-        pass:/[a-zA-z0-9]{3,12}/,
-        confpass:/[a-zA-z0-9]{3,12}/,
+        username:/^(?![^a-zA-Z]+$)(?!D+$).{6,12}$/,
+        phone:/^1[3|4|5|8][0-9]\d{4,8}$/,
+        pass:/^(?![^a-zA-Z]+$)(?!D+$).{6,12}$/,
+        confpass:/^(?![^a-zA-Z]+$)(?!D+$).{6,12}$/,
 
      },
      isor:false,  //用户名验证时使用的中间键
@@ -293,12 +293,13 @@ export default {
                          let data=res.data.error
                          if(!data){
                             //-----------------注册成功弹框
-                            that.$alert('注册成功', '成功', {
-                              confirmButtonText: '确定',
-                                callback: action => {
-                                  that.$router.push("/")
-                                }
-                            });
+                            that.$confirm('注册成功', '提示', {
+                                confirmButtonText: '确定',
+                                cancelButtonText: '取消',
+                                type: '	success'
+                              }).then(() => {
+                                that.$router.push('/login')
+                              })
                          }else{
                             //-----------------注册失败弹框
                             console.log(res.data.data)

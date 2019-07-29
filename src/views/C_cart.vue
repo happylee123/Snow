@@ -1,5 +1,5 @@
 <template>
-  <div class="cart">
+  <div id="cart">
     <!-- ---------头部 -------------->
     <Cheader></Cheader>
 
@@ -48,7 +48,7 @@
                   <div class="f-car_pro01">
                     <div class="f-car_img n">
                       <!-- ---------------------------------?????图片 -->
-                      <img src="${img_src}" alt="网络加载失败" />
+                      <img src="../assets/images/C_img/img_ilce_9_b.jpg" alt="网络加载失败" />
                     </div>
                     <p class="n">{{v.main_content}}{{v.main_head}}</p>
                   </div>
@@ -424,7 +424,7 @@ export default {
       let num=0;
       for (let k = 0; k < this.ischeckedarr.length; k++) {
         if(this.ischeckedarr[k]){
-          num++;
+         num++;
          ids.push(this.data[k].cart_id);    
         }
       }
@@ -498,7 +498,7 @@ export default {
 @import "../styles/C_pub.less";
 
 //-----------------------------
-.cart{
+#cart{
    #mainbigbox {
   background-color: rgb(237, 237, 237);
 

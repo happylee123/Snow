@@ -102,7 +102,7 @@ export default {
         #E-title{
         height: 50px;
         line-height: 50px;
-        font-size: 20px;
+        font-size: 14px;
         background: #f9f9f9;
         border-bottom: #cccccc solid 1px;
         >div{

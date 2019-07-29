@@ -16,10 +16,11 @@
         </div>
         <div class="log-d1"></div>
         <div class="d5">
-        <input type="checkbox" class="ipt3" id="checkinput"><span>自动登录</span>
+        <!-- <input type="checkbox" class="ipt3" id="checkinput"><span>自动登录</span> -->
           <div class="d9">
+            <router-link to="/forget" id="forget" style="margin-right:244px">忘记密码?</router-link>
             <router-link to='/register' id="register">注册账号</router-link>
-            <router-link to="/forget" id="forget">忘记密码?</router-link>
+            
           </div>
         </div>
         <button type="button" class="btn btn-primary" id="uploadbtn" @click="loginbtn">登录</button>
@@ -47,8 +48,8 @@ export default {
      isuser:false,
      ispass:false,
      reg:[
-       {username:/[a-zA-z0-9]{3,12}/},
-       {pass:/[a-zA-z0-9]{3,12}/}
+       {username:/^(?![^a-zA-Z]+$)(?!D+$).{6,12}$/},
+       {pass:/^(?![^a-zA-Z]+$)(?!D+$).{6,12}$/}
      ]
      
    }
@@ -154,6 +155,12 @@ export default {
 }
 
 .login{
+  .icon{
+    color: #bdbdbd;
+    position: relative;
+    left: 6px;
+    top: 2px
+  }
       //注册
     #register{
       color: @colormain;
@@ -289,13 +296,12 @@ export default {
       border: 0;
     }
     .d1 .d5 .d9 {
-      width: 150px;
-      height: 30px;
+      
       border: 0;
       margin: 0;
       position: absolute;
-      right: -23px;
-      top: 14px;
+      right: 0px;
+      top: 0xpx;
     }
     .d1 .div1 {
       width: 371px;

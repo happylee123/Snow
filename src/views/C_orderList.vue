@@ -74,7 +74,7 @@
 
                   <div class="picture1">
                     <!-- <input type="checkbox" name id style="position:relative;top:-16px" /> -->
-                    <img src class="D-img1" />
+                    <img src='../assets/images/C_img/img_ilce_9_b.jpg' class="D-img1" />
                     <span class="describe">{{a.main_head}}</span>
                     <span class="Dprice">{{a.price}}</span>
                     <span class="D-s">{{a.number}}</span>
@@ -405,8 +405,14 @@ export default {
 
         
     },
-    Mbuynow(i){
-     
+    Mbuynow(index){
+      let ids=[];
+      console.log(this.data[index].res)
+      for (let k = 0; k < this.data[index].res.length; k++) {
+        ids.push(this.data[index].res[k].cart_id)     
+      }
+      console.log(ids)
+      this.$router.push({path:'/order',query:{cart:ids}});
     }
   },
   mounted() {

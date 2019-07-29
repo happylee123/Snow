@@ -5,14 +5,14 @@
     <div>
       <!-- 顶部 -->
       <div id="f-RMB_top">
-        <p class="center_950">你好，欢迎您使用支付宝付款</p>
+        <p class="center_950">你好，欢迎您使用在线支付</p>
       </div>
 
       <!-- title -->
       <div id="f-RMB_title">
-        <div class="center_950" style="background-color: #fff">
-          <img src="../assets/images/C_img/zfb.png" alt />
-          我的收银台
+        <div class="center_950" style="background-color: #fff；height:40px;line-height:40px;">
+          <!-- <img src="../assets/images/C_img/zfb.png" alt /> -->
+          收银台
         </div>
       </div>
 
@@ -50,7 +50,7 @@
                 <span class="pay_pro_price">{{sum| price}}</span>
               </p>
               <p class="f-RMB_03">
-                <img src="../assets/images/C_img/erw.png" alt class="f-RMB_erwimg" />
+                <img src="../assets/timg.jpg" alt class="f-RMB_erwimg" />
                 <img src="../assets/images/C_img/zst.png" alt class="f-RMB_zstimg" />
               </p>
             </div>

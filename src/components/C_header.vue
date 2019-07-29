@@ -12,14 +12,14 @@
             </div>
             <div class="icon rt">
               <router-link to='/personIndex'>
-                <span class="iconfont">{{person}}</span>
+                <span class="iconfont" style="color:skyblue">{{person}}</span>
               </router-link>
               <router-link to='/cart' target="_blank">
                 <span class="iconfont">&#xf0179;</span>
               </router-link>
-              <router-link to='/' target='_blank'>
-                <span class="iconfont">&#xe60d;</span>
-              </router-link>
+              <!-- <router-link to='/' target='_blank'> -->
+                <span class="iconfont" @click="Mexit">&#xe60d;</span>
+              <!-- </router-link> -->
             </div>
           </div>
         </div>
@@ -49,7 +49,24 @@ export default {
     }
   },
   methods:{
-    
+    Mexit(){
+      //----确定退出弹框
+         this.$confirm('确定退出登录吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          //type: 'warning'
+        }).then(() => {      
+           //-----------------------发起删除session的请求
+          this.$axios.post('/api/C_exit').then((res)=>{
+            if(!res.data.error){ 
+              //储存localstotage和vuex
+              this.$store.commit('delete');
+              this.$router.push('/login');
+            }
+          })
+         
+        })
+    }
   },
   mounted(){
     if(!localStorage.user){
@@ -63,10 +80,29 @@ export default {
 
 <style scope lang="less">
 @import '../styles/C_pub.less';
+
 .header{
   width: 100%;
+  #c_header {
+   @font-face {
+  font-family: 'iconfont';
+  src: url('../C-font/font_ocnv4h6skj9/iconfont.eot');
+  src: url('../C-font/font_ocnv4h6skj9/iconfont.eot?#iefix') format('embedded-opentype'),
+      url('../C-font/font_ocnv4h6skj9/iconfont.woff2') format('woff2'),
+      url('../C-font/font_ocnv4h6skj9/iconfont.woff') format('woff'),
+      url('../C-font/font_ocnv4h6skj9/iconfont.ttf') format('truetype'),
+      url('../C-font/font_ocnv4h6skj9/iconfont.svg#iconfont') format('svg');
 }
-#c_header {
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+ 
   #logimg{
     position: relative;
     top: 6px;
@@ -118,4 +154,6 @@ export default {
      
   }
 }
+}
+
 </style>

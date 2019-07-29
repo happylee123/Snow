@@ -39,7 +39,8 @@ var orderModule= {
                             res:resdata,
                             order_num:resdata[0].order_num,
                             state:resdata[0].state,
-                            buy_time:resdata[0].buy_time
+                            buy_time:resdata[0].buy_time,
+
                         })
                         console.log(arr)
                     }else{

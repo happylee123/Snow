@@ -49,6 +49,7 @@ export default {
 }
 </script>
 <style lang='less' scope>
+.leftlist{
   #E-left {
   width: 200px;
   border: 1px solid #ccc;
@@ -112,4 +113,6 @@ li:hover {
     left: 0;
 }
 /*# sourceMappingURL=E-AfterSale.js.map */
+}
+  
 </style>

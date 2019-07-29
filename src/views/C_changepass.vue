@@ -105,20 +105,23 @@ export default {
                 let data=res.data.error;
                 if(!data){
                    //修改密码成功弹窗
-                      that.$alert('修改密码成功', '成功', {
-                      confirmButtonText: '确定',
-                        callback: action => {
-                        that.$router.push("/")
-                        }
-                    });
+                    that.$confirm('修改密码成功', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: '	success'
+                        }).then(() => {
+                        that.$router.push('/login')
+                        })
                 }else{
-                     //修改失败成功弹窗
-                      that.$alert('修改密码失败', '失败', {
-                      confirmButtonText: '确定',
-                        callback: action => {
-                        that.$router.push("/")
-                        }
-                    });
+                     //修改失败失败弹窗
+
+                    that.$confirm('修改密码失败', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'error'
+                        }).then(() => {
+                        that.$router.push('/changepass')
+                        })
                 }
             })
 

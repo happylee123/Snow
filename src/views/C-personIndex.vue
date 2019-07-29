@@ -36,10 +36,8 @@ export default {
 }
 </script>
 <style  scope lang="less" >
-  body {
-  background: #ededed;
-}
 .perserIndex{
+     background: #ededed;
    .E-boss {
   width: 1200px;
   margin: 80px  auto  0 auto;
